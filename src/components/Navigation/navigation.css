@@ -1,0 +1,15 @@
+.mainNavigation {
+    justify-content:center
+}
+.navigationActions {
+    display:flex;
+    align-content: space-around;
+}
+.autoCompleteSearch {
+    width:300px;
+    padding-left:20px;
+}
+.autoCompleteSearch input{
+    width:300px;
+    color:white;
+}
