@@ -39,6 +39,7 @@
     "init-ios": "yarn build && yarn add-ios",
     "sync-ios": "yarn build && npx cap sync",
     "open-ios": "npx cap open ios",
+    "init-deploy-ios": "yarn init-ios && yarn open-ios",
     "deploy-ios": "yarn sync-ios && yarn open-ios"
   },
   "eslintConfig": {
@@ -58,6 +59,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "^1.5.2",
-    "@capacitor/core": "^1.5.2"
+    "@capacitor/core": "^1.5.2",
+    "@material-ui/icons": "^4.9.1"
   }
 }
