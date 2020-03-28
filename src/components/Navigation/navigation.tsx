@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { ErrorStructure, errorObs } from 'services/errorService';
+import { AppBar, Toolbar, Typography, Fab, Button } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { HeaderContext } from 'containers/AppContainer';
+import MapIcon from '@material-ui/icons/Map';
 import './navigation.css';
 
 // will not compile if passing a field not in this definition
@@ -25,21 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Navigation = (props: NavigationProps) => {
   // calling setErrors is like calling this.setState
-  const [errors, setErrors] = useState<Array<ErrorStructure>>([]);
   const classes = useStyles();
   //consume context
-  const { currentPage } = useContext(HeaderContext);
-
-  useEffect(() => {
-    // errors from anywhere in the app could be handled here
-    const err$ = errorObs.subscribe((err: any) => {
-      setErrors(err);
-    });
-    return () => {
-      // called when component unmounts
-      err$.unsubscribe();
-    };
-  });
+  const { currentPage, searchView } = useContext(HeaderContext);
 
   // only re-render if there is any error or we start/stop loading
   return (
@@ -49,8 +37,9 @@ export const Navigation = (props: NavigationProps) => {
           <Typography variant="body1" className={classes.title}>
             {currentPage}
           </Typography>
+          <Button><MapIcon /><br /><div>{searchView || 'Temp'}</div></Button>
         </Toolbar>
-      </AppBar>
+    </AppBar>
     </>
   );
 };

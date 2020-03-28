@@ -13,10 +13,7 @@ const MapView = (props: MapViewProps) => {
 
     return (
         <>
-            <Grid item className="actionGroup">
-                <MapContainerActions search={searchByCustom} location={locationName} />
-            </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={10} sm={6}>
                 <div className="mapContainer">
 
                     <GoogleMapReact

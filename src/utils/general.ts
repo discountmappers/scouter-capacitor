@@ -13,3 +13,6 @@ export const isEmpty = (value: any) => {
         (value.constructor === Object && Object.keys(value).length === 0)
     )
 }
+export enum SearchView {
+    LIST, MAP
+}
