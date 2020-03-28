@@ -15,6 +15,7 @@ import {
   AddCircleOutline,
   SupervisorAccountOutlined
 } from '@material-ui/icons';
+// @ts-ignore
 import { SearchView } from 'utils/general';
 
 type AppProps = {

@@ -23,7 +23,7 @@ export const SearchContainer = (props: SearchContainerProps) => {
     const { searchView, setSearchView } = useContext(HeaderContext)
     const { position, locationName, getLocation, searchByCustom } = useGeoPosition()
 
-    // populate the text field & default center 
+    // populate the text field & default center
     useEffect(() => {
         getLocation()
     }, [])
