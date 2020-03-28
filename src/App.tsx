@@ -12,7 +12,7 @@ const App = (props: AppProps) => {
     <AppContainer>
       <Switch>
         <Route exact path="/" component={Splash} />
-        <Route exact path="/discounts" component={MapContainer} />
+        <Route exact path="/search" component={MapContainer} />
         <Route exact path="/home" component={HomeContainer} />
         <Redirect to="/" />
       </Switch>
