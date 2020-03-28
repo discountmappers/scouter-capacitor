@@ -5,12 +5,13 @@ import { useGeoPosition } from "hooks/useGeoPosition";
 import { Grid } from "@material-ui/core";
 import { MapContainerActions } from "components/Deals";
 import './map.css'
+import { AppHeaderBar } from '../components/AppHeaderBar';
 
 export const MapContainer = (props: any) => {
     const { position, locationName, getLocation, searchByCustom } = useGeoPosition()
     const [open, setMap] = useState(false)
 
-    // populate the text field & default center 
+    // populate the text field & default center
     useEffect(() => {
         getLocation()
     }, [])
@@ -19,23 +20,26 @@ export const MapContainer = (props: any) => {
         setMap(!open)
     }
     return (
-        <Grid container justify="center" alignItems="center">
-            <Grid item className="actionGroup">
-                <MapContainerActions search={searchByCustom} toggleMap={toggleMap} location={locationName} />
-            </Grid>
-            {open && <Grid item xs={12}>
-                <div className="mapContainer">
+        <>
+            <AppHeaderBar/>
+            <Grid container justify="center" alignItems="center">
+                <Grid item className="actionGroup">
+                    <MapContainerActions search={searchByCustom} toggleMap={toggleMap} location={locationName} />
+                </Grid>
+                {open && <Grid item xs={12}>
+                    <div className="mapContainer">
 
-                    <GoogleMapReact
-                        key={position.lng}
-                        bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
-                        defaultCenter={position}
-                        defaultZoom={11}
-                    >
-                    </GoogleMapReact>
-                </div>
-            </Grid>}
-        </Grid >
+                        <GoogleMapReact
+                            key={position.lng}
+                            bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
+                            defaultCenter={position}
+                            defaultZoom={11}
+                        >
+                        </GoogleMapReact>
+                    </div>
+                </Grid>}
+            </Grid >
+        </>
     )
 
 };
