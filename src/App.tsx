@@ -15,7 +15,7 @@ const App = (props: AppProps) => {
     <AppContainer>
       <Switch>
         <Route exact path="/" component={Splash} />
-        <Route exact path="/discounts" component={MapContainer} />
+        <Route exact path="/deals" component={MapContainer} />
         <Redirect to="/" />
       </Switch>
     </AppContainer>
