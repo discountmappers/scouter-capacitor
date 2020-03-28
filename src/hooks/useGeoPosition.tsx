@@ -24,6 +24,7 @@ export const useGeoPosition = () => {
             lat,
             lng
         })
+
         getCityName(lat, lng)
     }
 
@@ -31,7 +32,7 @@ export const useGeoPosition = () => {
     const getCityName = async (lat: string, lng: string) => {
         const response = await fetch(`${BASE_GEOCODE_API}?latlng=${lat},${lng}&key=${GOOGLE_API_KEY}`)
         const googleData: GoogleGeocodeResponse = await response.json()
-        const [, ...city] = googleData.plus_code.compound_code.split(" ")
+        const [, ...city] = googleData?.plus_code?.compound_code.split(" ")
         setLocationName(city.join(' '))
     }
 
