@@ -103,7 +103,7 @@ const AppContainer = (props: AppProps) => {
             />
             <BottomNavigationAction
               component={RouterLink}
-              to="/search"
+              to="/deals"
               label="Search"
               value={"Search"}
               icon={<Search />}
