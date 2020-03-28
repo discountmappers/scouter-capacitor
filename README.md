@@ -60,5 +60,5 @@ After your first time running iOS Capacitor App
 
 In the upper left of Xcode
 
-1. Select your sevice and iOS version
+1. Select your device and iOS version
 2. Click the play button to launch the app (pointed at [http://localhost:3000](http://localhost:3000) by default)
