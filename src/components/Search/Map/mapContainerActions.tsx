@@ -6,7 +6,6 @@ import { isEmpty } from "utils/general";
 import RoomIcon from '@material-ui/icons/Room'
 type MapContainerActionProps = {
     location: string
-    toggleMap: () => void
     search: (location: string) => void
 };
 
@@ -29,10 +28,11 @@ const MapContainerActions = (props: MapContainerActionProps) => {
     }
     return (
         <>
-            <ButtonGroup variant="contained" color="primary">
-                <Button onClick={props.toggleMap}><RoomIcon /></Button>
-                <TextField onKeyPress={getCustomCoordinate} onChange={handleChange} value={location} label="Location" variant="outlined" />
-            </ButtonGroup>
+            <TextField fullWidth onKeyPress={getCustomCoordinate} onChange={handleChange} value={location} label="Location" variant="outlined"
+                InputProps={{
+
+                    startAdornment: <RoomIcon />
+                }} />
         </>
     )
 }

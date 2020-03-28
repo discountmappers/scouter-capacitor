@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Navigation } from 'components/Navigation/navigation';
 import {
@@ -15,6 +15,8 @@ import {
   AddCircleOutline,
   SupervisorAccountOutlined
 } from '@material-ui/icons';
+// @ts-ignore
+import { SearchView } from 'utils/general';
 
 type AppProps = {
   children: React.ReactNode;
@@ -68,18 +70,22 @@ const theme = createMuiTheme({
 
 //set context types
 export type HeaderContextTypes = {
-  currentPage: string | null;
+  searchView: SearchView | null
+  setSearchView: (value: SearchView) => void
+  currentPage: string | null
 };
 
 // create context
 export const HeaderContext = React.createContext<HeaderContextTypes>({
+  setSearchView: () => { },
+  searchView: SearchView.LIST,
   currentPage: null
 });
 
 const AppContainer = (props: AppProps) => {
   const classes = useStyles();
-  const [navValue, setNavValue] = React.useState<string | null>(null);
-
+  const [navValue, setNavValue] = useState<string | null>(null);
+  const [searchView, setSearchView] = useState<SearchView | null>(null)
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setNavValue(newValue);
   };
@@ -87,7 +93,7 @@ const AppContainer = (props: AppProps) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <HeaderContext.Provider value={{ currentPage: navValue }}>
+        <HeaderContext.Provider value={{ setSearchView, searchView, currentPage: navValue }}>
           <Container maxWidth="xl" disableGutters>
             <Navigation />
             {props.children}
@@ -107,7 +113,7 @@ const AppContainer = (props: AppProps) => {
             />
             <BottomNavigationAction
               component={RouterLink}
-              to="/deals"
+              to="/search"
               label="Search"
               value={'Search'}
               icon={<Search />}
