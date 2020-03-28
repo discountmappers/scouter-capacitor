@@ -60,7 +60,9 @@ const theme = createMuiTheme({
 
 const AppContainer = (props: AppProps) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [navValue, setNavValue] = React.useState({
+    navValue: null
+  });
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -69,9 +71,9 @@ const AppContainer = (props: AppProps) => {
           {props.children}
         </Container>
         <BottomNavigation
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
+          value={navValue}
+          onChange={(event, newNavValue) => {
+            setNavValue(newNavValue);
           }}
           showLabels
           className={classes.root}
