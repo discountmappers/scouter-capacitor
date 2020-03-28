@@ -78,7 +78,7 @@ export type HeaderContextTypes = {
 // create context
 export const HeaderContext = React.createContext<HeaderContextTypes>({
   setSearchView: () => { },
-  searchView: null,
+  searchView: SearchView.LIST,
   currentPage: null
 });
 

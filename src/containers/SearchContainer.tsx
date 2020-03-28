@@ -9,6 +9,7 @@ import MapView from "components/Search/Map";
 import { HeaderContext } from "./AppContainer";
 import { SearchView } from "utils/general";
 import SearchFilter from "components/Search/searchFilter";
+import { ListView } from "components/Search";
 
 type SearchContainerProps = {
     listView: boolean
@@ -25,18 +26,20 @@ export const SearchContainer = (props: SearchContainerProps) => {
 
     // populate the text field & default center
     useEffect(() => {
+        // setSearchView(SearchView.LIST)
         getLocation()
     }, [])
 
     return (
         <SearchContainerContext.Provider value={{ position, locationName, searchByCustom }}>
             <Grid container justify="center" alignItems="center">
-                <Grid item xs={10} sm={6}>
+                <Grid item xs={10} md={7} lg={4}>
                     <div className="actionGroup">
                         <MapContainerActions search={searchByCustom} location={locationName} />
                     </div>
                 </Grid>
-                {searchView === null ? <SearchFilter /> : searchView === SearchView.MAP ? <MapView /> : ''}
+                <Grid item xs={12}></Grid>
+                {searchView === null ? <SearchFilter /> : searchView === SearchView.MAP ? <MapView /> : <ListView />}
 
             </Grid >
         </SearchContainerContext.Provider >

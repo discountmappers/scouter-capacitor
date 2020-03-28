@@ -1,3 +1,3 @@
 import MapContainerActions from 'components/Search/Map/mapContainerActions'
-
-export {MapContainerActions}
+import ListView from 'components/Search/List/index'
+export { MapContainerActions, ListView }

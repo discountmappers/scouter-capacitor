@@ -13,7 +13,7 @@ const MapView = (props: MapViewProps) => {
 
     return (
         <>
-            <Grid item xs={10} sm={6}>
+            <Grid item xs={10} md={7} lg={4}>
                 <div className="mapContainer">
 
                     <GoogleMapReact
@@ -24,7 +24,7 @@ const MapView = (props: MapViewProps) => {
                     >
                     </GoogleMapReact>
                 </div>
-            </Grid>}
+            </Grid>
         </>
     )
 }
