@@ -8,7 +8,13 @@ import {
   createMuiTheme
 } from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { Explore, Settings, Search, AddCircleOutline, SupervisorAccountOutlined } from '@material-ui/icons';
+import {
+  Explore,
+  Settings,
+  Search,
+  AddCircleOutline,
+  SupervisorAccountOutlined
+} from '@material-ui/icons';
 
 type AppProps = {
   children: React.ReactNode;
@@ -25,7 +31,7 @@ const useStyles = makeStyles({
     height: 65,
     alignContent: 'center',
     display: 'flex',
-    boxShadow: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)',
+    boxShadow: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)'
   }
 });
 
@@ -62,17 +68,17 @@ const theme = createMuiTheme({
 
 //set context types
 export type HeaderContextTypes = {
-  currentPage: String
-}
+  currentPage: string | null;
+};
 
 // create context
 export const HeaderContext = React.createContext<HeaderContextTypes>({
-  currentPage: 'Explore'
-})
+  currentPage: null
+});
 
 const AppContainer = (props: AppProps) => {
   const classes = useStyles();
-  const [navValue, setNavValue] = React.useState('Explore');
+  const [navValue, setNavValue] = React.useState<string | null>(null);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setNavValue(newValue);
@@ -81,9 +87,7 @@ const AppContainer = (props: AppProps) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <HeaderContext.Provider
-            value={{currentPage: navValue}}
-        >
+        <HeaderContext.Provider value={{ currentPage: navValue }}>
           <Container maxWidth="xl" disableGutters>
             <Navigation />
             {props.children}
@@ -98,18 +102,26 @@ const AppContainer = (props: AppProps) => {
               component={RouterLink}
               to="/home"
               label="Explore"
-              value={"Explore"}
+              value={'Explore'}
               icon={<Explore />}
             />
             <BottomNavigationAction
               component={RouterLink}
               to="/deals"
               label="Search"
-              value={"Search"}
+              value={'Search'}
               icon={<Search />}
             />
-            <BottomNavigationAction label="Add Deal" value={"Add Deal"} icon={<AddCircleOutline />} />
-            <BottomNavigationAction label="Profile"  value={"Profile"} icon={<SupervisorAccountOutlined />} />
+            <BottomNavigationAction
+              label="Add Deal"
+              value={'Add Deal'}
+              icon={<AddCircleOutline />}
+            />
+            <BottomNavigationAction
+              label="Profile"
+              value={'Profile'}
+              icon={<SupervisorAccountOutlined />}
+            />
           </BottomNavigation>
         </HeaderContext.Provider>
       </ThemeProvider>
