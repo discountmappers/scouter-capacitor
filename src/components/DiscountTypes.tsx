@@ -1,13 +1,14 @@
 import React from "react";
 import {
     createMuiTheme,
-    createStyles, GridList, GridListTile, GridListTileBar, Theme,
+    createStyles, GridList, GridListTile, GridListTileBar, Theme, Grid, Icon, Paper,
 } from "@material-ui/core";
 import {makeStyles, ThemeProvider} from "@material-ui/core/styles";
 import foodImage from './images/food.jpg';
 import coffeeImage from './images/coffee.jpg';
 import laundryImage from './images/laundry.jpg';
 import servicesImage2 from './images/services2.jpg';
+import { Search, Restaurant } from "@material-ui/icons";
 
 const theme = createMuiTheme({
     palette: {
@@ -48,13 +49,20 @@ const useStyles = makeStyles((theme: Theme) =>
             flexWrap: 'wrap',
             justifyContent: 'space-around',
             overflow: 'hidden',
-            backgroundColor: theme.palette.background.paper,
-            padding: '15px',
+            backgroundColor: theme.palette.secondary.light,
             marginTop: '100px',
         },
         gridList: {
-            width: 500,
+            width: '50%',
             height: 450,
+            borderWidth: '10px'
+        },
+        gridListTileBar: {
+            background: '#000000',
+            // border: '#000000'
+        },
+        paper: {
+            width: '500px',
         },
         icon: {
             color: 'rgba(255, 255, 255, 0.54)',
@@ -65,19 +73,23 @@ const useStyles = makeStyles((theme: Theme) =>
 const tileData = [
     {
         img: foodImage,
-        title: 'Food'
+        title: 'Food',
+        icon: <Restaurant/>
     },
     {
         img: coffeeImage,
-        title: 'Coffee'
+        title: 'Coffee',
+        icon: <Restaurant/>
     },
     {
         img: laundryImage,
-        title: 'Laundry'
+        title: 'Laundry',
+        icon: <Restaurant/>
     },
     {
         img: servicesImage2,
-        title: 'Services'
+        title: 'Services',
+        icon: <Restaurant/>
     }
 ]
 export const DiscountTypes = (props: any) => {
@@ -86,14 +98,12 @@ export const DiscountTypes = (props: any) => {
     return (
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
-                <GridList cellHeight={180} className={classes.gridList}>
+                <GridList cellHeight={80} className={classes.gridList}>
                     {tileData.map(tile => (
-                        <GridListTile key={tile.img}>
-                            <img src={tile.img} alt={tile.title} />
-                            <GridListTileBar
-                                title={tile.title}
-                            />
-                        </GridListTile>
+                        <Grid item>
+                            {tile.icon}
+                            {tile.title}
+                        </Grid>
                     ))}
                 </GridList>
             </div>

@@ -7,8 +7,6 @@ export const HomeContainer = (props: any) => {
   return (
     <>
       <AppHeaderBar />
-      <TextSearch />
-      <DiscountTypes />
     </>
   );
 };
