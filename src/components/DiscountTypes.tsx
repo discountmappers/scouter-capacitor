@@ -45,21 +45,22 @@ const theme = createMuiTheme({
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around',
-            overflow: 'hidden',
-            backgroundColor: theme.palette.secondary.light,
-            marginTop: '100px',
+            paddingTop: '20px',
         },
         gridList: {
-            width: '50%',
-            height: 450,
-            borderWidth: '10px'
+            width: '100%',
+            height: '100%',
+            borderWidth: '10px',
+            borderBottom: '#000000',
+            fontSize: '8px'
         },
-        gridListTileBar: {
-            background: '#000000',
-            // border: '#000000'
+        grid: {
+            background: '#fafafa',
+            border: '#000000',
+            borderBottom: '#000000',
+        },
+        gridTitle: {
+            marginTop: '2px',
         },
         paper: {
             width: '500px',
@@ -97,16 +98,34 @@ export const DiscountTypes = (props: any) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className={classes.root}>
-                <GridList cellHeight={80} className={classes.gridList}>
-                    {tileData.map(tile => (
-                        <Grid item>
-                            {tile.icon}
-                            {tile.title}
-                        </Grid>
-                    ))}
-                </GridList>
-            </div>
+                <Grid container spacing={0}>
+                    <Grid item xs={12} className={classes.root}>
+                    <GridList cellHeight={80} className={classes.gridList} spacing={0}>
+                        {tileData.map(tile => (
+                            <Grid item
+                                  alignContent={'center'}
+                                  className={classes.grid}
+                                  container
+                                  direction="row"
+                                  justify="center"
+                                  alignItems="baseline">
+                                {tile.icon}
+                                <Grid
+                                    item
+                                    alignContent={'center'}
+                                    alignItems={"baseline"}
+                                    justify="center"
+                                    direction="row"
+                                    container
+                                    className={classes.gridTitle}
+                                >
+                                    {tile.title}
+                                </Grid>
+                            </Grid>
+                        ))}
+                    </GridList>
+                    </Grid>
+                </Grid>
         </ThemeProvider>
     )
 };
