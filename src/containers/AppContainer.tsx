@@ -1,7 +1,6 @@
-import React from "react";
-import { Navigation } from "components/Navigation/navigation";
-import { Container } from "@material-ui/core";
-
+import React from 'react';
+import { Navigation } from 'components/Navigation/navigation';
+import { Container } from '@material-ui/core';
 
 type AppProps = {
   children: React.ReactNode;
@@ -11,13 +10,12 @@ const AppContainer = (props: AppProps) => {
   // add app theme
   return (
     <>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" disableGutters>
         <Navigation />
         {props.children}
       </Container>
     </>
-
   );
 };
 
-export default AppContainer
+export default AppContainer;
