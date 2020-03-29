@@ -14,5 +14,5 @@ export const isEmpty = (value: any) => {
     )
 }
 export enum SearchView {
-    LIST, MAP
+    LIST = "List", MAP = "Map"
 }
