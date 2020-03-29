@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
 import {
-  createMuiTheme,
-  createStyles,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  Theme,
-  Grid,
-  Icon,
-  Paper,
-  Button
+    createMuiTheme,
+    createStyles,
+    GridList,
+    GridListTile,
+    GridListTileBar,
+    Theme,
+    Grid,
+    Icon,
+    Paper,
+    Button
 } from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import foodImage from '../images/food.jpg';
@@ -21,9 +21,39 @@ import { FilterType } from '../FilterType'
 import { SearchContainerContext } from '../../containers/SearchContainer'
 import SingleLineGridList from 'components/SingleLineGridList';
 import tileData from 'components/SingleLineGridList/tileData';
-import { theme } from '../../themes/theme';
 
 type SearchFilterProps = {};
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            light: '#33abb8',
+            main: '#0097a7',
+            dark: '#006974',
+            contrastText: '#fff'
+        },
+        secondary: {
+            light: '#cfd8dc',
+            main: '#fafafa',
+            dark: '#90a4ae',
+            contrastText: '#000'
+        }
+    },
+    typography: {
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"'
+        ].join(',')
+    }
+});
 
 const filterTileData = [
     {
@@ -86,21 +116,21 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 export const SearchFilter = (props: SearchFilterProps) => {
-  const classes = useStyles();
-  const { setResults } = useContext(SearchContainerContext);
-  const [selectedFilters, setFilter] = useState<any>([]);
+    const classes = useStyles();
+    const { setResults } = useContext(SearchContainerContext);
+    const [selectedFilters, setFilter] = useState<any>([]);
 
-  // make call to lambdas to get filtered results
-  const getFilterResults = async (filters: any) => {
-    const url = 'https://api.github.com/users';
+    // make call to lambdas to get filtered results
+    const getFilterResults = async (filters: any) => {
+        const url = 'https://api.github.com/users';
 
-    //call the fetch function
-    let data = await fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        setResults(data);
-      });
-  };
+        //call the fetch function
+        let data = await fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                setResults(data);
+            });
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -112,7 +142,7 @@ export const SearchFilter = (props: SearchFilterProps) => {
                             icon={tile.icon}
                             selectedFilters={selectedFilters}
                             setFilter={setFilter}
-                    />
+                        />
                         {/*Adds a new row after every 2 */ idx % 2 ? <Grid item xs={12} /> : ''}
                     </>
                 ))}
@@ -122,7 +152,7 @@ export const SearchFilter = (props: SearchFilterProps) => {
                     className={classes.button}
                     variant="contained"
                     color={'primary'}
-                    onClick={event => { getFilterResults(selectedFilters)}}
+                    onClick={event => { getFilterResults(selectedFilters) }}
                 >
                     Submit
                 </Button>
