@@ -16,6 +16,7 @@ import {
 } from '@material-ui/icons';
 import { SearchView } from 'utils/general';
 import { Plugins, DeviceInfo } from '@capacitor/core';
+import { theme } from '../themes/theme';
 
 type AppProps = {
   children: React.ReactNode;
@@ -36,37 +37,6 @@ const useStyles = makeStyles({
     alignContent: 'center',
     display: 'flex',
     boxShadow: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)'
-  }
-});
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#33abb8',
-      main: '#0097a7',
-      dark: '#006974',
-      contrastText: '#fff'
-    },
-    secondary: {
-      light: '#cfd8dc',
-      main: '#b0bec5',
-      dark: '#90a4ae',
-      contrastText: '#000'
-    }
-  },
-  typography: {
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(',')
   }
 });
 

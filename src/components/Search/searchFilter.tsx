@@ -17,43 +17,13 @@ import coffeeImage from '../images/coffee.jpg';
 import laundryImage from '../images/laundry.jpg';
 import servicesImage2 from '../images/services2.jpg';
 import { Search, Restaurant, FreeBreakfastOutlined, LocalLaundryServiceOutlined, ExtensionOutlined } from "@material-ui/icons";
-import { FilterType } from '../filterType'
+import { FilterType } from '../FilterType'
 import { SearchContainerContext } from '../../containers/SearchContainer'
 import SingleLineGridList from 'components/SingleLineGridList';
-import tileData from 'components/SingleLineGridList/tileData'
+import tileData from 'components/SingleLineGridList/tileData';
+import { theme } from '../../themes/theme';
 
 type SearchFilterProps = {};
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#33abb8',
-      main: '#0097a7',
-      dark: '#006974',
-      contrastText: '#fff'
-    },
-    secondary: {
-      light: '#cfd8dc',
-      main: '#fafafa',
-      dark: '#90a4ae',
-      contrastText: '#000'
-    }
-  },
-  typography: {
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(',')
-  }
-});
 
 const filterTileData = [
     {

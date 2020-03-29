@@ -6,6 +6,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import { AppContext } from 'containers/AppContainer';
 import 'typeface-roboto';
+import { theme } from '../../themes/theme';
 
 type TileDataType = {
   img: string;
@@ -72,29 +73,6 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#33abb8',
-      main: '#0097a7',
-      dark: '#006974',
-      contrastText: '#fff'
-    },
-    secondary: {
-      light: '#cfd8dc',
-      main: '#fafafa',
-      dark: '#90a4ae',
-      contrastText: '#000'
-    }
-  },
-  typography: {
-    fontFamily: [
-      'Roboto',
-      'sans-serif',
-    ].join(',')
-  }
-});
 
 const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
   const { tileData, cols } = props;

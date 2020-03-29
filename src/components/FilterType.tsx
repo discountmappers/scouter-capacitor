@@ -9,6 +9,7 @@ import coffeeImage from './images/coffee.jpg';
 import laundryImage from './images/laundry.jpg';
 import servicesImage2 from './images/services2.jpg';
 import { Search, Restaurant } from "@material-ui/icons";
+import { theme } from '../themes/theme'
 
 type FilterTypeProps = {
     title: any,
@@ -16,37 +17,6 @@ type FilterTypeProps = {
     setFilter: Function,
     selectedFilters: Array<String>
 };
-
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            light: '#33abb8',
-            main: '#0097a7',
-            dark: '#006974',
-            contrastText: '#fff'
-        },
-        secondary: {
-            light: '#cfd8dc',
-            main: '#b0bec5',
-            dark: '#90a4ae',
-            contrastText: '#000'
-        }
-    },
-    typography: {
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"'
-        ].join(',')
-    }
-});
 
 const tileData = [
     {
