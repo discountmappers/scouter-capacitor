@@ -16,6 +16,7 @@ export const isEmpty = (value: any) => {
 export enum SearchView {
     LIST = "List", MAP = "Map"
 }
+
 export const mockResults = [
     {
 
