@@ -6,7 +6,6 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { SearchContainer } from "containers/SearchContainer";
 import { HomeContainer } from './containers/HomeContainer';
 import { Splash } from 'containers/Splash'
-import { Navigation } from "components/Navigation/navigation";
 import { DealsContainer } from 'containers/DealsContainer';
 import { ProfileContainer } from 'containers/ProfileContainer';
 

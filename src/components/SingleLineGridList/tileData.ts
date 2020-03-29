@@ -1,12 +1,12 @@
+import { showDetailPage } from '../Search/searchFilter';
+
 const tileData = [
   {
     img: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
     title: '50% off flight ',
     primarySubtitle: 'JetBlue',
     secondarySubtitle: 0.1,
-    onClick: () => {
-      console.log('hello');
-    }
+    onClick: () => {showDetailPage(1)}
   },
   {
     img: 'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
