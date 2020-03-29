@@ -37,7 +37,8 @@ const useStyles = makeStyles({
     height: 65,
     alignContent: 'center',
     display: 'flex',
-    boxShadow: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)'
+    boxShadow: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)',
+    paddingBottom: '15px'
   }
 });
 
@@ -64,7 +65,7 @@ const AppContainer = (props: AppProps) => {
   const [searchView, setSearchView] = useState<SearchView | null>(null);
   const [device, setDevice] = React.useState<DeviceInfo>(null);
   React.useEffect(() => {
-    // show filter page if navigating away from it 
+    // show filter page if navigating away from it
     history.listen((val) => {
       setSearchView(null)
     })
