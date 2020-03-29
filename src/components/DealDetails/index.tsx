@@ -74,7 +74,6 @@ const getRatings = (num: number, classes: any) => {
 
 export const DealDetails = (props: DealDetailsProps) => {
   const { deal } = props
-  const { position } = useContext(SearchContainerContext)
   const classes = useStyles();
 
   //TODO incorporate real ratings
