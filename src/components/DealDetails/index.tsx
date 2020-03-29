@@ -80,18 +80,6 @@ export const DealDetails = (props: DealDetailsProps) => {
   const randomRate = Math.floor(Math.random() * 5) + 1
   const rating = getRatings(randomRate, classes)
 
-  // this css is needed or the markers will shift!!!
-  const CustomMarker = ({ result }: any) =>
-    <Tooltip title={result.name} aria-label="add">
-      <div style={{ cursor: 'pointer', position: 'absolute', transform: 'translate(-50%, -100%)' }}>
-        <RoomIcon />
-      </div>
-    </Tooltip>
-
-  const getMarkers = () => {
-    return <CustomMarker key={deal.lat} lat={deal.lat} lng={deal.lng} result={deal} />
-  }
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -130,29 +118,14 @@ export const DealDetails = (props: DealDetailsProps) => {
 
             <CardActions className={classes.map}>
               { deal.lat && deal.lng ? <MapDetailView deal={deal}/> : <MapView/>}
-
-              {/*<Grid item xs={10} md={7} lg={4}>*/}
-              {/*  <div className="mapContainer">*/}
-
-              {/*    <GoogleMapReact*/}
-              {/*      key={position.lng}*/}
-              {/*      bootstrapURLKeys={{ key: GOOGLE_API_KEY }}*/}
-              {/*      defaultCenter={position}*/}
-              {/*      defaultZoom={15}*/}
-              {/*    >*/}
-              {/*      {getMarkers()}*/}
-              {/*    </GoogleMapReact>*/}
-              {/*  </div>*/}
-              {/*</Grid>*/}
-
-
-              {/*<MapView/>*/}
             </CardActions>
+
             <CardContent>
               <Typography variant="caption" color="textPrimary" component="p" className={classes.dealDesc}>
                 Address: {deal.address ? deal.address : 'Visit website for more details'}
               </Typography>
             </CardContent>
+            
           </CardActionArea>
         </Card>
         <div className={classes.dealsContainer}>
