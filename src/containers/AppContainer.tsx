@@ -72,7 +72,7 @@ export type AppContextTypes = {
   searchView: SearchView | null;
   setSearchView: (value: SearchView) => void;
   currentPage: string | null;
-  device: DeviceInfo;
+  device: DeviceInfo | null;
 };
 
 // create context
