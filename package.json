@@ -45,7 +45,8 @@
     "open-ios": "npx cap open ios",
     "init-deploy-ios": "yarn init-ios && yarn open-ios",
     "deploy-ios": "yarn sync-ios && yarn open-ios",
-    "package-ios": "mkdir Scouter && cp -R node_modules Scouter && cp -R ios Scouter && zip -r Scouter.zip Scouter"
+    "package-ios": "yarn sync-ios && mkdir Scouter && cp -R node_modules Scouter && cp -R ios Scouter && zip -r Scouter.zip Scouter",
+    "init-package-ios": "yarn init-ios && mkdir Scouter && cp -R node_modules Scouter && cp -R ios Scouter && zip -r Scouter.zip Scouter"
   },
   "eslintConfig": {
     "extends": "react-app"
