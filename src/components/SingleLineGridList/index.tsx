@@ -18,7 +18,7 @@ type TileDataType = {
   distance?: string;
   address: string;
   category: string;
-  imgUrl: string;
+  imageUrl: string;
   onClick?: any;
 };
 
@@ -108,8 +108,8 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
             >
               <img
                 src={
-                  tile.imgUrl
-                    ? tile.imgUrl
+                  tile.imageUrl
+                    ? tile.imageUrl
                     : 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'
                 }
                 alt={tile.name}
