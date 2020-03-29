@@ -1610,6 +1610,14 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-places-autocomplete@^7.2.6":
+  version "7.2.6"
+  resolved "https://registry.yarnpkg.com/@types/react-places-autocomplete/-/react-places-autocomplete-7.2.6.tgz#2e24c1de8ad1088bd34b7825c0bfd255566855db"
+  integrity sha512-5cjtUHZ6ys4Jfqo3jWXeU3SGeloBNOpRy7Zj6ZOjhnveSBJmCQ8q3nhadUw3uhd8sScssxYsBkwojBXlN3vFww==
+  dependencies:
+    "@types/googlemaps" "*"
+    "@types/react" "*"
+
 "@types/react-redux@^7.1.7":
   version "7.1.7"
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/@types/react-redux/-/react-redux-7.1.7.tgz#12a0c529aba660696947384a059c5c6e08185c7a"
@@ -1635,6 +1643,13 @@
   integrity sha1-fXC9kFVDy2vL3Ma9mJAjMgVPMaY=
   dependencies:
     "@types/history" "*"
+    "@types/react" "*"
+
+"@types/react-star-rating-component@^1.4.0":
+  version "1.4.0"
+  resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/@types/react-star-rating-component/-/react-star-rating-component-1.4.0.tgz#68b097c700c0d54fd7fd707abec2a3d17c52c0e4"
+  integrity sha1-aLCXxwDA1U/X/XB6vsKj0XxSwOQ=
+  dependencies:
     "@types/react" "*"
 
 "@types/react-transition-group@^4.2.0":
@@ -2946,6 +2961,11 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@^2.2.5:
+  version "2.2.6"
+  resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+  integrity sha1-Q5Nb/90pHzJtrQogUwmzjQD2UM4=
 
 clean-css@^4.2.3:
   version "4.2.3"
@@ -5405,10 +5425,10 @@ immer@1.10.0:
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
   integrity sha1-utZ2BbqcgQJ12R4cKkfUWC6YKG0=
 
-immer@^5.3.6:
-  version "5.3.6"
-  resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/immer/-/immer-5.3.6.tgz#51eab8cbbeb13075fe2244250f221598818cac04"
-  integrity sha1-Ueq4y76xMHX+IkQlDyIVmIGMrAQ=
+immer@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-6.0.2.tgz#5bc08dc4930c756d0749533a2afbd88c8de0cd19"
+  integrity sha512-56CMvUMZl4kkWJFFUe1TjBgGbyb9ibzpLyHD+RSKSVdytuDXgT/HXO1S+GJVywMVl5neGTdAogoR15eRVEd10Q==
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -6784,6 +6804,11 @@ lodash._reinterpolate@^3.0.0:
   version "3.0.0"
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
 lodash.memoize@^4.1.2:
   version "4.1.2"
@@ -8763,7 +8788,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.5.6, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -8929,6 +8954,11 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-dependent-script@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-dependent-script/-/react-dependent-script-1.1.2.tgz#1e49a502fd2306888491aa4929fa69c14f43e828"
+  integrity sha512-Yf3gdUhQR5B2iyr6IHs6mXEdo/meiU6ZJvFXK3zLM/Tu3jJH1uc8T/Mzg19OQYITT9U9hC0HdHxtIU+LfnLXTg==
+
 react-dev-utils@^10.2.0:
   version "10.2.1"
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/react-dev-utils/-/react-dev-utils-10.2.1.tgz#f6de325ae25fa4d546d09df4bb1befdc6dd19c19"
@@ -8981,6 +9011,14 @@ react-geocode@^0.2.1:
   dependencies:
     regenerator-runtime "^0.13.3"
 
+react-google-places-autocomplete@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/react-google-places-autocomplete/-/react-google-places-autocomplete-1.6.2.tgz#2db3b68e3da53943cf1cf1ba990e0082cb63afe5"
+  integrity sha512-zrWSIlEfEQ86yoqQ9wBK4PrlY/cykWEz4PjbxyG3Sr1HPD659+yD1OAVGjLWycX5k+K+JRMJ7+fWYB0ZFhTTlw==
+  dependencies:
+    prop-types "^15.6.2"
+    react "^16.7.0"
+
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -8990,6 +9028,14 @@ react-material@^0.3.2:
   version "0.3.2"
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/react-material/-/react-material-0.3.2.tgz#77cc0664c2f4790df0285f349c0e1b0b678b1497"
   integrity sha1-d8wGZML0eQ3wKF80nA4bC2eLFJc=
+
+react-places-autocomplete@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/react-places-autocomplete/-/react-places-autocomplete-7.2.1.tgz#ecdfdbb530ba19fedddd967a646642c2efd225cf"
+  integrity sha512-X1SRv3zJjEZ9dnfy/vlSFi8dpUZc/vW4CF7GhN46AVATNMmB1y1EwhX2aiqKVWXO1888p9l7FMJLgySPRBDMCQ==
+  dependencies:
+    lodash.debounce "^4.0.8"
+    prop-types "^15.5.8"
 
 react-router-dom@^5.1.2:
   version "5.1.2"
@@ -9080,6 +9126,14 @@ react-scripts@3.4.0:
   optionalDependencies:
     fsevents "2.1.2"
 
+react-star-rating-component@^1.4.1:
+  version "1.4.1"
+  resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/react-star-rating-component/-/react-star-rating-component-1.4.1.tgz#74dc1c73493f088013331c234190b8cccad31f6b"
+  integrity sha1-dNwcc0k/CIATMxwjQZC4zMrTH2s=
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
+
 react-transition-group@^4.3.0:
   version "4.3.0"
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/react-transition-group/-/react-transition-group-4.3.0.tgz#fea832e386cf8796c58b61874a3319704f5ce683"
@@ -9090,7 +9144,7 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@^16.12.0:
+react@^16.12.0, react@^16.7.0:
   version "16.13.1"
   resolved "https://artifactory.us-east-1.bamgrid.net/api/npm/partnerdesign-npm/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha1-LoGIIvGpdDEiwGPWQQ2FweOv5I4=

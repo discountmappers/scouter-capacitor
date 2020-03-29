@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   makeStyles,
   ThemeProvider,
@@ -7,20 +7,14 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  CardActions,
-  Grid,
-  Tooltip
+  CardActions
 } from '@material-ui/core';
 import { theme } from '../../themes/theme';
-import { Star } from '@material-ui/icons';
 import MapView from '../Search/Map';
 import './details.css';
 import { DealsList } from '../DealsList';
-import { SearchContainerContext } from '../../containers/SearchContainer';
-import GoogleMapReact from 'google-map-react';
-import { GOOGLE_API_KEY } from '../../utils/google';
-import RoomIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import MapDetailView from './mapDetail';
+import StarRatingComponent from 'react-star-rating-component';
 import { mockResults } from 'utils/general';
 
 type DealDetailsProps = {
@@ -65,13 +59,18 @@ const useStyles = makeStyles({
 });
 
 const getRatings = (num: number, classes: any) => {
-  const ratings: Array<any> = [];
-  if (num <= 5) {
-    for (let i = 0; i < num; i++) {
-      ratings.push(<Star color={'primary'} fontSize={'small'} />);
-    }
-  }
-  return <div className={classes.icon}>{ratings}</div>;
+  return (
+    <div className={classes.icon}>
+      <StarRatingComponent
+        name={'businessRating'}
+        value={num}
+        starCount={5}
+        starColor={theme.palette.primary.main}
+        emptyStarColor={theme.palette.secondary.dark}
+        editing={false}
+      />
+    </div>
+  );
 };
 
 export const DealDetails = (props: DealDetailsProps) => {
@@ -81,6 +80,7 @@ export const DealDetails = (props: DealDetailsProps) => {
   //TODO incorporate real ratings
   const randomRate = Math.floor(Math.random() * 5) + 1;
   const rating = getRatings(randomRate, classes);
+  console.log(randomRate);
 
   return (
     <>
@@ -106,6 +106,7 @@ export const DealDetails = (props: DealDetailsProps) => {
                 {deal.name}
                 {rating}
               </Typography>
+
               <Typography
                 gutterBottom
                 variant="body1"
@@ -123,6 +124,14 @@ export const DealDetails = (props: DealDetailsProps) => {
               >
                 Description: {deal.dealDesc ? deal.dealDesc : 'None'}
               </Typography>
+              <br />
+              {deal.notes ? (
+                <Typography variant="caption" color="textPrimary" component="p">
+                  {deal.notes}
+                </Typography>
+              ) : (
+                ''
+              )}
             </CardContent>
 
             <CardActions className={classes.map}>
