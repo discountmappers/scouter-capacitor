@@ -6,7 +6,7 @@ import './map.css';
 import MapView from 'components/Search/Map';
 import { ListView } from 'components/Search';
 import { AppContext } from './AppContainer';
-import { SearchView } from 'utils/general';
+import { SearchView, mockResults } from 'utils/general';
 import { SearchFilter } from 'components/Search/searchFilter';
 import { handleObs, showBack } from 'services/backService';
 import { useHistory } from "react-router-dom";
@@ -18,14 +18,14 @@ export const SearchContainerContext = React.createContext({
     position: { lat: 0, lng: 0 },
     locationName: '',
     searchByCustom: (location: string) => new Promise<void>(resolve => { }),
-    filterResults: [],
+    filterResults: [...mockResults],
     setResults: (value: any) => { }
 });
 
 export const SearchContainer = (props: SearchContainerProps) => {
     const history = useHistory();
     const { searchView, setSearchView } = useContext(AppContext);
-    const [filterResults, setFilterResults] = useState([]);
+    const [filterResults, setFilterResults] = useState(mockResults);
     const {
         position,
         locationName,
@@ -53,10 +53,10 @@ export const SearchContainer = (props: SearchContainerProps) => {
     }, [searchView]);
 
     const setResults = (value: any) => {
-        setFilterResults(value);
+        //setFilterResults(value);
         setSearchView(SearchView.LIST);
     };
-
+    console.log(searchView)
     return (
         <SearchContainerContext.Provider
             value={{

@@ -15,6 +15,7 @@ import { FilterType } from '../FilterType'
 import { SearchContainerContext } from '../../containers/SearchContainer'
 import SingleLineGridList from 'components/SingleLineGridList';
 import tileData from 'components/SingleLineGridList/tileData';
+import { DealsList } from 'components/DealsList';
 import { theme } from '../../themes/theme';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { ProfileContainer } from '../../containers/ProfileContainer';
@@ -43,7 +44,7 @@ const filterTileData = [
         title: 'Other',
         icon: <ExtensionOutlined />
     }
-]
+];
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -80,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
             fontFamily: 'Roboto',
             marginBottom: '0px'
         }
-    }),
+    })
 );
 
 export const showDetailPage = (tileId: number) => {
@@ -118,7 +119,11 @@ export const SearchFilter = (props: SearchFilterProps) => {
                             selectedFilters={selectedFilters}
                             setFilter={setFilter}
                         />
-                        {/*Adds a new row after every 2 */ idx % 2 ? <Grid item xs={12} /> : ''}
+                        {/*Adds a new row after every 2 */ idx % 2 ? (
+                            <Grid item xs={12} />
+                        ) : (
+                                ''
+                            )}
                     </>
                 ))}
             </Grid>
@@ -127,26 +132,18 @@ export const SearchFilter = (props: SearchFilterProps) => {
                     className={classes.button}
                     variant="contained"
                     color={'primary'}
-                    onClick={event => { getFilterResults(selectedFilters) }}
+                    onClick={event => {
+                        getFilterResults(selectedFilters);
+                    }}
                 >
                     Submit
-                </Button>
+        </Button>
             </div>
             <div className={classes.dealsContainer}>
-                <p className={classes.dealsText}> Popular Search Results</p>
                 {/*    Horizontal sections */}
-                <SingleLineGridList
-                    tileData={tileData}
-                    cols={2.5}
-                />
-                <p className={classes.dealsText}> New Offers</p>
-                <SingleLineGridList
-                    tileData={tileData}
-                    cols={2.5}
-                />
+                <DealsList title="Popular Search Results" deals={tileData} />
+                <DealsList title="New Offers" deals={tileData} />
             </div>
         </ThemeProvider>
-    )
-}
-
-
+    );
+};

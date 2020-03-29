@@ -3,5 +3,14 @@
 }
 
 .listViewContainer {
+    padding-top:20px;
+}
+
+.resultCard {
     padding-top:12px;
+}
+
+.mapContainer{
+    height:100%;
+    width:100%;
 }

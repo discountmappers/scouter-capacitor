@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column'
     },
     mainNavigation: {
-      marginTop: '10%',
+      height: 75
     }
   })
 );
@@ -56,7 +56,6 @@ export const Navigation = (props: NavigationProps) => {
     }
   })
   const getSearchIcon = () => {
-    const icon = []
     return searchView === SearchView.MAP ?
       <><EventNoteIcon className="navBtn" /> <div>{SearchView.LIST}</div></> :
       <><MapIcon className="navBtn" /><div>{SearchView.MAP}</div></>
@@ -75,7 +74,11 @@ export const Navigation = (props: NavigationProps) => {
   const goBack = () => {
     handle()
   }
-
+  const getSearchToggle = () => {
+    return <ButtonBase classes={{
+      root: classes.buttonBase
+    }} onClick={switchView}>{getSearchIcon()}</ButtonBase>
+  }
   return (
     <>
       <AppBar position="static">
@@ -83,14 +86,12 @@ export const Navigation = (props: NavigationProps) => {
           {show && <Button classes={{
             root: classes.buttonRoot
           }} onClick={goBack}><ArrowBackIcon className="navBtn" />Back</Button>}
-          <Typography variant="body1" className={(currentPage==='Search' ? classes.title : classes.normalTitle)}>
+          <Typography variant="body1" className={(currentPage === 'Search' ? classes.title : classes.normalTitle)}>
             {currentPage}
           </Typography>
-          {currentPage === 'Search' ? (
-            <ButtonBase classes={{
-              root: classes.buttonBase
-            }} onClick={switchView}>{getSearchIcon()}</ButtonBase>
-          ) : ('')}
+          {searchView !== null ?
+            getSearchToggle()
+            : ('')}
         </Toolbar>
       </AppBar>
     </>
