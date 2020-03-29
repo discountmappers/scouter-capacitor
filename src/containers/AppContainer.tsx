@@ -14,7 +14,14 @@ import {
   AddCircleOutline,
   SupervisorAccountOutlined
 } from '@material-ui/icons';
-import { SearchView, Position } from 'utils/general';
+import {
+  SearchView,
+  Position,
+  mockResults,
+  Deal,
+  isEmpty,
+  Pages
+} from 'utils/general';
 import { Plugins, DeviceInfo } from '@capacitor/core';
 import { useHistory } from 'react-router-dom';
 import { theme } from '../themes/theme';
@@ -50,6 +57,8 @@ export type AppContextTypes = {
   device: DeviceInfo | null;
   position: Position | null;
   setPosition: (value: Position) => void;
+  filterResults: Array<Deal>;
+  setFilterResults: (value: Array<Deal>) => void;
 };
 
 // create context
@@ -59,12 +68,45 @@ export const AppContext = React.createContext<AppContextTypes>({
   currentPage: null,
   device: null,
   position: null,
-  setPosition: () => {}
+  setPosition: () => {},
+  filterResults: [...mockResults],
+  setFilterResults: () => {}
 });
 
 const manhattanCenter = {
   lat: 40.7831,
   lng: -73.9712
+};
+
+const checkNavigation = ({
+  navValue,
+  setNavValue,
+  history
+}: {
+  navValue: string;
+  setNavValue: (value: string) => void;
+  history: any;
+}) => {
+  if (isEmpty(navValue)) {
+    const rootRoute = history.location.pathname.split('/')[1];
+    const childRoute = history.location.pathname.split('/')[2];
+
+    switch (rootRoute) {
+      case '':
+        setNavValue(Pages.EXPLORE);
+        break;
+      case 'search':
+        setNavValue(Pages.SEARCH);
+        break;
+      case 'deals':
+        childRoute ? setNavValue(Pages.SEARCH) : setNavValue(Pages.ADD_DEAL);
+        break;
+      case 'profile':
+        setNavValue(Pages.PROFILE);
+        break;
+      default:
+    }
+  }
 };
 
 const AppContainer = (props: AppProps) => {
@@ -73,6 +115,7 @@ const AppContainer = (props: AppProps) => {
   const [navValue, setNavValue] = useState<string | null>(null);
   const [searchView, setSearchView] = useState<SearchView | null>(null);
   const [position, setPosition] = useState<Position | null>(manhattanCenter);
+  const [filterResults, setFilterResults] = useState(mockResults);
   const [device, setDevice] = React.useState<DeviceInfo>(null);
   React.useEffect(() => {
     // show filter page if navigating away from it
@@ -85,6 +128,7 @@ const AppContainer = (props: AppProps) => {
     }
 
     getDeviceInfo();
+    checkNavigation({ navValue, setNavValue, history });
   }, []);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
@@ -101,7 +145,9 @@ const AppContainer = (props: AppProps) => {
             currentPage: navValue,
             device: device,
             position: position,
-            setPosition: setPosition
+            setPosition: setPosition,
+            filterResults: filterResults,
+            setFilterResults: setFilterResults
           }}
         >
           <Container
@@ -122,28 +168,28 @@ const AppContainer = (props: AppProps) => {
               component={RouterLink}
               to="/explore"
               label="Explore"
-              value={'Explore Deals'}
+              value={Pages.EXPLORE}
               icon={<Explore />}
             />
             <BottomNavigationAction
               component={RouterLink}
               to="/search"
               label="Search"
-              value={'Search'}
+              value={Pages.SEARCH}
               icon={<Search />}
             />
             <BottomNavigationAction
               component={RouterLink}
               to="/deals"
               label="Add Deal"
-              value={'Add Deal'}
+              value={Pages.ADD_DEAL}
               icon={<AddCircleOutline />}
             />
             <BottomNavigationAction
               component={RouterLink}
               to="/profile"
               label="Profile"
-              value={'Profile'}
+              value={Pages.PROFILE}
               icon={<SupervisorAccountOutlined />}
             />
           </BottomNavigation>

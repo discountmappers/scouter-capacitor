@@ -79,6 +79,7 @@ export const DealsContainer = (props: any) => {
     const handleAutoChange = (value: any) => {
         const newState = produce(draft => {
             draft.name = value
+            draft.dealName = value
         })
         setNewDeal(newState(newDeal))
     }
@@ -104,6 +105,7 @@ export const DealsContainer = (props: any) => {
         const response = await geocodeByPlaceId(placeId)
         const newState = produce(draft => {
             draft.name = event.split(",")[0]
+            draft.dealName = event
             draft.address = response[0].formatted_address
             draft.lat = response[0].geometry.location.lat()
             draft.lng = response[0].geometry.location.lng()
@@ -140,7 +142,7 @@ export const DealsContainer = (props: any) => {
             <Grid container justify="center">
                 <Grid item className="autoComplete" xs={10} md={4}>
                     <PlacesAutocomplete
-                        value={newDeal.name}
+                        value={newDeal.dealName}
                         onChange={handleAutoChange}
                         onSelect={handleSelect}
                     >
@@ -190,6 +192,7 @@ export const DealsContainer = (props: any) => {
                 <Grid item xs={12}></Grid>
                 <Grid item xs={10} md={4} className="textArea">
                     <TextField
+                        onChange={(event) => handleChange('dealDesc', event.target.value)}
                         value={newDeal.dealDesc}
                         variant="outlined"
                         label="Deal info"
@@ -209,6 +212,7 @@ export const DealsContainer = (props: any) => {
                 <Grid item xs={10}></Grid>
                 <Grid item xs={10} md={4} className="textArea">
                     <TextField
+                        onChange={(event) => handleChange('notes', event.target.value)}
                         variant="outlined"
                         fullWidth
                         label="Additional details"
