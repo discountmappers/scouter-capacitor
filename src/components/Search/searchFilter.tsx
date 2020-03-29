@@ -20,7 +20,7 @@ import { Search, Restaurant, FreeBreakfastOutlined, LocalLaundryServiceOutlined,
 import { FilterType } from '../FilterType'
 import { SearchContainerContext } from '../../containers/SearchContainer'
 import SingleLineGridList from 'components/SingleLineGridList';
-import tileData from 'components/SingleLineGridList/tileData'
+import tileData from 'components/SingleLineGridList/tileData';
 
 type SearchFilterProps = {};
 
