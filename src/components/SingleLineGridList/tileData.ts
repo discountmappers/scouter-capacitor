@@ -1,5 +1,6 @@
 const tileData = [
   {
+    id: 1,
     name: 'Starbucks',
     dealName: 'Free Starbucks Coffee',
     type: 'Chain',
@@ -15,6 +16,7 @@ const tileData = [
     imageUrl: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png'
   },
   {
+    id: 2,
     name: 'Sweetgreen',
     dealName: 'Free Salad Delivery',
     type: 'Chain',
@@ -28,6 +30,7 @@ const tileData = [
     imageUrl: 'https://homepages.cae.wisc.edu/~ece533/images/boat.png'
   },
   {
+    id: 3,
     name: 'Krispy Kreme',
     dealName: 'Free Donut Mondays',
     type: 'Chain',
@@ -42,6 +45,7 @@ const tileData = [
     imageUrl: 'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'
   },
   {
+    id: 4,
     name: 'Four Seasons Hotel',
     dealName: 'Free Hotel Stay',
     type: 'Local',
@@ -56,6 +60,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 5,
     name: '&pizza',
     dealName: 'Free Pizza',
     type: 'Local',
@@ -71,6 +76,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 6,
     name: 'Crocs',
     dealName: 'Free Crocs',
     type: 'Local',
@@ -85,6 +91,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 7,
     name: 'Hertz',
     dealName: 'Free Car Rental',
     type: 'Local',
@@ -99,6 +106,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 8,
     name: 'Casa Organic Dry Cleaners',
     dealName: '50% Off Laundry',
     type: 'Local',
@@ -113,6 +121,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 9,
     name: 'Bubbleology',
     dealName: '50% Off Drinks',
     type: 'Local',
@@ -126,6 +135,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 10,
     name: 'Paris Baguette',
     dealName: 'Free Coffee',
     type: 'Chain',
@@ -140,6 +150,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 11,
     name: 'Melt Shop',
     dealName: 'Free Sandwich',
     type: 'Local',
@@ -154,6 +165,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 12,
     name: 'All Birds',
     dealName: 'Free Shoes',
     type: 'Local',
@@ -167,6 +179,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 13,
     name: 'Tropical Smoothie Cafe',
     dealName: 'Free Smoothie',
     type: 'Chain',
@@ -178,9 +191,10 @@ const tileData = [
     lng: null,
     address: '',
     category: 'Food',
-    imageUrl: ''
+    imageUrl: "https://bluhawk.com/2018/wp-content/uploads/2019/03/000539-BLU-Tenant-Coordination-Tropical-Smoothie-Blog-Image.jpg"
   },
   {
+    id: 14,
     name: 'Room Mate Grace Hotel',
     dealName: 'Free Hotel Stay',
     type: 'Local',
@@ -195,6 +209,7 @@ const tileData = [
     imageUrl: ''
   },
   {
+    id: 15,
     name: 'CitiBike',
     dealName: 'Free CitiBike',
     type: 'Chain',
