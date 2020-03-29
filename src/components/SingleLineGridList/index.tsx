@@ -1,21 +1,24 @@
 import React, { useContext } from 'react';
-import {
-  makeStyles,
-  ThemeProvider
-} from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import { AppContext } from 'containers/AppContainer';
+import { Link as RouterLink } from 'react-router-dom';
 import 'typeface-roboto';
 import { theme } from '../../themes/theme';
 
 type TileDataType = {
-  img: string;
-  title: string;
-  primarySubtitle: string;
-  secondarySubtitle?: string | number;
+  id: string;
+  name: string;
+  dealName: string;
+  dealDesc: string;
+  notes: string;
+  distance?: string;
+  address: string;
+  category: string;
+  imageUrl: string;
   onClick?: any;
 };
 
@@ -47,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   title: {
     color: theme.palette.primary.main,
     fontSize: '12px',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   primarySubtitle: {
     color: theme.palette.secondary.contrastText,
@@ -70,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     background: '#ffffff',
     '& > div': {
       position: 'absolute',
-      top: 0,
+      top: '5px',
       left: '5px',
       margin: 0
     }
@@ -96,21 +99,32 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
           {tileData.map((tile, index) => (
             <GridListTile
               className={classes.tile}
-              key={tile.title + index}
-              onClick={tile.onClick}
+              key={tile.id}
+              component={RouterLink}
+              to={{
+                pathname: `/deals/${tile.id}`,
+                state: tile
+              }}
             >
-              <img src={tile.img} alt={tile.title} />
+              <img
+                src={
+                  tile.imageUrl
+                    ? tile.imageUrl
+                    : 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'
+                }
+                alt={tile.name}
+              />
               <GridListTileBar
-                title={tile.title}
+                title={tile.dealName}
                 subtitle={
                   <div className={classes.primarySubtitle}>
                     <div>
-                      <span>{tile.primarySubtitle}</span>
+                      <span>{tile.name}</span>
                     </div>
-                    {tile.secondarySubtitle ? (
+                    {tile.distance ? (
                       <div className={classes.secondarySubtitle}>
                         <LocationOnOutlinedIcon />
-                        <span>{tile.secondarySubtitle} miles away</span>
+                        <span>{tile.distance} miles away</span>
                       </div>
                     ) : null}
                   </div>
