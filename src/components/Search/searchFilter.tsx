@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             paddingTop: '20px',
+            width: '100%'
         },
         buttonContainer: {
             width: '100%',
@@ -126,11 +127,6 @@ export const SearchFilter = (props: SearchFilterProps) => {
                     </>
                 ))}
             </Grid>
-
-            {/*    submit button */}
-            {/* ajax call to the lambda (does the filters)  */}
-            {/* store filtered results in context api */}
-            {/* send to search container for display */}
                 <div className={classes.buttonContainer}>
                     <Button
                         className={classes.button}
