@@ -1,21 +1,15 @@
-import React, { useContext } from 'react';
-import {
-  Grid,
-  Card,
-  makeStyles,
-  Typography,
-  CardContent
-} from '@material-ui/core';
-import '../search.css';
-import { SearchContainerContext } from 'containers/SearchContainer';
-import CustomCard from 'components/card';
-import { AppContext } from 'containers/AppContainer';
-type ListViewProps = {};
+import React from "react";
+import { Grid } from "@material-ui/core";
+import "../search.css";
+import CustomCard from "components/card";
+import { Deal } from "utils/general";
+type ListViewProps = {
+  results: Array<Deal>;
+};
 
 const ListView = (props: ListViewProps) => {
-  const { filterResults } = useContext(AppContext);
   const getItemCards = () => {
-    let more = [...filterResults, ...filterResults];
+    let more = [...props.results];
     const cards = more.map(result => {
       return (
         <>

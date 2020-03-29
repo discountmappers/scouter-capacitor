@@ -1,31 +1,31 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useGeoPosition } from 'hooks/useGeoPosition';
-import { Grid } from '@material-ui/core';
-import { MapContainerActions } from 'components/Search';
-import './map.css';
-import MapView from 'components/Search/Map';
-import { ListView } from 'components/Search';
-import { AppContext } from './AppContainer';
-import { SearchView, mockResults } from 'utils/general';
-import { SearchFilter } from 'components/Search/searchFilter';
-import { handleObs, showBack } from 'services/backService';
-import { useHistory } from 'react-router-dom';
-
+import React, { useContext, useEffect, useState } from "react";
+import { useGeoPosition } from "hooks/useGeoPosition";
+import { Grid } from "@material-ui/core";
+import { MapContainerActions } from "components/Search";
+import "./map.css";
+import MapView from "components/Search/Map";
+import { ListView } from "components/Search";
+import { AppContext } from "./AppContainer";
+import { SearchView, mockResults } from "utils/general";
+import { SearchFilter } from "components/Search/searchFilter";
+import { handleObs, showBack } from "services/backService";
+import { useHistory } from "react-router-dom";
+import { filter } from "rxjs/operators";
 type SearchContainerProps = {
   listView: boolean;
 };
 
 export const SearchContainerContext = React.createContext({
-  locationName: '',
+  locationName: "",
   searchByCustom: (location: string) => new Promise<void>(resolve => {}),
   setResults: (value: any) => {}
 });
 
 export const SearchContainer = (props: SearchContainerProps) => {
   const history = useHistory();
-  const { searchView, setSearchView } = useContext(AppContext);
+  const { searchView, setSearchView, filterResults } = useContext(AppContext);
   const { locationName, getLocation, searchByCustom } = useGeoPosition();
-
+  const [filtered, setFiltered] = useState([]);
   // populate the text field & default center
   // go  back the filter page
   useEffect(() => {
@@ -46,8 +46,12 @@ export const SearchContainer = (props: SearchContainerProps) => {
     };
   }, [searchView]);
 
+  const submitFilters = (filters: Array<string>) => {
+    const filt = filterResults.filter(fil => filters.includes(fil.category));
+    setFiltered(filt);
+    setSearchView(SearchView.LIST);
+  };
   const setResults = (value: any) => {
-    //setFilterResults(value);
     setSearchView(SearchView.LIST);
   };
 
@@ -70,11 +74,11 @@ export const SearchContainer = (props: SearchContainerProps) => {
         </Grid>
         <Grid item xs={12}></Grid>
         {searchView === null ? (
-          <SearchFilter />
+          <SearchFilter submitFilters={submitFilters} />
         ) : searchView === SearchView.MAP ? (
-          <MapView />
+          <MapView results={filtered} />
         ) : (
-          <ListView />
+          <ListView results={filtered} />
         )}
       </Grid>
     </SearchContainerContext.Provider>

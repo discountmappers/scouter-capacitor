@@ -1,20 +1,22 @@
 import React, { useContext, useEffect } from 'react';
 import { Grid, Tooltip } from "@material-ui/core";
 import GoogleMapReact from "google-map-react";
-import { BASE_GEOCODE_API, GOOGLE_API_KEY } from 'utils/google';
-import RoomIcon from '@material-ui/icons/Room';
-import 'components/DealDetails/mapDetail'
-import './details.css'
+import { GOOGLE_API_KEY } from "utils/google";
+import RoomIcon from "@material-ui/icons/Room";
+import "components/DealDetails/mapDetail";
+import "./details.css";
 import { AppContext } from '../../containers/AppContainer';
 import { useGeoPosition } from '../../hooks/useGeoPosition';
 
 type MapDetailViewProps = {
-  deal: any
+  deal: any;
 };
 
 type GoogleNearbyResponse = {
   results: any[];
 };
+
+
 
 
 const MapDetailView = (props: MapDetailViewProps) => {
@@ -65,12 +67,19 @@ const MapDetailView = (props: MapDetailViewProps) => {
 
 
   // this css is needed or the markers will shift!!!
-  const CustomMarker = ({ deal }: any) =>
+  const CustomMarker = ({ deal }: any) => (
     <Tooltip title={deal.name} aria-label="add">
-      <div style={{ cursor: 'pointer', position: 'absolute', transform: 'translate(-50%, -100%)' }}>
+      <div
+        style={{
+          cursor: "pointer",
+          position: "absolute",
+          transform: "translate(-50%, -100%)"
+        }}
+      >
         <RoomIcon />
       </div>
     </Tooltip>
+  );
 
   const detailPosition = deal.lat && deal.lng ? { lat: deal.lat, lng: deal.lng } : position
 
@@ -84,7 +93,6 @@ const MapDetailView = (props: MapDetailViewProps) => {
     <>
       <Grid item xs={10} md={7} lg={4}>
         <div className="mapDetailsContainer">
-
           <GoogleMapReact
             key={deal.lng}
             bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
@@ -96,10 +104,7 @@ const MapDetailView = (props: MapDetailViewProps) => {
         </div>
       </Grid>
     </>
-  )
-}
+  );
+};
 
 export default MapDetailView;
-
-
-

@@ -1,14 +1,15 @@
-import React, { useContext, useState } from 'react';
-import { Grid, Button, Tooltip } from '@material-ui/core';
-import GoogleMapReact from 'google-map-react';
-import { GOOGLE_API_KEY } from 'utils/google';
-import { SearchContainerContext } from 'containers/SearchContainer';
-import RoomIcon from '@material-ui/icons/Room';
-import CustomCard from 'components/card';
-import '../search.css';
-import { AppContext } from 'containers/AppContainer';
-import { filter } from 'rxjs/operators';
-type MapViewProps = {};
+import React, { useContext, useState } from "react";
+import { Grid, Tooltip } from "@material-ui/core";
+import GoogleMapReact from "google-map-react";
+import { GOOGLE_API_KEY } from "utils/google";
+import RoomIcon from "@material-ui/icons/Room";
+import CustomCard from "components/card";
+import "../search.css";
+import { AppContext } from "containers/AppContainer";
+import { Deal } from "utils/general";
+type MapViewProps = {
+  results?: Array<Deal>;
+};
 
 const MapView = (props: MapViewProps) => {
   // this css is needed or the markers will shift!!!
@@ -16,9 +17,9 @@ const MapView = (props: MapViewProps) => {
     <Tooltip title={result.name} aria-label="add">
       <div
         style={{
-          cursor: 'pointer',
-          position: 'absolute',
-          transform: 'translate(-50%, -100%)'
+          cursor: "pointer",
+          position: "absolute",
+          transform: "translate(-50%, -100%)"
         }}
         onClick={() => showClick(result)}
       >
@@ -26,7 +27,7 @@ const MapView = (props: MapViewProps) => {
       </div>
     </Tooltip>
   );
-  const { position, filterResults } = useContext(AppContext);
+  const { position } = useContext(AppContext);
   const [resultCard, setResultCard] = useState(null);
 
   // show the selected choice under the map
@@ -34,16 +35,21 @@ const MapView = (props: MapViewProps) => {
     setResultCard(result);
   };
   const getMarkers = () => {
-    return filterResults.map(result => {
-      return (
-        <CustomMarker
-          key={result.lat}
-          lat={result.lat}
-          lng={result.lng}
-          result={result}
-        />
-      );
-    });
+    const { results } = props;
+
+    return (
+      results &&
+      results.map(result => {
+        return (
+          <CustomMarker
+            key={result.lat}
+            lat={result.lat}
+            lng={result.lng}
+            result={result}
+          />
+        );
+      })
+    );
   };
   return (
     <>
