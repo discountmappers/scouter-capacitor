@@ -17,6 +17,12 @@ export enum SearchView {
   LIST = 'List',
   MAP = 'Map'
 }
+export enum Pages {
+  EXPLORE = 'Explore Deals',
+  SEARCH = 'Search',
+  ADD_DEAL = 'Add Deal',
+  PROFILE = 'Profile'
+}
 export type Position = {
   lat: number;
   lng: number;
