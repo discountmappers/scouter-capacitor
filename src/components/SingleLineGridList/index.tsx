@@ -11,6 +11,7 @@ type TileDataType = {
   title: string;
   primarySubtitle: string;
   secondarySubtitle?: string | number;
+  onClick?: any;
 };
 
 type SingleLineGridListProps = {
@@ -78,7 +79,11 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={getCols}>
         {tileData.map((tile, index) => (
-          <GridListTile className={classes.tile} key={tile.title + index}>
+          <GridListTile
+            className={classes.tile}
+            key={tile.title + index}
+            onClick={tile.onClick}
+          >
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
