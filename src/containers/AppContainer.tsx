@@ -14,7 +14,14 @@ import {
   AddCircleOutline,
   SupervisorAccountOutlined
 } from '@material-ui/icons';
-import { SearchView, Position, mockResults, Deal } from 'utils/general';
+import {
+  SearchView,
+  Position,
+  mockResults,
+  Deal,
+  isEmpty,
+  Pages
+} from 'utils/general';
 import { Plugins, DeviceInfo } from '@capacitor/core';
 import { useHistory } from 'react-router-dom';
 import { theme } from '../themes/theme';
@@ -71,6 +78,37 @@ const manhattanCenter = {
   lng: -73.9712
 };
 
+const checkNavigation = ({
+  navValue,
+  setNavValue,
+  history
+}: {
+  navValue: string;
+  setNavValue: (value: string) => void;
+  history: any;
+}) => {
+  if (isEmpty(navValue)) {
+    const rootRoute = history.location.pathname.split('/')[1];
+    const childRoute = history.location.pathname.split('/')[2];
+
+    switch (rootRoute) {
+      case '':
+        setNavValue(Pages.EXPLORE);
+        break;
+      case 'search':
+        setNavValue(Pages.SEARCH);
+        break;
+      case 'deals':
+        childRoute ? setNavValue(Pages.SEARCH) : setNavValue(Pages.ADD_DEAL);
+        break;
+      case 'profile':
+        setNavValue(Pages.PROFILE);
+        break;
+      default:
+    }
+  }
+};
+
 const AppContainer = (props: AppProps) => {
   const history = useHistory();
   const classes = useStyles();
@@ -90,6 +128,7 @@ const AppContainer = (props: AppProps) => {
     }
 
     getDeviceInfo();
+    checkNavigation({ navValue, setNavValue, history });
   }, []);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
@@ -129,28 +168,28 @@ const AppContainer = (props: AppProps) => {
               component={RouterLink}
               to="/explore"
               label="Explore"
-              value={'Explore Deals'}
+              value={Pages.EXPLORE}
               icon={<Explore />}
             />
             <BottomNavigationAction
               component={RouterLink}
               to="/search"
               label="Search"
-              value={'Search'}
+              value={Pages.SEARCH}
               icon={<Search />}
             />
             <BottomNavigationAction
               component={RouterLink}
               to="/deals"
               label="Add Deal"
-              value={'Add Deal'}
+              value={Pages.ADD_DEAL}
               icon={<AddCircleOutline />}
             />
             <BottomNavigationAction
               component={RouterLink}
               to="/profile"
               label="Profile"
-              value={'Profile'}
+              value={Pages.PROFILE}
               icon={<SupervisorAccountOutlined />}
             />
           </BottomNavigation>

@@ -11,7 +11,13 @@ type ExploreContainerProps = {
 
 export const ExploreContainer = (props: ExploreContainerProps) => {
   const { getLocation } = useGeoPosition();
-  const { position } = useContext(AppContext);
+  const { position, filterResults } = useContext(AppContext);
+  const foodDeals = filterResults.filter(deal => deal.category === 'Food');
+  const coffeeDeals = filterResults.filter(deal => deal.category === 'Coffee');
+  const servicesDeals = filterResults.filter(
+    deal => deal.category === 'Services'
+  );
+  const otherDeals = filterResults.filter(deal => deal.category === 'Other');
 
   useEffect(() => {
     getLocation();
@@ -19,10 +25,10 @@ export const ExploreContainer = (props: ExploreContainerProps) => {
 
   return (
     <Grid container justify="flex-start" alignItems="center">
-      <DealsList title="Food" />
-      <DealsList title="Coffee" />
-      <DealsList title="Services" />
-      <DealsList title="Other" />
+      <DealsList title="Food" deals={foodDeals} />
+      <DealsList title="Coffee" deals={coffeeDeals} />
+      <DealsList title="Services" deals={servicesDeals} />
+      <DealsList title="Other" deals={otherDeals} />
     </Grid>
   );
 };

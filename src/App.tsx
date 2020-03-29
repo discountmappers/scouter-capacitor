@@ -16,8 +16,7 @@ const App = (props: AppProps) => {
   return (
     <AppContainer>
       <Switch>
-        <Route exact path="/" component={Splash} />
-        <Route exact path="/explore" component={ExploreContainer} />
+        <Route exact path="/" component={ExploreContainer} />
         <Route exact path="/search" component={SearchContainer} />
         <Route exact path="/deals" component={DealsContainer} />
         <Route exact path="/profile" component={ProfileContainer} />
