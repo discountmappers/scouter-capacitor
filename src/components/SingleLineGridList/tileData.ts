@@ -3,7 +3,10 @@ const tileData = [
     img: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
     title: '50% off flight ',
     primarySubtitle: 'JetBlue',
-    secondarySubtitle: 0.1
+    secondarySubtitle: 0.1,
+    onClick: () => {
+      console.log('hello');
+    }
   },
   {
     img: 'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
