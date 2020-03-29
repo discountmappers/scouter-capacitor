@@ -78,9 +78,8 @@ export const DealDetails = (props: DealDetailsProps) => {
   const classes = useStyles();
 
   //TODO incorporate real ratings
-  const randomRate = Math.floor(Math.random() * 5) + 1;
-  const rating = getRatings(randomRate, classes);
-  console.log(randomRate);
+  const randomRate = Math.floor(Math.random() * 5) + 1
+  const rating = getRatings(randomRate, classes)
 
   return (
     <>
@@ -135,11 +134,7 @@ export const DealDetails = (props: DealDetailsProps) => {
             </CardContent>
 
             <CardActions className={classes.map}>
-              {deal.lat && deal.lng ? (
-                <MapDetailView deal={deal} />
-              ) : (
-                <MapView />
-              )}
+              { <MapDetailView deal={deal}/> }
             </CardActions>
 
             <CardContent>
