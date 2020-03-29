@@ -1,14 +1,14 @@
 import React, { useState, useContext }  from "react";
 import {
     createMuiTheme,
-    createStyles, GridList, GridListTile, GridListTileBar, Theme, Grid, Icon, Paper, Button
+    createStyles, GridList, GridListTile, GridListTileBar, Theme, Grid, Icon, Paper, Button, Container, Box
 } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import foodImage from '../images/food.jpg';
 import coffeeImage from '../images/coffee.jpg';
 import laundryImage from '../images/laundry.jpg';
 import servicesImage2 from '../images/services2.jpg';
-import { Search, Restaurant } from "@material-ui/icons";
+import { Search, Restaurant, FreeBreakfastOutlined, LocalLaundryServiceOutlined, ExtensionOutlined } from "@material-ui/icons";
 import { FilterType } from '../filterType'
 import { SearchContainerContext } from '../../containers/SearchContainer'
 
@@ -56,17 +56,17 @@ const tileData = [
     {
         img: coffeeImage,
         title: 'Coffee',
-        icon: <Restaurant />
+        icon: <FreeBreakfastOutlined />
     },
     {
         img: laundryImage,
-        title: 'Transportation & Services',
-        icon: <Restaurant />
+        title: 'Services',
+        icon: <LocalLaundryServiceOutlined />
     },
     {
         img: servicesImage2,
         title: 'Other',
-        icon: <Restaurant />
+        icon: <ExtensionOutlined />
     }
 ]
 
@@ -79,10 +79,11 @@ const useStyles = makeStyles((theme: Theme) =>
         buttonContainer: {
             width: '100%',
             height: '100%',
-            padding: '10px',
+            padding: '15px',
             // alignItems: 'center',
             justifyContent: 'center',
-            display: 'flex'
+            display: 'flex',
+            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
         },
         button: {
             padding: '10px',
@@ -90,6 +91,17 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '12px',
             fontWeight: 'bold'
         },
+        dealsContainer: {
+            outline: '1px solid #9e9e9e',
+            width: '100%',
+            height: '100%'
+        },
+        dealsText: {
+            paddingTop: '10px',
+            paddingLeft: '10px',
+            fontSize: '12px',
+            fontWeight: 'bold'
+        }
     }),
 );
 
@@ -117,26 +129,37 @@ export const SearchFilter = (props: SearchFilterProps) => {
         <ThemeProvider theme={theme}>
             <Grid container justify="center" spacing={0} className={classes.root}>
                 {tileData.map((tile, idx) => (
-                    <><FilterType
-                        title={tile.title}
-                        icon={tile.icon}
-                        selectedFilters={selectedFilters}
-                        setFilter={setFilter}
+                    <>
+                        <FilterType
+                            title={tile.title}
+                            icon={tile.icon}
+                            selectedFilters={selectedFilters}
+                            setFilter={setFilter}
                     />
                         {/*Adds a new row after every 2 */ idx % 2 ? <Grid item xs={12} /> : ''}
                     </>
                 ))}
             </Grid>
-                <div className={classes.buttonContainer}>
-                    <Button
-                        className={classes.button}
-                        variant="contained"
-                        color={'primary'}
-                        onClick={event => { getFilterResults(selectedFilters)}}
-                    >
-                        Submit
-                    </Button>
+            <div className={classes.buttonContainer}>
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    color={'primary'}
+                    onClick={event => { getFilterResults(selectedFilters)}}
+                >
+                    Submit
+                </Button>
+            </div>
+            <div className={classes.dealsContainer}>
+                <p className={classes.dealsText}> Popular Search Results</p>
+
+                <div>
+                    
                 </div>
+
+            </div>
+
+        {/*    Horizontal sections */}
         </ThemeProvider>
     )
 }

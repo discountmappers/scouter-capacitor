@@ -96,7 +96,7 @@ export const FilterType = (props: any) => {
                 marginTop: '2px',
             },
             buttonBase: {
-                height: 120,
+                height: 90,
                 width: '100%',
                 backgroundColor: buttonColor,
                 outline: '1px solid #9e9e9e'
