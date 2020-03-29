@@ -7,6 +7,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import CustomCard from 'components/card';
 import '../search.css';
 import { AppContext } from 'containers/AppContainer';
+import { filter } from 'rxjs/operators';
 type MapViewProps = {};
 
 const MapView = (props: MapViewProps) => {
