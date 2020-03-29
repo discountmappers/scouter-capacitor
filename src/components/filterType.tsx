@@ -82,7 +82,7 @@ export const FilterType = (props: any) => {
     const useStyles = makeStyles((theme: Theme) =>
         createStyles({
             root: {
-                paddingTop: '20px',
+                // paddingTop: '20px',
             },
             gridList: {
                 width: '100%',
@@ -94,9 +94,6 @@ export const FilterType = (props: any) => {
             },
             gridTitle: {
                 marginTop: '2px',
-            },
-            icon: {
-                color: 'rgba(255, 255, 255, 0.54)',
             },
             buttonBase: {
                 height: 120,
