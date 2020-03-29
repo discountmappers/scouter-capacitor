@@ -9,8 +9,8 @@ const tileData = [
       'Free tall hot or iced coffee to all health care workers through May 3',
     notes:
       'Offer goes for more than just doctors and nurses‚ police officers, firefighters, paramedics and other hospital or medical staffers are also eligible',
-    lat: null,
-    lng: null,
+    lat: 40.711047,
+    lng: -74.010150,
     address: '',
     category: 'Coffee',
     imageUrl: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png'
@@ -23,8 +23,8 @@ const tileData = [
     offer: 'Free',
     dealDesc: 'Free delivery of salads and bowls to NYC hospitals',
     notes: 'Free lunch for hospitals and health facilities',
-    lat: null,
-    lng: null,
+    lat: 40.730570,
+    lng: -74.002554,
     address: '',
     category: 'Food',
     imageUrl: 'https://homepages.cae.wisc.edu/~ece533/images/boat.png'

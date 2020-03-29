@@ -7,7 +7,6 @@ import { theme } from '../../themes/theme';
 type DealsList = {
   title: string;
   deals?: any;
-  history?: any;
 };
 
 const useStyles = makeStyles((theme: Theme) =>
