@@ -25,7 +25,7 @@ type AppProps = {
 
 const useStyles = makeStyles({
   appContainer: {
-    paddingBottom: 65
+    paddingBottom: 75
   },
   bottomNav: {
     width: '100%',

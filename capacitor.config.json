@@ -4,10 +4,6 @@
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "build",
-  "server": {
-    "url": "http://localhost:3000",
-    "allowNavigation": []
-  },
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 5000
