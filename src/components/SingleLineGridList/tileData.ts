@@ -1,8 +1,9 @@
 const tileData = [
   {
     img: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
-    title: 'airplane',
-    primarySubtitle: 'pilot'
+    title: '50% off flight ',
+    primarySubtitle: 'JetBlue',
+    secondarySubtitle: 0.1
   },
   {
     img: 'https://homepages.cae.wisc.edu/~ece533/images/boat.png',

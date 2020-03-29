@@ -19,6 +19,8 @@ import servicesImage2 from '../images/services2.jpg';
 import { Search, Restaurant, FreeBreakfastOutlined, LocalLaundryServiceOutlined, ExtensionOutlined } from "@material-ui/icons";
 import { FilterType } from '../filterType'
 import { SearchContainerContext } from '../../containers/SearchContainer'
+import SingleLineGridList from 'components/SingleLineGridList';
+import tileData from 'components/SingleLineGridList/tileData'
 
 type SearchFilterProps = {};
 
@@ -53,7 +55,7 @@ const theme = createMuiTheme({
   }
 });
 
-const tileData = [
+const filterTileData = [
     {
         img: foodImage,
         title: 'Food',
@@ -100,16 +102,18 @@ const useStyles = makeStyles((theme: Theme) =>
         dealsContainer: {
             outline: '1px solid #9e9e9e',
             width: '100%',
-            height: '100%'
+            height: '100%',
+            background: '#f5f5f5',
+            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
         },
         dealsText: {
-            paddingTop: '10px',
             paddingLeft: '10px',
             fontSize: '12px',
             fontWeight: 'bold'
         }
     }),
 );
+
 
 export const SearchFilter = (props: SearchFilterProps) => {
   const classes = useStyles();
@@ -131,7 +135,7 @@ export const SearchFilter = (props: SearchFilterProps) => {
     return (
         <ThemeProvider theme={theme}>
             <Grid container justify="center" spacing={0} className={classes.root}>
-                {tileData.map((tile, idx) => (
+                {filterTileData.map((tile, idx) => (
                     <>
                         <FilterType
                             title={tile.title}
@@ -155,14 +159,17 @@ export const SearchFilter = (props: SearchFilterProps) => {
             </div>
             <div className={classes.dealsContainer}>
                 <p className={classes.dealsText}> Popular Search Results</p>
-
-                <div>
-                    
-                </div>
-
+                {/*    Horizontal sections */}
+                <SingleLineGridList
+                    tileData={tileData}
+                    cols={2.5}
+                />
+                <p className={classes.dealsText}> New Offers</p>
+                <SingleLineGridList
+                    tileData={tileData}
+                    cols={2.5}
+                />
             </div>
-
-        {/*    Horizontal sections */}
         </ThemeProvider>
     )
 }
