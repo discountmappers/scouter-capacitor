@@ -13,13 +13,10 @@ import servicesImage2 from '../images/services2.jpg';
 import { Restaurant, FreeBreakfastOutlined, LocalLaundryServiceOutlined, ExtensionOutlined } from "@material-ui/icons";
 import { FilterType } from '../FilterType'
 import { SearchContainerContext } from '../../containers/SearchContainer'
-import SingleLineGridList from 'components/SingleLineGridList';
 import tileData from 'components/SingleLineGridList/tileData';
 import { DealsList } from 'components/DealsList';
 import { theme } from '../../themes/theme';
-import { BrowserRouter, Link } from 'react-router-dom';
-import { ProfileContainer } from '../../containers/ProfileContainer';
-import { useHistory } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 
 type SearchFilterProps = {};
 
@@ -84,10 +81,11 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const showDetailPage = (tileId: number) => {
-    console.log('show detail page: ')
-    const history = useHistory();
-    history.push('/home')
+export const showDetailPage = () => {
+    console.log("show detail")
+    return (
+      <Redirect to="/home" push />
+      )
 }
 
 
@@ -140,7 +138,6 @@ export const SearchFilter = (props: SearchFilterProps) => {
         </Button>
             </div>
             <div className={classes.dealsContainer}>
-                {/*    Horizontal sections */}
                 <DealsList title="Popular Search Results" deals={tileData} />
                 <DealsList title="New Offers" deals={tileData} />
             </div>

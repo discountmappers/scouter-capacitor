@@ -6,7 +6,7 @@ const tileData = [
     title: '50% off flight ',
     primarySubtitle: 'JetBlue',
     secondarySubtitle: 0.1,
-    onClick: () => {showDetailPage(1)}
+    onClick: () => {showDetailPage()}
   },
   {
     img: 'https://homepages.cae.wisc.edu/~ece533/images/boat.png',

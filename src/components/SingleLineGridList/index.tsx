@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import {
   makeStyles,
-  ThemeProvider,
-  createMuiTheme
+  ThemeProvider
 } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -48,7 +47,7 @@ const useStyles = makeStyles(theme => ({
   title: {
     color: theme.palette.primary.main,
     fontSize: '12px',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   primarySubtitle: {
     color: theme.palette.secondary.contrastText,
