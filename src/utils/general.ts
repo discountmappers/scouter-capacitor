@@ -17,22 +17,6 @@ export enum SearchView {
     LIST = "List", MAP = "Map"
 }
 
-export const mockAPIresults = [
-    {
-        "id": 13,
-        "name": "Tropical Smoothie Cafe",
-        "dealName": "Free smoothie",
-        "type": "Chain",
-        "offer": "Free",
-        "dealDesc": "Tropical Smoothie Cafe is donating 100,000 smoothies in NYC to local healthcare workers and first responders.",
-        "notes": "",
-        "lat": "",
-        "lng": "",
-        "address": "123 East 9th Street New York, NY 10009",
-        "category": "Food",
-        "imgUrl": "https://bluhawk.com/2018/wp-content/uploads/2019/03/000539-BLU-Tenant-Coordination-Tropical-Smoothie-Blog-Image.jpg"
-    }
-]
 export const mockResults = [
     {
 

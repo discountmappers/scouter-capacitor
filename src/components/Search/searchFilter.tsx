@@ -16,7 +16,6 @@ import { SearchContainerContext } from '../../containers/SearchContainer'
 import tileData from 'components/SingleLineGridList/tileData';
 import { DealsList } from 'components/DealsList';
 import { theme } from '../../themes/theme';
-import { Redirect } from 'react-router-dom';
 
 type SearchFilterProps = {};
 
@@ -80,14 +79,6 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
-
-export const showDetailPage = () => {
-    console.log("show detail")
-    return (
-      <Redirect to="/home" push />
-      )
-}
-
 
 export const SearchFilter = (props: SearchFilterProps) => {
     const classes = useStyles();

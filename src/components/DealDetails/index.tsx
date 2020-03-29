@@ -8,12 +8,15 @@ import {
   CardContent, Typography, CardActions
 } from '@material-ui/core';
 import { theme } from '../../themes/theme';
-import { mockAPIresults } from 'utils/general';
 import { Star } from "@material-ui/icons";
 import MapView from '../Search/Map';
 import './details.css'
 import { DealsList } from '../DealsList';
 import tileData from '../SingleLineGridList/tileData';
+
+type DealDetailsProps = {
+  deal: any;
+};
 
 const useStyles = makeStyles({
   root: {
@@ -64,14 +67,13 @@ const getRatings = (num: number, classes: any) => {
   return <div className={classes.icon}>{ratings}</div>
 }
 
-export const DealDetails = (props: any) => {
-  // const { deal } = props
+export const DealDetails = (props: DealDetailsProps) => {
+  const { deal } = props
   const classes = useStyles();
 
-  //subject to change if data model changes
-  const deal = mockAPIresults[0]
-
-  const rating = getRatings(5, classes)
+  //TODO incorporate real ratings
+  const randomRate = Math.floor(Math.random() * 5) + 1
+  const rating = getRatings(randomRate, classes)
 
   return (
     <>
@@ -80,7 +82,9 @@ export const DealDetails = (props: any) => {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={deal.imgUrl}
+              image={ deal.imageUrl
+                ? deal.imageUrl
+                : 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'}
             />
             <CardContent className={classes.card}>
               <Typography
@@ -103,7 +107,7 @@ export const DealDetails = (props: any) => {
               </Typography>
 
               <Typography variant="caption" color="textPrimary" component="p" className={classes.dealDesc}>
-                Description: {deal.dealDesc}
+                Description: {deal.dealDesc ? deal.dealDesc : 'None'}
               </Typography>
             </CardContent>
 
@@ -112,7 +116,7 @@ export const DealDetails = (props: any) => {
             </CardActions>
             <CardContent>
               <Typography variant="caption" color="textPrimary" component="p" className={classes.dealDesc}>
-                Address: {deal.address}
+                Address: {deal.address ? deal.address : 'Visit website for more details'}
               </Typography>
             </CardContent>
           </CardActionArea>
