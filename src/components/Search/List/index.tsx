@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
-import { Grid, Card, makeStyles, ButtonBase, Typography, CardContent, IconButton, CardMedia } from "@material-ui/core";
-import GoogleMapReact from "google-map-react";
-import { GOOGLE_API_KEY } from "utils/google";
-import { SearchContainerContext } from "containers/SearchContainer";
+import { Grid, Card, makeStyles, Typography, CardContent } from "@material-ui/core";
+
 type ListViewProps = {
 
 };
@@ -17,8 +15,16 @@ const mockResults = [
         "lng": 90,
         "address": '146 forest',
         "category": 'Coffee',
-        "img": 'we'
+    },
+    {
 
+        "name": "Starbucks Deal",
+        "dealDesc": "20% off Venti Americano",
+        "notes": "Onle applicable in Union Square Stores",
+        "lat": 89,
+        "lng": 90,
+        "address": '146 forest',
+        "category": 'Coffee',
     },
     {
 
@@ -29,9 +35,37 @@ const mockResults = [
         "lng": 90,
         "address": '146 forest',
         "category": 'Coffee',
-        "img": 'we'
-
     },
+    {
+
+        "name": "John Laundromat",
+        "dealDesc": "5% discount on weekends",
+        "notes": "Onle applicable in Union Square Stores",
+        "lat": 89,
+        "lng": 90,
+        "address": '146 forest',
+        "category": 'Services',
+    },
+    {
+
+        "name": "Dunkin Deal",
+        "dealDesc": "20% off Venti Americano",
+        "notes": "Onle applicable in Union Square Stores",
+        "lat": 89,
+        "lng": 90,
+        "address": '146 forest',
+        "category": 'Food',
+    },
+    {
+
+        "name": "Applebees",
+        "dealDesc": "20% off apps",
+        "notes": "Onle applicable in Union Square Stores",
+        "lat": 89,
+        "lng": 90,
+        "address": '146 forest',
+        "category": 'Food',
+    }
 ]
 const useStyles = makeStyles({
     root: {
@@ -61,7 +95,8 @@ const ListView = (props: ListViewProps) => {
     // get results from context
     //const { position, searchByCustom, locationName } = useContext(SearchContainerContext)
     const getItemCards = () => {
-        const cards = mockResults.map(result => {
+        let more = [...mockResults, ...mockResults]
+        const cards = more.map(result => {
             return (<><Grid item xs={10} md={7} lg={4}>
                 <Card className={classes.root}>
                     <img className={classes.img} src="https://maps.gstatic.com/mapfiles/place_api/icons/cafe-71.png" />
