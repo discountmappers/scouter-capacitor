@@ -91,7 +91,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: [
       'Roboto',
-      // 'sans-serif',
+      'sans-serif',
     ].join(',')
   }
 });
@@ -103,40 +103,42 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
   const getCols = cols ? cols : device?.platform === 'web' ? 4.5 : 2.5;
 
   return (
-    <div className={classes.root}>
-      <GridList className={classes.gridList} cols={getCols}>
-        {tileData.map((tile, index) => (
-          <GridListTile
-            className={classes.tile}
-            key={tile.title + index}
-            onClick={tile.onClick}
-          >
-            <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={tile.title}
-              subtitle={
-                <div className={classes.primarySubtitle}>
-                  <div>
-                    <span>{tile.primarySubtitle}</span>
-                  </div>
-                  {tile.secondarySubtitle ? (
-                    <div className={classes.secondarySubtitle}>
-                      <LocationOnOutlinedIcon />
-                      <span>{tile.secondarySubtitle} miles away</span>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <GridList className={classes.gridList} cols={getCols}>
+            {tileData.map((tile, index) => (
+              <GridListTile
+                className={classes.tile}
+                key={tile.title + index}
+                onClick={tile.onClick}
+              >
+                <img src={tile.img} alt={tile.title} />
+                <GridListTileBar
+                  title={tile.title}
+                  subtitle={
+                    <div className={classes.primarySubtitle}>
+                      <div>
+                        <span>{tile.primarySubtitle}</span>
+                      </div>
+                      {tile.secondarySubtitle ? (
+                        <div className={classes.secondarySubtitle}>
+                          <LocationOnOutlinedIcon />
+                          <span>{tile.secondarySubtitle} miles away</span>
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              }
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-                subtitle: classes.primarySubtitle
-              }}
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+                  }
+                  classes={{
+                    root: classes.titleBar,
+                    title: classes.title,
+                    subtitle: classes.primarySubtitle
+                  }}
+                />
+              </GridListTile>
+            ))}
+          </GridList>
+        </div>
+      </ThemeProvider>
   );
 };
 
