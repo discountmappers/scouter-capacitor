@@ -4,6 +4,7 @@ import {Grid} from "@material-ui/core";
 import {MapContainerActions} from "components/Search";
 import './map.css'
 import MapView from "components/Search/Map";
+import { ListView } from "components/Search";
 import {HeaderContext} from "./AppContainer";
 import {SearchView} from "utils/general";
 import {SearchFilter} from "components/Search/searchFilter";
@@ -39,12 +40,13 @@ export const SearchContainer = (props: SearchContainerProps) => {
     return (
         <SearchContainerContext.Provider value={{ position, locationName, searchByCustom, filterResults, setResults }}>
             <Grid container justify="center" alignItems="center">
-                <Grid item xs={10} sm={6}>
+                <Grid item xs={10} md={7} lg={4}>
                     <div className="actionGroup">
                         <MapContainerActions search={searchByCustom} location={locationName} />
                     </div>
                 </Grid>
-                {searchView === null ? <SearchFilter /> : searchView === SearchView.MAP ? <MapView /> : ''}
+                <Grid item xs={12}></Grid>
+                {searchView === null ? <SearchFilter /> : searchView === SearchView.MAP ? <MapView /> : <ListView />}
 
             </Grid >
         </SearchContainerContext.Provider >

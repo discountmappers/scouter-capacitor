@@ -3,7 +3,7 @@ import {
     createMuiTheme,
     createStyles, GridList, GridListTile, GridListTileBar, Theme, Grid, Icon, Paper, Button
 } from "@material-ui/core";
-import {makeStyles, ThemeProvider} from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import foodImage from '../images/food.jpg';
 import coffeeImage from '../images/coffee.jpg';
 import laundryImage from '../images/laundry.jpg';
@@ -51,22 +51,22 @@ const tileData = [
     {
         img: foodImage,
         title: 'Food',
-        icon: <Restaurant/>
+        icon: <Restaurant />
     },
     {
         img: coffeeImage,
         title: 'Coffee',
-        icon: <Restaurant/>
+        icon: <Restaurant />
     },
     {
         img: laundryImage,
         title: 'Transportation & Services',
-        icon: <Restaurant/>
+        icon: <Restaurant />
     },
     {
         img: servicesImage2,
         title: 'Other',
-        icon: <Restaurant/>
+        icon: <Restaurant />
     }
 ]
 
@@ -114,14 +114,23 @@ export const SearchFilter = (props: SearchFilterProps) => {
 
     return (
         <ThemeProvider theme={theme}>
-                {tileData.map(tile => (
-                    <FilterType
+            <Grid container justify="center" spacing={0}>
+                {tileData.map((tile, idx) => (
+                    <><FilterType
                         title={tile.title}
                         icon={tile.icon}
                         selectedFilters={selectedFilters}
                         setFilter={setFilter}
                     />
+                        {/*Adds a new row after every 2 */ idx % 2 ? <Grid item xs={12} /> : ''}
+                    </>
                 ))}
+            </Grid>
+
+            {/*    submit button */}
+            {/* ajax call to the lambda (does the filters)  */}
+            {/* store filtered results in context api */}
+            {/* send to search container for display */}
                 <div className={classes.buttonContainer}>
                     <Button
                         className={classes.button}
@@ -132,11 +141,6 @@ export const SearchFilter = (props: SearchFilterProps) => {
                         Submit
                     </Button>
                 </div>
-            {/*    submit button */}
-            {/* ajax call to the lambda (does the filters)  */}
-            {/* store filtered results in context api */}
-            {/* send to search container for display */}
-            {/*</SearchFilterContext.Provider>*/}
         </ThemeProvider>
     )
 }

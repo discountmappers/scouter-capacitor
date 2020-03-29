@@ -1,9 +1,9 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import {
     createMuiTheme,
     createStyles, GridList, GridListTile, GridListTileBar, Theme, Grid, Icon, Paper, ButtonBase
 } from "@material-ui/core";
-import {makeStyles, ThemeProvider} from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import foodImage from './images/food.jpg';
 import coffeeImage from './images/coffee.jpg';
 import laundryImage from './images/laundry.jpg';
@@ -52,22 +52,22 @@ const tileData = [
     {
         img: foodImage,
         title: 'Food',
-        icon: <Restaurant/>
+        icon: <Restaurant />
     },
     {
         img: coffeeImage,
         title: 'Coffee',
-        icon: <Restaurant/>
+        icon: <Restaurant />
     },
     {
         img: laundryImage,
         title: 'Transportation & Services',
-        icon: <Restaurant/>
+        icon: <Restaurant />
     },
     {
         img: servicesImage2,
         title: 'Other',
-        icon: <Restaurant/>
+        icon: <Restaurant />
     }
 ]
 export const FilterType = (props: any) => {
@@ -99,6 +99,8 @@ export const FilterType = (props: any) => {
                 color: 'rgba(255, 255, 255, 0.54)',
             },
             buttonBase: {
+                height: 120,
+                width: '100%',
                 backgroundColor: buttonColor,
                 outline: '1px solid #9e9e9e'
             },
@@ -116,42 +118,37 @@ export const FilterType = (props: any) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid container spacing={0}>
-                <Grid item xs={12} className={classes.root}>
-                    <GridList cellHeight={80} className={classes.gridList} spacing={0}>
-                        <ButtonBase
-                            focusRipple
-                            key={title}
-                            value={title}
-                            className={classes.buttonBase}
-                            onClick={handleClick}
-                            disabled={disabled}
-                        >
-                            <Grid
-                                item
-                                alignContent={'center'}
-                                container
-                                direction="row"
-                                justify="center"
-                                alignItems="baseline"
-                            >
+            <Grid item xs={5} md={3} className={classes.root}>
+                <ButtonBase
+                    focusRipple
+                    key={title}
+                    value={title}
+                    className={classes.buttonBase}
+                    onClick={handleClick}
+                    disabled={disabled}
+                >
+                    <Grid
+                        alignContent={'center'}
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="baseline"
+                    >
 
-                                {icon}
-                                <Grid
-                                    item
-                                    alignContent={'center'}
-                                    alignItems={"baseline"}
-                                    justify="center"
-                                    direction="row"
-                                    container
-                                    className={classes.gridTitle}
-                                >
-                                    {title}
-                                </Grid>
-                            </Grid>
-                        </ButtonBase>
-                    </GridList>
-                </Grid>
+                        {icon}
+                        <Grid
+                            item
+                            alignContent={'center'}
+                            alignItems={"baseline"}
+                            justify="center"
+                            direction="row"
+                            container
+                            className={classes.gridTitle}
+                        >
+                            {title}
+                        </Grid>
+                    </Grid>
+                </ButtonBase>
             </Grid>
         </ThemeProvider>
     )
