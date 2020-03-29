@@ -22,7 +22,10 @@ type AppProps = {
 };
 
 const useStyles = makeStyles({
-  root: {
+  appContainer: {
+    paddingBottom: 65
+  },
+  bottomNav: {
     width: '100%',
     position: 'fixed',
     bottom: 0,
@@ -72,7 +75,7 @@ export type AppContextTypes = {
   searchView: SearchView | null;
   setSearchView: (value: SearchView) => void;
   currentPage: string | null;
-  device: DeviceInfo;
+  device: DeviceInfo | null;
 };
 
 // create context
@@ -112,7 +115,11 @@ const AppContainer = (props: AppProps) => {
             device: device
           }}
         >
-          <Container maxWidth="xl" disableGutters>
+          <Container
+            maxWidth="xl"
+            disableGutters
+            className={classes.appContainer}
+          >
             <Navigation />
             {props.children}
           </Container>
@@ -120,7 +127,7 @@ const AppContainer = (props: AppProps) => {
             value={navValue}
             onChange={handleChange}
             showLabels
-            className={classes.root}
+            className={classes.bottomNav}
           >
             <BottomNavigationAction
               component={RouterLink}
