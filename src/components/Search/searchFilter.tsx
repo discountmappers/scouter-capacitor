@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   createMuiTheme,
   createStyles,
@@ -9,7 +9,7 @@ import {
   Grid,
   Icon,
   Paper,
-  ButtonBase
+  Button
 } from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import foodImage from '../images/food.jpg';
@@ -18,6 +18,7 @@ import laundryImage from '../images/laundry.jpg';
 import servicesImage2 from '../images/services2.jpg';
 import { Search, Restaurant } from '@material-ui/icons';
 import { FilterType } from '../filterType';
+import { SearchContainerContext } from '../../containers/SearchContainer';
 
 type SearchFilterProps = {};
 
@@ -78,40 +79,46 @@ const tileData = [
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      paddingTop: '20px'
+      paddingTop: '20px',
+      width: '100%'
     },
-    gridList: {
+    buttonContainer: {
       width: '100%',
       height: '100%',
-      borderWidth: '10px',
-      borderBottom: '#000000',
-      fontSize: '8px',
-      outline: '1px solid #9e9e9e'
+      padding: '10px',
+      // alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex'
     },
-    gridTitle: {
-      marginTop: '2px'
-    },
-    paper: {
-      width: '500px'
-    },
-    icon: {
-      color: 'rgba(255, 255, 255, 0.54)'
-    },
-    buttonBase: {
-      backgroundColor: '#fafafa',
-      outline: '1px solid #9e9e9e'
+    button: {
+      padding: '10px',
+      width: '80%',
+      fontSize: '12px',
+      fontWeight: 'bold'
     }
   })
 );
 
-const SearchFilter = (props: SearchFilterProps) => {
+export const SearchFilter = (props: SearchFilterProps) => {
   const classes = useStyles();
+  const { setResults } = useContext(SearchContainerContext);
   const [selectedFilters, setFilter] = useState<any>([]);
-  console.log(selectedFilters);
+
+  // make call to lambdas to get filtered results
+  const getFilterResults = async (filters: any) => {
+    const url = 'https://api.github.com/users';
+
+    //call the fetch function
+    let data = await fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setResults(data);
+      });
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container justify="center" spacing={0}>
+      <Grid container justify="center" spacing={0} className={classes.root}>
         {tileData.map((tile, idx) => (
           <>
             <FilterType
@@ -119,7 +126,6 @@ const SearchFilter = (props: SearchFilterProps) => {
               icon={tile.icon}
               selectedFilters={selectedFilters}
               setFilter={setFilter}
-              key={idx}
             />
             {/*Adds a new row after every 2 */ idx % 2 ? (
               <Grid item xs={12} />
@@ -129,11 +135,18 @@ const SearchFilter = (props: SearchFilterProps) => {
           </>
         ))}
       </Grid>
-
-      {/*    submit button */}
-      {/* ajax call to the lambda (does the filters)  */}
-      {/* store filtered results in context api */}
-      {/* send to search container for display */}
+      <div className={classes.buttonContainer}>
+        <Button
+          className={classes.button}
+          variant="contained"
+          color={'primary'}
+          onClick={event => {
+            getFilterResults(selectedFilters);
+          }}
+        >
+          Submit
+        </Button>
+      </div>
     </ThemeProvider>
   );
 };
