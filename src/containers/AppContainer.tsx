@@ -16,7 +16,7 @@ import {
 } from '@material-ui/icons';
 import { SearchView } from 'utils/general';
 import { Plugins, DeviceInfo } from '@capacitor/core';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { theme } from '../themes/theme';
 
 type AppProps = {
@@ -51,23 +51,23 @@ export type AppContextTypes = {
 
 // create context
 export const AppContext = React.createContext<AppContextTypes>({
-  setSearchView: () => { },
+  setSearchView: () => {},
   searchView: null,
   currentPage: null,
   device: null
 });
 
 const AppContainer = (props: AppProps) => {
-  const history = useHistory()
+  const history = useHistory();
   const classes = useStyles();
   const [navValue, setNavValue] = useState<string | null>(null);
   const [searchView, setSearchView] = useState<SearchView | null>(null);
   const [device, setDevice] = React.useState<DeviceInfo>(null);
   React.useEffect(() => {
-    // show filter page if navigating away from it 
-    history.listen((val) => {
-      setSearchView(null)
-    })
+    // show filter page if navigating away from it
+    history.listen(val => {
+      setSearchView(null);
+    });
     async function getDeviceInfo() {
       const deviceInfo = await Plugins.Device.getInfo();
       setDevice(deviceInfo);
@@ -107,9 +107,9 @@ const AppContainer = (props: AppProps) => {
           >
             <BottomNavigationAction
               component={RouterLink}
-              to="/home"
+              to="/explore"
               label="Explore"
-              value={'Explore'}
+              value={'Explore Deals'}
               icon={<Explore />}
             />
             <BottomNavigationAction

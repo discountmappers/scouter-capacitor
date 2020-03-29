@@ -1,5 +1,9 @@
 import React, { useContext } from 'react';
-import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {
+  makeStyles,
+  ThemeProvider,
+  createMuiTheme
+} from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -27,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    padding: '10px',
+    padding: '10px'
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -60,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   secondarySubtitle: {
     '& svg': {
       height: '15px',
-      width: '15px',
+      width: '15px'
     }
   },
   titleBar: {
@@ -78,45 +82,51 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
   const { tileData, cols } = props;
   const classes = useStyles();
   const { device } = useContext(AppContext);
-  const getCols = cols ? cols : device?.platform === 'web' ? 4.5 : 2.5;
+  const getCols = cols
+    ? cols
+    : device?.platform === 'web' &&
+      device?.operatingSystem !== 'ios' &&
+      device?.operatingSystem !== 'android'
+    ? 4.5
+    : 2.5;
 
   return (
-      <ThemeProvider theme={theme}>
-        <div className={classes.root}>
-          <GridList className={classes.gridList} cols={getCols}>
-            {tileData.map((tile, index) => (
-              <GridListTile
-                className={classes.tile}
-                key={tile.title + index}
-                onClick={tile.onClick}
-              >
-                <img src={tile.img} alt={tile.title} />
-                <GridListTileBar
-                  title={tile.title}
-                  subtitle={
-                    <div className={classes.primarySubtitle}>
-                      <div>
-                        <span>{tile.primarySubtitle}</span>
-                      </div>
-                      {tile.secondarySubtitle ? (
-                        <div className={classes.secondarySubtitle}>
-                          <LocationOnOutlinedIcon />
-                          <span>{tile.secondarySubtitle} miles away</span>
-                        </div>
-                      ) : null}
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <GridList className={classes.gridList} cols={getCols}>
+          {tileData.map((tile, index) => (
+            <GridListTile
+              className={classes.tile}
+              key={tile.title + index}
+              onClick={tile.onClick}
+            >
+              <img src={tile.img} alt={tile.title} />
+              <GridListTileBar
+                title={tile.title}
+                subtitle={
+                  <div className={classes.primarySubtitle}>
+                    <div>
+                      <span>{tile.primarySubtitle}</span>
                     </div>
-                  }
-                  classes={{
-                    root: classes.titleBar,
-                    title: classes.title,
-                    subtitle: classes.primarySubtitle
-                  }}
-                />
-              </GridListTile>
-            ))}
-          </GridList>
-        </div>
-      </ThemeProvider>
+                    {tile.secondarySubtitle ? (
+                      <div className={classes.secondarySubtitle}>
+                        <LocationOnOutlinedIcon />
+                        <span>{tile.secondarySubtitle} miles away</span>
+                      </div>
+                    ) : null}
+                  </div>
+                }
+                classes={{
+                  root: classes.titleBar,
+                  title: classes.title,
+                  subtitle: classes.primarySubtitle
+                }}
+              />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+    </ThemeProvider>
   );
 };
 
