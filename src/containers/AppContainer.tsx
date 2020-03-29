@@ -10,13 +10,12 @@ import {
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import {
   Explore,
-  Settings,
   Search,
   AddCircleOutline,
   SupervisorAccountOutlined
 } from '@material-ui/icons';
-// @ts-ignore
 import { SearchView } from 'utils/general';
+import { Plugins, DeviceInfo } from '@capacitor/core';
 
 type AppProps = {
   children: React.ReactNode;
@@ -69,23 +68,35 @@ const theme = createMuiTheme({
 });
 
 //set context types
-export type HeaderContextTypes = {
-  searchView: SearchView | null
-  setSearchView: (value: SearchView) => void
-  currentPage: string | null
+export type AppContextTypes = {
+  searchView: SearchView | null;
+  setSearchView: (value: SearchView) => void;
+  currentPage: string | null;
+  device: DeviceInfo;
 };
 
 // create context
-export const HeaderContext = React.createContext<HeaderContextTypes>({
-  setSearchView: () => { },
+export const AppContext = React.createContext<AppContextTypes>({
+  setSearchView: () => {},
   searchView: SearchView.LIST,
-  currentPage: null
+  currentPage: null,
+  device: null
 });
 
 const AppContainer = (props: AppProps) => {
   const classes = useStyles();
   const [navValue, setNavValue] = useState<string | null>(null);
-  const [searchView, setSearchView] = useState<SearchView | null>(null)
+  const [searchView, setSearchView] = useState<SearchView | null>(null);
+  const [device, setDevice] = React.useState<DeviceInfo>(null);
+  React.useEffect(() => {
+    async function getDeviceInfo() {
+      const deviceInfo = await Plugins.Device.getInfo();
+      setDevice(deviceInfo);
+    }
+
+    getDeviceInfo();
+  }, []);
+
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setNavValue(newValue);
   };
@@ -93,7 +104,14 @@ const AppContainer = (props: AppProps) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <HeaderContext.Provider value={{ setSearchView, searchView, currentPage: navValue }}>
+        <AppContext.Provider
+          value={{
+            setSearchView,
+            searchView,
+            currentPage: navValue,
+            device: device
+          }}
+        >
           <Container maxWidth="xl" disableGutters>
             <Navigation />
             {props.children}
@@ -129,7 +147,7 @@ const AppContainer = (props: AppProps) => {
               icon={<SupervisorAccountOutlined />}
             />
           </BottomNavigation>
-        </HeaderContext.Provider>
+        </AppContext.Provider>
       </ThemeProvider>
     </>
   );
