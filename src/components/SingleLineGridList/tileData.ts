@@ -2,7 +2,10 @@ const tileData = [
   {
     img: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
     title: 'airplane',
-    primarySubtitle: 'pilot'
+    primarySubtitle: 'pilot',
+    onClick: () => {
+      console.log('hello');
+    }
   },
   {
     img: 'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
