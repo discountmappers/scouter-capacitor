@@ -1,43 +1,44 @@
-import React, { useState, useContext } from 'react';
-import { createStyles, Theme, Grid, Button } from '@material-ui/core';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import foodImage from '../images/food.jpg';
-import coffeeImage from '../images/coffee.jpg';
-import laundryImage from '../images/laundry.jpg';
-import servicesImage2 from '../images/services2.jpg';
+import React, { useState } from "react";
+import { createStyles, Theme, Grid, Button } from "@material-ui/core";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import foodImage from "../images/food.jpg";
+import coffeeImage from "../images/coffee.jpg";
+import laundryImage from "../images/laundry.jpg";
+import servicesImage2 from "../images/services2.jpg";
 import {
   Restaurant,
   FreeBreakfastOutlined,
   LocalLaundryServiceOutlined,
   ExtensionOutlined
-} from '@material-ui/icons';
-import { FilterType } from '../FilterType';
-import { SearchContainerContext } from '../../containers/SearchContainer';
-import { DealsList } from 'components/DealsList';
-import { theme } from '../../themes/theme';
-import { mockResults } from 'utils/general';
+} from "@material-ui/icons";
+import { FilterType } from "../FilterType";
+import { DealsList } from "components/DealsList";
+import { theme } from "../../themes/theme";
+import { mockResults } from "utils/general";
 
-type SearchFilterProps = {};
+type SearchFilterProps = {
+  submitFilters: (filters: Array<string>) => void;
+};
 
 const filterTileData = [
   {
     img: foodImage,
-    title: 'Food',
+    title: "Food",
     icon: <Restaurant />
   },
   {
     img: coffeeImage,
-    title: 'Coffee',
+    title: "Coffee",
     icon: <FreeBreakfastOutlined />
   },
   {
     img: laundryImage,
-    title: 'Services',
+    title: "Services",
     icon: <LocalLaundryServiceOutlined />
   },
   {
     img: servicesImage2,
-    title: 'Other',
+    title: "Other",
     icon: <ExtensionOutlined />
   }
 ];
@@ -45,57 +46,45 @@ const filterTileData = [
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      paddingTop: '20px',
-      width: '100%'
+      paddingTop: "20px",
+      width: "100%"
     },
     buttonContainer: {
-      width: '100%',
-      height: '100%',
-      padding: '15px',
+      width: "100%",
+      height: "100%",
+      padding: "15px",
       // alignItems: 'center',
-      justifyContent: 'center',
-      display: 'flex',
-      boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+      justifyContent: "center",
+      display: "flex",
+      boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"
     },
     button: {
-      padding: '10px',
-      width: '80%',
-      fontSize: '12px',
-      fontWeight: 'bold'
+      padding: "10px",
+      width: "80%",
+      fontSize: "12px",
+      fontWeight: "bold"
     },
     dealsContainer: {
-      outline: '1px solid #9e9e9e',
-      width: '100%',
-      height: '100%',
-      background: '#f5f5f5',
-      boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+      outline: "1px solid #9e9e9e",
+      width: "100%",
+      height: "100%",
+      background: "#f5f5f5",
+      boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"
     },
     dealsText: {
-      paddingLeft: '10px',
-      fontSize: '12px',
-      fontWeight: 'bold',
-      fontFamily: 'Roboto',
-      marginBottom: '0px'
+      paddingLeft: "10px",
+      fontSize: "12px",
+      fontWeight: "bold",
+      fontFamily: "Roboto",
+      marginBottom: "0px"
     }
   })
 );
 
 export const SearchFilter = (props: SearchFilterProps) => {
   const classes = useStyles();
-  const { setResults } = useContext(SearchContainerContext);
   const [selectedFilters, setFilter] = useState<any>([]);
-
-  // make call to lambdas to get filtered results
-  const getFilterResults = async (filters: any) => {
-    const url = 'https://api.github.com/users';
-
-    //call the fetch function
-    await fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        setResults(data);
-      });
-  };
+  const { submitFilters } = props;
 
   return (
     <ThemeProvider theme={theme}>
@@ -103,7 +92,7 @@ export const SearchFilter = (props: SearchFilterProps) => {
         {filterTileData.map((tile, idx) => (
           <>
             <Grid item xs={5} md={3}>
-              <div style={{ height: '90px', width: '100%' }}>
+              <div style={{ height: "90px", width: "100%" }}>
                 <FilterType
                   disabled={false}
                   title={tile.title}
@@ -116,7 +105,7 @@ export const SearchFilter = (props: SearchFilterProps) => {
             {/*Adds a new row after every 2 */ idx % 2 ? (
               <Grid item xs={12} />
             ) : (
-              ''
+              ""
             )}
           </>
         ))}
@@ -125,9 +114,9 @@ export const SearchFilter = (props: SearchFilterProps) => {
         <Button
           className={classes.button}
           variant="contained"
-          color={'primary'}
+          color={"primary"}
           onClick={event => {
-            getFilterResults(selectedFilters);
+            submitFilters(selectedFilters);
           }}
         >
           Submit
