@@ -14,7 +14,7 @@ import {
   AddCircleOutline,
   SupervisorAccountOutlined
 } from '@material-ui/icons';
-import { SearchView } from 'utils/general';
+import { SearchView, Position } from 'utils/general';
 import { Plugins, DeviceInfo } from '@capacitor/core';
 import { useHistory } from 'react-router-dom';
 import { theme } from '../themes/theme';
@@ -48,21 +48,31 @@ export type AppContextTypes = {
   setSearchView: (value: SearchView) => void;
   currentPage: string | null;
   device: DeviceInfo | null;
+  position: Position | null;
+  setPosition: (value: Position) => void;
 };
 
 // create context
 export const AppContext = React.createContext<AppContextTypes>({
-  setSearchView: () => { },
+  setSearchView: () => {},
   searchView: null,
   currentPage: null,
-  device: null
+  device: null,
+  position: null,
+  setPosition: () => {}
 });
+
+const manhattanCenter = {
+  lat: 40.7831,
+  lng: -73.9712
+};
 
 const AppContainer = (props: AppProps) => {
   const history = useHistory();
   const classes = useStyles();
   const [navValue, setNavValue] = useState<string | null>(null);
   const [searchView, setSearchView] = useState<SearchView | null>(null);
+  const [position, setPosition] = useState<Position | null>(manhattanCenter);
   const [device, setDevice] = React.useState<DeviceInfo>(null);
   React.useEffect(() => {
     // show filter page if navigating away from it
@@ -89,7 +99,9 @@ const AppContainer = (props: AppProps) => {
             setSearchView,
             searchView,
             currentPage: navValue,
-            device: device
+            device: device,
+            position: position,
+            setPosition: setPosition
           }}
         >
           <Container

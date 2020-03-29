@@ -9,13 +9,12 @@ import { AppContext } from './AppContainer';
 import { SearchView, mockResults } from 'utils/general';
 import { SearchFilter } from 'components/Search/searchFilter';
 import { handleObs, showBack } from 'services/backService';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 type SearchContainerProps = {
     listView: boolean;
 };
 
 export const SearchContainerContext = React.createContext({
-    position: { lat: 0, lng: 0 },
     locationName: '',
     searchByCustom: (location: string) => new Promise<void>(resolve => { }),
     filterResults: [...mockResults],
@@ -26,40 +25,34 @@ export const SearchContainer = (props: SearchContainerProps) => {
     const history = useHistory();
     const { searchView, setSearchView } = useContext(AppContext);
     const [filterResults, setFilterResults] = useState(mockResults);
-    const {
-        position,
-        locationName,
-        getLocation,
-        searchByCustom
-    } = useGeoPosition();
+    const { locationName, getLocation, searchByCustom } = useGeoPosition();
 
     // populate the text field & default center
     // go  back the filter page
     useEffect(() => {
-        showBack(true)
+        showBack(true);
         const handle = handleObs.subscribe(val => {
             // we are already at the filter so go back to previous
-            if (searchView === null)
-                history.goBack()
+            if (searchView === null) history.goBack();
 
-            setSearchView(null)
-        })
-        getLocation()
+            setSearchView(null);
+        });
+        getLocation();
 
         return () => {
-            showBack(false)
-            handle.unsubscribe()
-        }
+            showBack(false);
+            handle.unsubscribe();
+        };
     }, [searchView]);
 
     const setResults = (value: any) => {
         //setFilterResults(value);
         setSearchView(SearchView.LIST);
     };
+
     return (
         <SearchContainerContext.Provider
             value={{
-                position,
                 locationName,
                 searchByCustom,
                 filterResults,
