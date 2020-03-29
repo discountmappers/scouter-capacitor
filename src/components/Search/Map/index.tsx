@@ -25,8 +25,7 @@ const MapView = (props: MapViewProps) => {
       </div>
     </Tooltip>
   );
-  const { position } = useContext(AppContext);
-  const { filterResults } = useContext(SearchContainerContext);
+  const { position, filterResults } = useContext(AppContext);
   const [resultCard, setResultCard] = useState(null);
 
   // show the selected choice under the map

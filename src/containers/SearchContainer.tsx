@@ -17,14 +17,12 @@ type SearchContainerProps = {
 export const SearchContainerContext = React.createContext({
   locationName: '',
   searchByCustom: (location: string) => new Promise<void>(resolve => {}),
-  filterResults: [...mockResults],
   setResults: (value: any) => {}
 });
 
 export const SearchContainer = (props: SearchContainerProps) => {
   const history = useHistory();
   const { searchView, setSearchView } = useContext(AppContext);
-  const [filterResults, setFilterResults] = useState(mockResults);
   const { locationName, getLocation, searchByCustom } = useGeoPosition();
 
   // populate the text field & default center
@@ -55,7 +53,6 @@ export const SearchContainer = (props: SearchContainerProps) => {
       value={{
         locationName,
         searchByCustom,
-        filterResults,
         setResults
       }}
     >

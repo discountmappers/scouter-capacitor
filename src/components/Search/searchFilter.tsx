@@ -1,137 +1,137 @@
 import React, { useState, useContext } from 'react';
-import {
-    createStyles,
-    Theme,
-    Grid,
-    Button
-} from '@material-ui/core';
+import { createStyles, Theme, Grid, Button } from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import foodImage from '../images/food.jpg';
 import coffeeImage from '../images/coffee.jpg';
 import laundryImage from '../images/laundry.jpg';
 import servicesImage2 from '../images/services2.jpg';
-import { Restaurant, FreeBreakfastOutlined, LocalLaundryServiceOutlined, ExtensionOutlined } from "@material-ui/icons";
-import { FilterType } from '../FilterType'
-import { SearchContainerContext } from '../../containers/SearchContainer'
-import tileData from 'components/SingleLineGridList/tileData';
+import {
+  Restaurant,
+  FreeBreakfastOutlined,
+  LocalLaundryServiceOutlined,
+  ExtensionOutlined
+} from '@material-ui/icons';
+import { FilterType } from '../FilterType';
+import { SearchContainerContext } from '../../containers/SearchContainer';
 import { DealsList } from 'components/DealsList';
 import { theme } from '../../themes/theme';
+import { mockResults } from 'utils/general';
 
 type SearchFilterProps = {};
 
 const filterTileData = [
-    {
-        img: foodImage,
-        title: 'Food',
-        icon: <Restaurant />
-    },
-    {
-        img: coffeeImage,
-        title: 'Coffee',
-        icon: <FreeBreakfastOutlined />
-    },
-    {
-        img: laundryImage,
-        title: 'Services',
-        icon: <LocalLaundryServiceOutlined />
-    },
-    {
-        img: servicesImage2,
-        title: 'Other',
-        icon: <ExtensionOutlined />
-    }
+  {
+    img: foodImage,
+    title: 'Food',
+    icon: <Restaurant />
+  },
+  {
+    img: coffeeImage,
+    title: 'Coffee',
+    icon: <FreeBreakfastOutlined />
+  },
+  {
+    img: laundryImage,
+    title: 'Services',
+    icon: <LocalLaundryServiceOutlined />
+  },
+  {
+    img: servicesImage2,
+    title: 'Other',
+    icon: <ExtensionOutlined />
+  }
 ];
 
 const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            paddingTop: '20px',
-            width: '100%'
-        },
-        buttonContainer: {
-            width: '100%',
-            height: '100%',
-            padding: '15px',
-            // alignItems: 'center',
-            justifyContent: 'center',
-            display: 'flex',
-            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
-        },
-        button: {
-            padding: '10px',
-            width: '80%',
-            fontSize: '12px',
-            fontWeight: 'bold'
-        },
-        dealsContainer: {
-            outline: '1px solid #9e9e9e',
-            width: '100%',
-            height: '100%',
-            background: '#f5f5f5',
-            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
-        },
-        dealsText: {
-            paddingLeft: '10px',
-            fontSize: '12px',
-            fontWeight: 'bold',
-            fontFamily: 'Roboto',
-            marginBottom: '0px'
-        }
-    })
+  createStyles({
+    root: {
+      paddingTop: '20px',
+      width: '100%'
+    },
+    buttonContainer: {
+      width: '100%',
+      height: '100%',
+      padding: '15px',
+      // alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex',
+      boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+    },
+    button: {
+      padding: '10px',
+      width: '80%',
+      fontSize: '12px',
+      fontWeight: 'bold'
+    },
+    dealsContainer: {
+      outline: '1px solid #9e9e9e',
+      width: '100%',
+      height: '100%',
+      background: '#f5f5f5',
+      boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+    },
+    dealsText: {
+      paddingLeft: '10px',
+      fontSize: '12px',
+      fontWeight: 'bold',
+      fontFamily: 'Roboto',
+      marginBottom: '0px'
+    }
+  })
 );
 
 export const SearchFilter = (props: SearchFilterProps) => {
-    const classes = useStyles();
-    const { setResults } = useContext(SearchContainerContext);
-    const [selectedFilters, setFilter] = useState<any>([]);
+  const classes = useStyles();
+  const { setResults } = useContext(SearchContainerContext);
+  const [selectedFilters, setFilter] = useState<any>([]);
 
-    // make call to lambdas to get filtered results
-    const getFilterResults = async (filters: any) => {
-        const url = 'https://api.github.com/users';
+  // make call to lambdas to get filtered results
+  const getFilterResults = async (filters: any) => {
+    const url = 'https://api.github.com/users';
 
-        //call the fetch function
-        await fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                setResults(data);
-            });
-    };
+    //call the fetch function
+    await fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setResults(data);
+      });
+  };
 
-    return (
-        <ThemeProvider theme={theme}>
-            <Grid container justify="center" spacing={0} className={classes.root}>
-                {filterTileData.map((tile, idx) => (
-                    <>
-                        <FilterType
-                            title={tile.title}
-                            icon={tile.icon}
-                            selectedFilters={selectedFilters}
-                            setFilter={setFilter}
-                        />
-                        {/*Adds a new row after every 2 */ idx % 2 ? (
-                            <Grid item xs={12} />
-                        ) : (
-                                ''
-                            )}
-                    </>
-                ))}
-            </Grid>
-            <div className={classes.buttonContainer}>
-                <Button
-                    className={classes.button}
-                    variant="contained"
-                    color={'primary'}
-                    onClick={event => {
-                        getFilterResults(selectedFilters);
-                    }}
-                >
-                    Submit
+  return (
+    <ThemeProvider theme={theme}>
+      <Grid container justify="center" spacing={0} className={classes.root}>
+        {filterTileData.map((tile, idx) => (
+          <>
+            <FilterType
+              title={tile.title}
+              icon={tile.icon}
+              selectedFilters={selectedFilters}
+              setFilter={setFilter}
+            />
+            {/*Adds a new row after every 2 */ idx % 2 ? (
+              <Grid item xs={12} />
+            ) : (
+              ''
+            )}
+          </>
+        ))}
+      </Grid>
+      <div className={classes.buttonContainer}>
+        <Button
+          className={classes.button}
+          variant="contained"
+          color={'primary'}
+          onClick={event => {
+            getFilterResults(selectedFilters);
+          }}
+        >
+          Submit
         </Button>
-            </div>
-            <div className={classes.dealsContainer}>
-                <DealsList title="Popular Search Results" deals={tileData} />
-                <DealsList title="New Offers" deals={tileData} />
-            </div>
-        </ThemeProvider>
-    );
+      </div>
+      <div className={classes.dealsContainer}>
+        <DealsList title="Popular Search Results" deals={mockResults} />
+        <DealsList title="New Offers" deals={mockResults} />
+      </div>
+    </ThemeProvider>
+  );
 };

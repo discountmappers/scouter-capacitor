@@ -9,7 +9,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import 'typeface-roboto';
 import { theme } from '../../themes/theme';
 
-type TileDataType = {
+type TileType = {
   id: string;
   name: string;
   dealName: string;
@@ -23,7 +23,7 @@ type TileDataType = {
 };
 
 type SingleLineGridListProps = {
-  tileData: Array<TileDataType>;
+  tiles: Array<TileType>;
   cols?: number;
 };
 
@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
-  const { tileData, cols } = props;
+  const { tiles, cols } = props;
   const classes = useStyles();
   const { device } = useContext(AppContext);
   const getCols = cols
@@ -96,7 +96,7 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <GridList className={classes.gridList} cols={getCols}>
-          {tileData.map((tile, index) => (
+          {tiles.map((tile, index) => (
             <GridListTile
               className={classes.tile}
               key={tile.id}
