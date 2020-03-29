@@ -4,6 +4,7 @@ import { DealsList } from 'components/DealsList';
 import { AppContext } from '../AppContainer';
 import { MapContainerActions } from 'components/Search';
 import { useGeoPosition } from 'hooks/useGeoPosition';
+import { handleObs, showBack } from '../../services/backService';
 
 type ExploreContainerProps = {
   deals: any;
@@ -22,6 +23,11 @@ export const ExploreContainer = (props: ExploreContainerProps) => {
   useEffect(() => {
     getLocation();
   }, []);
+
+  //do not show back
+  useEffect(() => {
+    showBack(false)
+  })
 
   return (
     <Grid container justify="flex-start" alignItems="center">

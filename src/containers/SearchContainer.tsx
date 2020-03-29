@@ -10,6 +10,7 @@ import { SearchView, mockResults } from 'utils/general';
 import { SearchFilter } from 'components/Search/searchFilter';
 import { handleObs, showBack } from 'services/backService';
 import { useHistory } from 'react-router-dom';
+
 type SearchContainerProps = {
   listView: boolean;
 };
@@ -28,7 +29,9 @@ export const SearchContainer = (props: SearchContainerProps) => {
   // populate the text field & default center
   // go  back the filter page
   useEffect(() => {
-    showBack(true);
+    // dont show when we are on main search page and not in a view
+    const show = history.location.pathname !== '/search' || searchView !== null
+    showBack(show);
     const handle = handleObs.subscribe(val => {
       // we are already at the filter so go back to previous
       if (searchView === null) history.goBack();

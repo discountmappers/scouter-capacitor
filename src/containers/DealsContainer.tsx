@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TextSearch } from '../components/TextSearch';
 import PlacesAutocomplete, { geocodeByPlaceId } from 'react-places-autocomplete';
-import { Grid, TextField, Paper, Switch, FormControlLabel, FormGroup, InputBase, Button } from '@material-ui/core';
+import { Grid, TextField, Paper, Switch, Button } from '@material-ui/core';
 import RoomIcon from '@material-ui/icons/Room'
 import produce from 'immer'
 import { Restaurant, FreeBreakfastOutlined, LocalLaundryServiceOutlined, ExtensionOutlined } from '@material-ui/icons';
@@ -11,8 +10,8 @@ import laundryImage from '../components/images/laundry.jpg';
 import servicesImage2 from '../components/images/services2.jpg';
 import { FilterType } from 'components/FilterType';
 import './map.css'
-import { showBack, handleObs } from 'services/backService';
-import { useHistory } from 'react-router-dom';
+import { showBack } from 'services/backService';
+
 const filterTileData = [
     {
         img: foodImage,
@@ -64,17 +63,12 @@ const initalState: newDealState = {
 }
 export const DealsContainer = (props: any) => {
     const [newDeal, setNewDeal] = useState(initalState)
-    const history = useHistory()
-    useEffect(() => {
-        showBack(true)
-        const handle = handleObs.subscribe(val => {
-            history.goBack()
 
-        })
-        return () => {
-            handle.unsubscribe()
-        }
+    //Do not show, deal's is its own page
+    useEffect(() => {
+        showBack(false)
     })
+
     // the change for the typeahead
     const handleAutoChange = (value: any) => {
         const newState = produce(draft => {
@@ -83,7 +77,7 @@ export const DealsContainer = (props: any) => {
         })
         setNewDeal(newState(newDeal))
     }
-    // generic handle change 
+    // generic handle change
     const handleChange = (key: string, value: any) => {
         const newState = produce(draft => {
             draft[key] = value

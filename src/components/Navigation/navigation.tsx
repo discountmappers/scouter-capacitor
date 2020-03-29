@@ -16,11 +16,17 @@ const useStyles = makeStyles((theme: Theme) =>
     menuButton: {
       marginRight: theme.spacing(2)
     },
-    title: {
+    searchViewTitle: {
       flexGrow: 1,
       fontWeight: 'bold',
       textAlign: 'center',
-      paddingRight: '50px',
+      paddingRight: '52px',
+    },
+    backTitle: {
+      flexGrow: 1,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      paddingRight: '76px',
     },
     normalTitle: {
       flexGrow: 1,
@@ -55,6 +61,7 @@ export const Navigation = (props: NavigationProps) => {
       back.unsubscribe()
     }
   })
+
   const getSearchIcon = () => {
     return searchView === SearchView.MAP ?
       <><EventNoteIcon className="navBtn" /> <div>{SearchView.LIST}</div></> :
@@ -74,11 +81,23 @@ export const Navigation = (props: NavigationProps) => {
   const goBack = () => {
     handle()
   }
+
   const getSearchToggle = () => {
     return <ButtonBase classes={{
       root: classes.buttonBase
     }} onClick={switchView}>{getSearchIcon()}</ButtonBase>
   }
+
+  //due to weirdness with back and map icon, center the title correctly
+  let headerTextClass = ''
+  if(show && searchView !== null){
+    headerTextClass = classes.searchViewTitle
+  } else if (show) {
+    headerTextClass = classes.backTitle
+  } else {
+    headerTextClass = classes.normalTitle
+  }
+
   return (
     <>
       <AppBar position="static">
@@ -86,7 +105,7 @@ export const Navigation = (props: NavigationProps) => {
           {show && <Button classes={{
             root: classes.buttonRoot
           }} onClick={goBack}><ArrowBackIcon className="navBtn" />Back</Button>}
-          <Typography variant="body1" className={(currentPage === 'Search' ? classes.title : classes.normalTitle)}>
+          <Typography variant="body1" className={headerTextClass}>
             {currentPage}
           </Typography>
           {searchView !== null ?
