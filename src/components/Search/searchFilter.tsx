@@ -112,20 +112,26 @@ export const SearchFilter = (props: SearchFilterProps) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid container justify="center" spacing={0} className={classes.root}>
+            <Grid container justify="center" className={classes.root}>
                 {filterTileData.map((tile, idx) => (
                     <>
-                        <FilterType
-                            title={tile.title}
-                            icon={tile.icon}
-                            selectedFilters={selectedFilters}
-                            setFilter={setFilter}
-                        />
+                        <Grid item xs={5} md={3}>
+                            <div style={{ height: '90px', width: '100%' }}>
+                                <FilterType
+                                    disabled={false}
+                                    title={tile.title}
+                                    icon={tile.icon}
+                                    selectedFilters={selectedFilters}
+                                    setFilter={setFilter}
+                                />
+                            </div>
+                        </Grid>
                         {/*Adds a new row after every 2 */ idx % 2 ? (
                             <Grid item xs={12} />
                         ) : (
                                 ''
                             )}
+
                     </>
                 ))}
             </Grid>

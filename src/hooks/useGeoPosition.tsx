@@ -25,7 +25,7 @@ export const useGeoPosition = () => {
             lng
         })
 
-        // getCityName(lat, lng)
+        getCityName(lat, lng)
     }
 
     // get the location based on lat and long

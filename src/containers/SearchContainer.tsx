@@ -56,7 +56,6 @@ export const SearchContainer = (props: SearchContainerProps) => {
         //setFilterResults(value);
         setSearchView(SearchView.LIST);
     };
-    console.log(searchView)
     return (
         <SearchContainerContext.Provider
             value={{
