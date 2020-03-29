@@ -28,39 +28,9 @@ import { SearchContainerContext } from '../../containers/SearchContainer';
 import SingleLineGridList from 'components/SingleLineGridList';
 import tileData from 'components/SingleLineGridList/tileData';
 import { DealsList } from 'components/DealsList';
+import { theme } from '../../themes/theme';
 
 type SearchFilterProps = {};
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#33abb8',
-      main: '#0097a7',
-      dark: '#006974',
-      contrastText: '#fff'
-    },
-    secondary: {
-      light: '#cfd8dc',
-      main: '#fafafa',
-      dark: '#90a4ae',
-      contrastText: '#000'
-    }
-  },
-  typography: {
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(',')
-  }
-});
 
 const filterTileData = [
   {
@@ -116,7 +86,9 @@ const useStyles = makeStyles((theme: Theme) =>
     dealsText: {
       paddingLeft: '10px',
       fontSize: '12px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontFamily: 'Roboto',
+      marginBottom: '0px'
     }
   })
 );

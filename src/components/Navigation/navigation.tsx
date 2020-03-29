@@ -18,17 +18,26 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
-      textAlign: 'center',
       fontWeight: 'bold',
-      margin: '10%'
+      textAlign: 'center',
+      paddingRight: '50px',
     },
-
+    normalTitle: {
+      flexGrow: 1,
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
     buttonRoot: {
-      color: 'white'
+      color: 'white',
+      display: 'flex',
+      flexDirection: 'column'
     },
     buttonBase: {
       display: 'flex',
       flexDirection: 'column'
+    },
+    mainNavigation: {
+      marginTop: '10%',
     }
   })
 );
@@ -66,23 +75,22 @@ export const Navigation = (props: NavigationProps) => {
   const goBack = () => {
     handle()
   }
+
   return (
     <>
       <AppBar position="static">
-        <Toolbar className="mainNavigation">
+        <Toolbar className={classes.mainNavigation}>
           {show && <Button classes={{
             root: classes.buttonRoot
           }} onClick={goBack}><ArrowBackIcon className="navBtn" />Back</Button>}
-          <Typography variant="body1" className={classes.title}>
+          <Typography variant="body1" className={(currentPage==='Search' ? classes.title : classes.normalTitle)}>
             {currentPage}
           </Typography>
-          {searchView !== null ? (
+          {currentPage === 'Search' ? (
             <ButtonBase classes={{
               root: classes.buttonBase
             }} onClick={switchView}>{getSearchIcon()}</ButtonBase>
-          ) : (
-              ''
-            )}
+          ) : ('')}
         </Toolbar>
       </AppBar>
     </>
