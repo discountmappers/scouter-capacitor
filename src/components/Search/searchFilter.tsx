@@ -114,7 +114,7 @@ export const SearchFilter = (props: SearchFilterProps) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid container justify="center" spacing={0}>
+            <Grid container justify="center" spacing={0} className={classes.root}>
                 {tileData.map((tile, idx) => (
                     <><FilterType
                         title={tile.title}
