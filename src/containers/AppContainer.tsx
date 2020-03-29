@@ -52,7 +52,7 @@ export type AppContextTypes = {
 
 // create context
 export const AppContext = React.createContext<AppContextTypes>({
-  setSearchView: () => { },
+  setSearchView: () => {},
   searchView: null,
   currentPage: null,
   device: null
