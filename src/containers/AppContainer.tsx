@@ -150,11 +150,15 @@ const AppContainer = (props: AppProps) => {
               icon={<Search />}
             />
             <BottomNavigationAction
+              component={RouterLink}
+              to="/deals"
               label="Add Deal"
               value={'Add Deal'}
               icon={<AddCircleOutline />}
             />
             <BottomNavigationAction
+              component={RouterLink}
+              to="/profile"
               label="Profile"
               value={'Profile'}
               icon={<SupervisorAccountOutlined />}

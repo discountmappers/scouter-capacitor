@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import { AppContext } from 'containers/AppContainer';
+import 'typeface-roboto';
 
 type TileDataType = {
   img: string;
   title: string;
   primarySubtitle: string;
   secondarySubtitle?: string | number;
+  onClick?: any;
 };
 
 type SingleLineGridListProps = {
@@ -23,7 +25,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    padding: '10px',
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -34,11 +37,13 @@ const useStyles = makeStyles(theme => ({
   tile: {
     '& > div': {
       borderRadius: '10px',
-      boxShadow: '3px 3px 5px rgba(0,0,0,0.5)'
+      boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
     }
   },
   title: {
-    color: theme.palette.primary.light
+    color: theme.palette.primary.main,
+    fontSize: '12px',
+    fontWeight: 'bold'
   },
   primarySubtitle: {
     color: theme.palette.secondary.contrastText,
@@ -54,7 +59,7 @@ const useStyles = makeStyles(theme => ({
   secondarySubtitle: {
     '& svg': {
       height: '15px',
-      width: '15px'
+      width: '15px',
     }
   },
   titleBar: {
@@ -68,6 +73,29 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#33abb8',
+      main: '#0097a7',
+      dark: '#006974',
+      contrastText: '#fff'
+    },
+    secondary: {
+      light: '#cfd8dc',
+      main: '#fafafa',
+      dark: '#90a4ae',
+      contrastText: '#000'
+    }
+  },
+  typography: {
+    fontFamily: [
+      'Roboto',
+      'sans-serif',
+    ].join(',')
+  }
+});
+
 const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
   const { tileData, cols } = props;
   const classes = useStyles();
@@ -75,36 +103,42 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
   const getCols = cols ? cols : device?.platform === 'web' ? 4.5 : 2.5;
 
   return (
-    <div className={classes.root}>
-      <GridList className={classes.gridList} cols={getCols}>
-        {tileData.map((tile, index) => (
-          <GridListTile className={classes.tile} key={tile.title + index}>
-            <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={tile.title}
-              subtitle={
-                <div className={classes.primarySubtitle}>
-                  <div>
-                    <span>{tile.primarySubtitle}</span>
-                  </div>
-                  {tile.secondarySubtitle ? (
-                    <div className={classes.secondarySubtitle}>
-                      <LocationOnOutlinedIcon />
-                      <span>{tile.secondarySubtitle} miles away</span>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <GridList className={classes.gridList} cols={getCols}>
+            {tileData.map((tile, index) => (
+              <GridListTile
+                className={classes.tile}
+                key={tile.title + index}
+                onClick={tile.onClick}
+              >
+                <img src={tile.img} alt={tile.title} />
+                <GridListTileBar
+                  title={tile.title}
+                  subtitle={
+                    <div className={classes.primarySubtitle}>
+                      <div>
+                        <span>{tile.primarySubtitle}</span>
+                      </div>
+                      {tile.secondarySubtitle ? (
+                        <div className={classes.secondarySubtitle}>
+                          <LocationOnOutlinedIcon />
+                          <span>{tile.secondarySubtitle} miles away</span>
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              }
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-                subtitle: classes.primarySubtitle
-              }}
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+                  }
+                  classes={{
+                    root: classes.titleBar,
+                    title: classes.title,
+                    subtitle: classes.primarySubtitle
+                  }}
+                />
+              </GridListTile>
+            ))}
+          </GridList>
+        </div>
+      </ThemeProvider>
   );
 };
 
