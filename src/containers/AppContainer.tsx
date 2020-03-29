@@ -25,7 +25,7 @@ type AppProps = {
 
 const useStyles = makeStyles({
   appContainer: {
-    paddingBottom: 65
+    paddingBottom: 90
   },
   bottomNav: {
     width: '100%',
@@ -52,7 +52,7 @@ export type AppContextTypes = {
 
 // create context
 export const AppContext = React.createContext<AppContextTypes>({
-  setSearchView: () => {},
+  setSearchView: () => { },
   searchView: null,
   currentPage: null,
   device: null

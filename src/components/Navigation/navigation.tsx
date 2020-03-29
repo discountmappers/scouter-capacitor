@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column'
     },
     mainNavigation: {
-      marginTop: '10%',
+      height: 75
     }
   })
 );
@@ -75,11 +75,9 @@ export const Navigation = (props: NavigationProps) => {
     handle()
   }
   const getSearchToggle = () => {
-    return searchView !== null ?
-      <ButtonBase classes={{
-        root: classes.buttonBase
-      }} onClick={switchView}>{getSearchIcon()}</ButtonBase>
-      : null
+    return <ButtonBase classes={{
+      root: classes.buttonBase
+    }} onClick={switchView}>{getSearchIcon()}</ButtonBase>
   }
   return (
     <>
@@ -91,7 +89,7 @@ export const Navigation = (props: NavigationProps) => {
           <Typography variant="body1" className={(currentPage === 'Search' ? classes.title : classes.normalTitle)}>
             {currentPage}
           </Typography>
-          {currentPage === 'Search' ?
+          {searchView !== null ?
             getSearchToggle()
             : ('')}
         </Toolbar>
