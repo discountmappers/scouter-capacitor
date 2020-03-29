@@ -12,12 +12,12 @@ type MapDetailViewProps = {
 
 
 const MapDetailView = (props: MapDetailViewProps) => {
-  const { deal} = props
+  const { deal } = props
   // this css is needed or the markers will shift!!!
-  const CustomMarker = ({ deal }:any) =>
+  const CustomMarker = ({ deal }: any) =>
     <Tooltip title={deal.name} aria-label="add">
       <div style={{ cursor: 'pointer', position: 'absolute', transform: 'translate(-50%, -100%)' }}>
-        <RoomIcon/>
+        <RoomIcon />
       </div>
     </Tooltip>
 
@@ -25,12 +25,12 @@ const MapDetailView = (props: MapDetailViewProps) => {
 
 
   const getMarker = () => {
-    return <CustomMarker key={deal.lat} lat={deal.lat} lng={deal.lng} deal={deal}/>
+    return <CustomMarker key={deal.lat} lat={deal.lat} lng={deal.lng} deal={deal} />
   }
   return (
     <>
       <Grid item xs={10} md={7} lg={4}>
-        <div className="mapContainer">
+        <div className="mapDetailsContainer">
 
           <GoogleMapReact
             key={deal.lng}

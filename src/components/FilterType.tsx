@@ -12,46 +12,25 @@ import { Search, Restaurant } from "@material-ui/icons";
 import { theme } from '../themes/theme'
 
 type FilterTypeProps = {
+    disabled: boolean,
     title: any,
     icon: any,
     setFilter: Function,
     selectedFilters: Array<String>
 };
 
-const tileData = [
-    {
-        img: foodImage,
-        title: 'Food',
-        icon: <Restaurant />
-    },
-    {
-        img: coffeeImage,
-        title: 'Coffee',
-        icon: <Restaurant />
-    },
-    {
-        img: laundryImage,
-        title: 'Transportation & Services',
-        icon: <Restaurant />
-    },
-    {
-        img: servicesImage2,
-        title: 'Other',
-        icon: <Restaurant />
-    }
-]
 export const FilterType = (props: any) => {
-    const { title, icon, setFilter, selectedFilters } = props
+    const { title, icon, setFilter, selectedFilters, disabled } = props
 
     const [buttonColor, setButtonColor] = useState<string>(
         '#fafafa'
     );
 
-    const [disabled, setDisabled] = useState<boolean>(false)
-
     const useStyles = makeStyles((theme: Theme) =>
         createStyles({
             root: {
+                height: '100%',
+                width: '100%'
                 // paddingTop: '20px',
             },
             gridList: {
@@ -66,8 +45,8 @@ export const FilterType = (props: any) => {
                 marginTop: '2px',
             },
             buttonBase: {
-                height: 90,
                 width: '100%',
+                height: '100%',
                 backgroundColor: buttonColor,
                 outline: '1px solid #9e9e9e'
             },
@@ -76,47 +55,51 @@ export const FilterType = (props: any) => {
 
     const classes = useStyles();
 
+    // support toggling 
     const handleClick = (event: any) => {
-        setButtonColor(theme.palette.primary.light)
-        selectedFilters.push(event.currentTarget.value)
-        setFilter(selectedFilters)
-        setDisabled(true)
+        let newFilters = [...selectedFilters]
+        if (buttonColor !== '#fafafa') {
+            setButtonColor('#fafafa')
+            newFilters = selectedFilters.filter((item: string) => item !== event.currentTarget.value)
+        } else {
+            setButtonColor(theme.palette.primary.light)
+            newFilters.push(event.currentTarget.value)
+        }
+        setFilter(newFilters)
     }
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid item xs={5} md={3} className={classes.root}>
-                <ButtonBase
-                    focusRipple
-                    key={title}
-                    value={title}
-                    className={classes.buttonBase}
-                    onClick={handleClick}
-                    disabled={disabled}
+            <ButtonBase
+                focusRipple
+                key={title}
+                value={title}
+                className={classes.buttonBase}
+                onClick={handleClick}
+                disabled={disabled}
+            >
+                <Grid
+                    alignContent={'center'}
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="baseline"
                 >
-                    <Grid
-                        alignContent={'center'}
-                        container
-                        direction="row"
-                        justify="center"
-                        alignItems="baseline"
-                    >
 
-                        {icon}
-                        <Grid
-                            item
-                            alignContent={'center'}
-                            alignItems={"baseline"}
-                            justify="center"
-                            direction="row"
-                            container
-                            className={classes.gridTitle}
-                        >
-                            {title}
-                        </Grid>
+                    {icon}
+                    <Grid
+                        item
+                        alignContent={'center'}
+                        alignItems={"baseline"}
+                        justify="center"
+                        direction="row"
+                        container
+                        className={classes.gridTitle}
+                    >
+                        {title}
                     </Grid>
-                </ButtonBase>
-            </Grid>
+                </Grid>
+            </ButtonBase>
         </ThemeProvider>
     )
 };
