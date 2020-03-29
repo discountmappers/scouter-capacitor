@@ -16,9 +16,11 @@ import foodImage from '../images/food.jpg';
 import coffeeImage from '../images/coffee.jpg';
 import laundryImage from '../images/laundry.jpg';
 import servicesImage2 from '../images/services2.jpg';
-import { Search, Restaurant } from '@material-ui/icons';
-import { FilterType } from '../filterType';
-import { SearchContainerContext } from '../../containers/SearchContainer';
+import { Search, Restaurant, FreeBreakfastOutlined, LocalLaundryServiceOutlined, ExtensionOutlined } from "@material-ui/icons";
+import { FilterType } from '../filterType'
+import { SearchContainerContext } from '../../containers/SearchContainer'
+import SingleLineGridList from 'components/SingleLineGridList';
+import tileData from 'components/SingleLineGridList/tileData'
 
 type SearchFilterProps = {};
 
@@ -53,51 +55,65 @@ const theme = createMuiTheme({
   }
 });
 
-const tileData = [
-  {
-    img: foodImage,
-    title: 'Food',
-    icon: <Restaurant />
-  },
-  {
-    img: coffeeImage,
-    title: 'Coffee',
-    icon: <Restaurant />
-  },
-  {
-    img: laundryImage,
-    title: 'Transportation & Services',
-    icon: <Restaurant />
-  },
-  {
-    img: servicesImage2,
-    title: 'Other',
-    icon: <Restaurant />
-  }
-];
+const filterTileData = [
+    {
+        img: foodImage,
+        title: 'Food',
+        icon: <Restaurant />
+    },
+    {
+        img: coffeeImage,
+        title: 'Coffee',
+        icon: <FreeBreakfastOutlined />
+    },
+    {
+        img: laundryImage,
+        title: 'Services',
+        icon: <LocalLaundryServiceOutlined />
+    },
+    {
+        img: servicesImage2,
+        title: 'Other',
+        icon: <ExtensionOutlined />
+    }
+]
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      paddingTop: '20px',
-      width: '100%'
-    },
-    buttonContainer: {
-      width: '100%',
-      height: '100%',
-      padding: '10px',
-      // alignItems: 'center',
-      justifyContent: 'center',
-      display: 'flex'
-    },
-    button: {
-      padding: '10px',
-      width: '80%',
-      fontSize: '12px',
-      fontWeight: 'bold'
-    }
-  })
+    createStyles({
+        root: {
+            paddingTop: '20px',
+            width: '100%'
+        },
+        buttonContainer: {
+            width: '100%',
+            height: '100%',
+            padding: '15px',
+            // alignItems: 'center',
+            justifyContent: 'center',
+            display: 'flex',
+            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+        },
+        button: {
+            padding: '10px',
+            width: '80%',
+            fontSize: '12px',
+            fontWeight: 'bold'
+        },
+        dealsContainer: {
+            outline: '1px solid #9e9e9e',
+            width: '100%',
+            height: '100%',
+            background: '#f5f5f5',
+            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+        },
+        dealsText: {
+            paddingLeft: '10px',
+            fontSize: '12px',
+            fontWeight: 'bold'
+        }
+    }),
 );
+
 
 export const SearchFilter = (props: SearchFilterProps) => {
   const classes = useStyles();
@@ -116,39 +132,46 @@ export const SearchFilter = (props: SearchFilterProps) => {
       });
   };
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Grid container justify="center" spacing={0} className={classes.root}>
-        {tileData.map((tile, idx) => (
-          <>
-            <FilterType
-              title={tile.title}
-              icon={tile.icon}
-              selectedFilters={selectedFilters}
-              setFilter={setFilter}
-            />
-            {/*Adds a new row after every 2 */ idx % 2 ? (
-              <Grid item xs={12} />
-            ) : (
-              ''
-            )}
-          </>
-        ))}
-      </Grid>
-      <div className={classes.buttonContainer}>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color={'primary'}
-          onClick={event => {
-            getFilterResults(selectedFilters);
-          }}
-        >
-          Submit
-        </Button>
-      </div>
-    </ThemeProvider>
-  );
-};
+    return (
+        <ThemeProvider theme={theme}>
+            <Grid container justify="center" spacing={0} className={classes.root}>
+                {filterTileData.map((tile, idx) => (
+                    <>
+                        <FilterType
+                            title={tile.title}
+                            icon={tile.icon}
+                            selectedFilters={selectedFilters}
+                            setFilter={setFilter}
+                    />
+                        {/*Adds a new row after every 2 */ idx % 2 ? <Grid item xs={12} /> : ''}
+                    </>
+                ))}
+            </Grid>
+            <div className={classes.buttonContainer}>
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    color={'primary'}
+                    onClick={event => { getFilterResults(selectedFilters)}}
+                >
+                    Submit
+                </Button>
+            </div>
+            <div className={classes.dealsContainer}>
+                <p className={classes.dealsText}> Popular Search Results</p>
+                {/*    Horizontal sections */}
+                <SingleLineGridList
+                    tileData={tileData}
+                    cols={2.5}
+                />
+                <p className={classes.dealsText}> New Offers</p>
+                <SingleLineGridList
+                    tileData={tileData}
+                    cols={2.5}
+                />
+            </div>
+        </ThemeProvider>
+    )
+}
 
-export default SearchFilter;
+
