@@ -1,5 +1,6 @@
 import { makeStyles, CardContent, Typography, Card } from "@material-ui/core";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -30,7 +31,12 @@ type CardProps = {
 const CustomCard = (props: CardProps) => {
     const { result } = props
     const classes = useStyles();
-    return (<Card className={classes.root}>
+    const history = useHistory()
+
+    const handleClick = () => {
+        history.push({ pathname: `/deals/${result.lat}`, state: { ...result } });
+    }
+    return (<Card className={classes.root} onClick={() => handleClick()}>
         <img className={classes.img} src="https://maps.gstatic.com/mapfiles/place_api/icons/cafe-71.png" />
 
         <div className={classes.details}>
