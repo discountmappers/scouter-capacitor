@@ -78,6 +78,37 @@ const manhattanCenter = {
   lng: -73.9712
 };
 
+const checkNavigation = ({
+  navValue,
+  setNavValue,
+  history
+}: {
+  navValue: string;
+  setNavValue: (value: string) => void;
+  history: any;
+}) => {
+  if (isEmpty(navValue)) {
+    const rootRoute = history.location.pathname.split('/')[1];
+    const childRoute = history.location.pathname.split('/')[2];
+
+    switch (rootRoute) {
+      case '':
+        setNavValue(Pages.EXPLORE);
+        break;
+      case 'search':
+        setNavValue(Pages.SEARCH);
+        break;
+      case 'deals':
+        childRoute ? setNavValue(Pages.SEARCH) : setNavValue(Pages.ADD_DEAL);
+        break;
+      case 'profile':
+        setNavValue(Pages.PROFILE);
+        break;
+      default:
+    }
+  }
+};
+
 const AppContainer = (props: AppProps) => {
   const history = useHistory();
   const classes = useStyles();
@@ -97,35 +128,12 @@ const AppContainer = (props: AppProps) => {
     }
 
     getDeviceInfo();
+    checkNavigation({ navValue, setNavValue, history });
   }, []);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setNavValue(newValue);
   };
-
-  if (isEmpty(navValue)) {
-    const parentRoute = history.location.pathname.split('/')[1];
-    const childRoute = history.location.pathname.split('/')[2];
-
-    console.log('parentRoute', parentRoute);
-    console.log('childRoute', childRoute);
-
-    switch (parentRoute) {
-      case '':
-        setNavValue(Pages.EXPLORE);
-        break;
-      case 'search':
-        setNavValue(Pages.SEARCH);
-        break;
-      case 'deals':
-        childRoute ? setNavValue(Pages.SEARCH) : setNavValue(Pages.ADD_DEAL);
-        break;
-      case 'profile':
-        setNavValue(Pages.PROFILE);
-        break;
-      default:
-    }
-  }
 
   return (
     <>
