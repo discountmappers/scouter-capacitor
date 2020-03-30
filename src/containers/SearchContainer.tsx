@@ -15,8 +15,7 @@ type SearchContainerProps = {
 };
 
 export const SearchContainerContext = React.createContext({
-  searchByCustom: (location: string) => new Promise<void>(resolve => {}),
-  setResults: (value: any) => {}
+  searchByCustom: (location: string) => new Promise<void>(resolve => {})
 });
 
 export const SearchContainer = (props: SearchContainerProps) => {
@@ -25,11 +24,14 @@ export const SearchContainer = (props: SearchContainerProps) => {
     searchView,
     setSearchView,
     filterResults,
-    deviceLocationName
+    deviceLocationName,
+    devicePosition
   } = useContext(AppContext);
   //override the device location if searching for something else
-  const { locationName, searchByCustom } = useGeoPosition();
+  const { locationName, position, searchByCustom } = useGeoPosition();
   const [filtered, setFiltered] = useState(filterResults);
+  // default position to the device location, then update if changing
+  const [updatedPosition, setUpdatedPosition] = useState(false);
   // populate the text field & default center
   // go  back the filter page
   useEffect(() => {
@@ -62,37 +64,32 @@ export const SearchContainer = (props: SearchContainerProps) => {
     const filt = filterResults.filter(fil => filters.includes(fil.category));
     setFiltered(filt);
   };
-  const setResults = (value: any) => {
-    setSearchView(SearchView.LIST);
+
+  const updateSearchLocation = (place: string) => {
+    searchByCustom(place);
+    setUpdatedPosition(true);
   };
 
+  // use the device location unless overriding in the search bar
+  const newPosition = updatedPosition ? position : devicePosition;
   return (
-    <SearchContainerContext.Provider
-      value={{
-        searchByCustom,
-        setResults
-      }}
-    >
-      <Grid container justify="center" alignItems="center">
-        <Grid item xs={10} md={7} lg={4}>
-          <div className="actionGroup">
-            <MapContainerActions
-              search={searchByCustom}
-              location={
-                isEmpty(locationName) ? deviceLocationName : locationName
-              }
-            />
-          </div>
-        </Grid>
-        <Grid item xs={12}></Grid>
-        {searchView === null ? (
-          <SearchFilter submitFilters={submitFilters} />
-        ) : searchView === SearchView.MAP ? (
-          <MapView results={filtered} />
-        ) : (
-          <ListView results={filtered} />
-        )}
+    <Grid container justify="center" alignItems="center">
+      <Grid item xs={10} md={7} lg={4}>
+        <div className="actionGroup">
+          <MapContainerActions
+            search={updateSearchLocation}
+            location={isEmpty(locationName) ? deviceLocationName : locationName}
+          />
+        </div>
       </Grid>
-    </SearchContainerContext.Provider>
+      <Grid item xs={12}></Grid>
+      {searchView === null ? (
+        <SearchFilter submitFilters={submitFilters} />
+      ) : searchView === SearchView.MAP ? (
+        <MapView results={filtered} updatedPosition={newPosition} />
+      ) : (
+        <ListView results={filtered} />
+      )}
+    </Grid>
   );
 };

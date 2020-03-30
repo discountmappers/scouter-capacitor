@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Grid, Tooltip } from "@material-ui/core";
 import GoogleMapReact from "google-map-react";
 import { GOOGLE_API_KEY } from "utils/google";
 import RoomIcon from "@material-ui/icons/Room";
 import CustomCard from "components/card";
 import "../search.css";
-import { AppContext } from "containers/AppContainer";
 import { Deal } from "utils/general";
 type MapViewProps = {
   results?: Array<Deal>;
+  updatedPosition: any;
 };
 
 const MapView = (props: MapViewProps) => {
@@ -27,7 +27,7 @@ const MapView = (props: MapViewProps) => {
       </div>
     </Tooltip>
   );
-  const { position } = useContext(AppContext);
+
   const [resultCard, setResultCard] = useState(null);
   // show the selected choice under the map
   const showClick = (result: any) => {
@@ -55,9 +55,9 @@ const MapView = (props: MapViewProps) => {
       <Grid item xs={10} md={7} lg={4}>
         <div className="mapContainer">
           <GoogleMapReact
-            key={position.lng}
+            key={props.updatedPosition.lat}
             bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
-            defaultCenter={position}
+            defaultCenter={props.updatedPosition}
             defaultZoom={15}
           >
             {getMarkers()}
