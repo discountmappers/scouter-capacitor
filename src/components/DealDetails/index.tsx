@@ -10,7 +10,6 @@ import {
   CardActions
 } from '@material-ui/core';
 import { theme } from '../../themes/theme';
-import MapView from '../Search/Map';
 import './details.css';
 import { DealsList } from '../DealsList';
 import MapDetailView from './mapDetail';
