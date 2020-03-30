@@ -25,6 +25,7 @@ import {
 import { Plugins, DeviceInfo } from '@capacitor/core';
 import { useHistory } from 'react-router-dom';
 import { theme } from '../themes/theme';
+import { useGeoPosition } from '../hooks/useGeoPosition';
 
 type AppProps = {
   children: React.ReactNode;
@@ -112,6 +113,7 @@ const checkNavigation = ({
 const AppContainer = (props: AppProps) => {
   const history = useHistory();
   const classes = useStyles();
+  const { getLocation } = useGeoPosition();
   const [navValue, setNavValue] = useState<string | null>(null);
   const [searchView, setSearchView] = useState<SearchView | null>(null);
   const [position, setPosition] = useState<Position | null>(manhattanCenter);
@@ -129,6 +131,7 @@ const AppContainer = (props: AppProps) => {
 
     getDeviceInfo();
     checkNavigation({ navValue, setNavValue, history });
+    getLocation();
   }, []);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {

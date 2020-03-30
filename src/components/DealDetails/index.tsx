@@ -16,6 +16,7 @@ import { DealsList } from '../DealsList';
 import MapDetailView from './mapDetail';
 import StarRatingComponent from 'react-star-rating-component';
 import { mockResults } from 'utils/general';
+import { GOOGLE_API_KEY } from '../../utils/google';
 
 type DealDetailsProps = {
   deal: any;
@@ -78,7 +79,7 @@ export const DealDetails = (props: DealDetailsProps) => {
   const classes = useStyles();
 
   //TODO incorporate real ratings
-  const randomRate = Math.floor(Math.random() * 5) + 1
+  const randomRate = Math.floor(Math.random() * 5) + 3
   const rating = getRatings(randomRate, classes)
 
   return (
@@ -91,7 +92,7 @@ export const DealDetails = (props: DealDetailsProps) => {
               image={
                 deal.imageUrl
                   ? deal.imageUrl
-                  : 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'
+                  : `https://maps.googleapis.com/maps/api/place/js/PhotoService.GetPhoto?1sCmRaAAAAXsRIKPwIMfKEpHr9R2GVyM6qzri2mOTSTEh3nJV4AkiJD7hvsP5fAJE7dXIdv6xKsv63N2of3o0NjKfoXhvbJ7oGkjpAMX1Wt1Pkl56bj3AwysyrOs09zpVTTQ4C8yYEEhC3T2haySoOWKQBifAoFaQKGhRKz7X9hAuJUGfGCevjwImJpDbx6g&3u4032&5m1&2e1&callback=none&key=${GOOGLE_API_KEY}&token=90529`
               }
             />
             <CardContent className={classes.card}>
@@ -134,7 +135,7 @@ export const DealDetails = (props: DealDetailsProps) => {
             </CardContent>
 
             <CardActions className={classes.map}>
-              { <MapDetailView deal={deal}/> }
+              <MapDetailView deal={deal} />
             </CardActions>
 
             <CardContent>

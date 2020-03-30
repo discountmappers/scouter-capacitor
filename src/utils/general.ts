@@ -56,7 +56,7 @@ export const mockResults = [
     lng: null,
     address: '',
     category: 'Coffee',
-    imageUrl: 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png'
+    imageUrl: ''
   },
   {
     id: 2,
@@ -171,8 +171,8 @@ export const mockResults = [
     offer: 'Discount',
     dealDesc: '50% off of all drinks for emergency service workers',
     notes: 'All drinks are discounted through April, 2020',
-    lat: 40.7270286,
-    lng: 73.9854043,
+    lat: 40.727240,
+    lng: -73.985383,
     address: '120 1/2 1st Avenue, New York, NY 10009',
     category: 'Food',
     imageUrl: ''
@@ -202,7 +202,7 @@ export const mockResults = [
       'Melt Shop is offering a free sandwich for takeout to any hospital worker.',
     notes: '',
     lat: 40.7608163,
-    lng: 73.9823423,
+    lng: -73.9823423,
     address: '135 W 50th St, New York, NY 10019',
     category: 'Food',
     imageUrl: ''

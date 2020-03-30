@@ -38,7 +38,6 @@ export const SearchContainer = (props: SearchContainerProps) => {
 
       setSearchView(null);
     });
-    getLocation();
 
     return () => {
       showBack(false);
