@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { TextSearch } from "../components/TextSearch";
-import PlacesAutocomplete, {
-  geocodeByPlaceId
-} from "react-places-autocomplete";
+import React, { useState } from "react";
+import PlacesAutocomplete from "react-places-autocomplete";
 import {
   Grid,
   TextField,
   Paper,
   Switch,
-  FormControlLabel,
-  FormGroup,
-  InputBase,
-  Button
+  Button,
+  Snackbar
 } from "@material-ui/core";
 import RoomIcon from "@material-ui/icons/Room";
 import produce from "immer";
@@ -27,8 +22,10 @@ import laundryImage from "../components/images/laundry.jpg";
 import servicesImage2 from "../components/images/services2.jpg";
 import { FilterType } from "components/FilterType";
 import "./map.css";
-import { showBack } from "services/backService";
 import { useDiscountsApi } from "hooks/apiServiceHook";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { Alert } from "@material-ui/lab";
+
 const filterTileData = [
   {
     img: foodImage,
@@ -56,7 +53,7 @@ type newDealState = {
   lat: number;
   lng: number;
   address: string;
-  type: string;
+  type: string | null;
   dealName: string;
   dealDesc: string;
   notes: string;
@@ -66,19 +63,20 @@ type newDealState = {
 };
 const initalState: newDealState = {
   typeChecked: false,
-  name: "",
-  lat: 0,
-  lng: 0,
-  address: "",
-  type: "",
-  dealName: "",
-  dealDesc: "",
-  notes: "",
-  category: "",
-  imageUrl: ""
+  name: null,
+  lat: null,
+  lng: null,
+  address: null,
+  type: null,
+  dealName: null,
+  dealDesc: null,
+  notes: null,
+  category: null,
+  imageUrl: null
 };
 export const DealsContainer = (props: any) => {
   const [newDeal, setNewDeal] = useState(initalState);
+  const [openSnackbar, setOpenSnackBar] = useState(false);
   const { isLoading, postData } = useDiscountsApi();
   // the change for the typeahead
   const handleAutoChange = (value: any) => {
@@ -136,13 +134,18 @@ export const DealsContainer = (props: any) => {
     const tempDeal = { ...newDeal };
     delete tempDeal.typeChecked;
     const rep = await postData(tempDeal);
-    console.log(rep);
+    // clear entries, doesn't handle errors
+    if (rep.statusCode === 200) {
+      setOpenSnackBar(true);
+      setNewDeal(initalState);
+    }
   };
   const setFilter = (data: any) => {
     const value = data?.[0] ? data?.[0] : "";
     handleChange("category", value);
   };
-  console.log(newDeal);
+
+  // display the filter images
   const getFilters = () => {
     return filterTileData.map((tile, idx) => (
       <>
@@ -150,7 +153,9 @@ export const DealsContainer = (props: any) => {
           <div className="newDealFilter">
             <FilterType
               disabled={
-                tile.title !== newDeal.category && newDeal.category.length > 0
+                newDeal.category &&
+                tile.title !== newDeal.category &&
+                newDeal.category.length > 0
               }
               title={tile.title}
               icon={tile.icon}
@@ -162,20 +167,20 @@ export const DealsContainer = (props: any) => {
       </>
     ));
   };
-  console.log(newDeal);
-  const searchOptions = {
-    location: new google.maps.LatLng(40.7831, -73.9712),
-    radius: 20000
+
+  const closeSnackBar = () => {
+    setOpenSnackBar(false);
   };
+
   return (
     <>
+      {isLoading && <LinearProgress />}
       <Grid container justify="center">
         <Grid item className="autoComplete" xs={10} md={4}>
           <PlacesAutocomplete
             value={newDeal.dealName}
             onChange={handleAutoChange}
             onSelect={handleSelect}
-            searchOptions={searchOptions}
           >
             {({ getInputProps, suggestions, getSuggestionItemProps }) => (
               <div>
@@ -280,6 +285,13 @@ export const DealsContainer = (props: any) => {
           </Button>
         </Grid>
       </Grid>
+      <Snackbar
+        open={openSnackbar}
+        onClose={closeSnackBar}
+        autoHideDuration={3000}
+      >
+        <Alert severity="success">The deal has been added!</Alert>
+      </Snackbar>
     </>
   );
 };
