@@ -89,7 +89,7 @@ const CustomCard = (props: CardProps) => {
                 color={"primary"}
                 className={classes.title}
               >
-                {result.dealName}
+                {result.dealDesc}
               </Typography>
               <Typography
                 variant="subtitle2"
