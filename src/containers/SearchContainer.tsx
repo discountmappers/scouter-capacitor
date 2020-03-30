@@ -25,12 +25,12 @@ export const SearchContainer = (props: SearchContainerProps) => {
   const history = useHistory();
   const { searchView, setSearchView, filterResults } = useContext(AppContext);
   const { locationName, getLocation, searchByCustom } = useGeoPosition();
-  const [filtered, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState(filterResults);
   // populate the text field & default center
   // go  back the filter page
   useEffect(() => {
     // dont show when we are on main search page and not in a view
-    const show = history.location.pathname !== '/search' || searchView !== null
+    const show = history.location.pathname !== "/search" || searchView !== null;
     showBack(show);
     const handle = handleObs.subscribe(val => {
       // we are already at the filter so go back to previous

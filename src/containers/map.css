@@ -1,32 +1,36 @@
 .mapContainer {
-    padding-top:20px;
-    height: 60vh;
+  padding-top: 20px;
+  height: 60vh;
 }
 .actionGroup {
-    margin:auto;
-    padding-top:20px;
+  margin: auto;
+  padding-top: 20px;
 }
 .autoComplete {
-    padding-top:36px;
-    padding-bottom:20px;
+  padding-top: 36px;
+  padding-bottom: 20px;
 }
 /*make paper above the other form */
 .paperAutoComplete {
-    position: absolute;
-    z-index: 100;
+  position: absolute;
+  z-index: 100;
+}
+
+@media (min-width: 992px) {
+  .paperAutoComplete {
+    min-width: 550px;
+  }
 }
 .newDealFilter {
-    padding-top:12px;
-    height:60px;
+  padding-top: 12px;
+  height: 60px;
 }
 
 .label {
-    padding-top:20px;
-    font-size: 18px;
+  padding-top: 20px;
+  font-size: 18px;
 }
 
 .textArea {
-    padding-top:20px;
+  padding-top: 20px;
 }
-
-
