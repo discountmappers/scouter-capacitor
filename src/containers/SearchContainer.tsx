@@ -44,7 +44,6 @@ export const SearchContainer = (props: SearchContainerProps) => {
     });
     // reset filters if they exist, they are cleared when using bottom nav bar
     const persistedFilters = JSON.parse(localStorage.getItem("filters"));
-    console.log(persistedFilters, searchView);
     if (persistedFilters !== null && persistedFilters.length > 0)
       performFilter(persistedFilters);
     return () => {

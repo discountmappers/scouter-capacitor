@@ -133,7 +133,6 @@ const AppContainer = (props: AppProps) => {
     getDeviceInfo();
     checkNavigation({ navValue, setNavValue, history });
     getLocation();
-    console.log("just called get location");
     getAllDeals();
   }, []);
 
