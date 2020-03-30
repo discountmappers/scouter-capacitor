@@ -11,15 +11,15 @@ import food from "../components/images/food.jpg";
 import coffee from "../components/images/coffee.jpg";
 import services2 from "../components/images/services2.jpg";
 import laundry from "../components/images/services1.jpg";
-import StarRatingComponent from 'react-star-rating-component';
-import { theme } from '../themes/theme';
+import StarRatingComponent from "react-star-rating-component";
+import { theme } from "../themes/theme";
 
 const useStyles = makeStyles({
   root: {
     display: "flex",
     alignItems: "center",
     boxShadow: "1px 1px 1px 1px #888888",
-    cursor: "pointer",
+    cursor: "pointer"
   },
   details: {
     width: "100%",
@@ -28,26 +28,26 @@ const useStyles = makeStyles({
   },
   content: {
     flex: "1 0 auto",
-    padding: '0px',
-    '&:last-child': {
-      paddingBottom: '0px'
-    },
+    padding: "0px",
+    "&:last-child": {
+      paddingBottom: "0px"
+    }
   },
   img: {
     width: 90,
     height: 80,
-    paddingRight: '20px',
-    borderRadius: '10px',
+    paddingRight: "20px",
+    borderRadius: "10px"
   },
   padding: {
     padding: "10px"
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: '12px',
+    fontWeight: "bold",
+    fontSize: "12px"
   },
   subtitle: {
-    fontSize: '10px'
+    fontSize: "10px"
   }
 });
 
@@ -78,13 +78,19 @@ const CustomCard = (props: CardProps) => {
   const imageSrc = cardIcons[result.category];
 
   return (
-    <Card className={classes.root} onClick={() => handleClick()}>
+    <Card className={classes.root} onClick={handleClick}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Grid container>
             <img className={classes.img} src={result.imageUrl} />
             <Grid item xs={7} md={9} className={classes.padding}>
-              <Typography variant="body2" color={'primary'} className={classes.title}>{result.dealName}</Typography>
+              <Typography
+                variant="body2"
+                color={"primary"}
+                className={classes.title}
+              >
+                {result.dealDesc}
+              </Typography>
               <Typography
                 variant="subtitle2"
                 color="textSecondary"
@@ -98,7 +104,8 @@ const CustomCard = (props: CardProps) => {
                 starCount={5}
                 starColor={theme.palette.primary.main}
                 emptyStarColor={theme.palette.secondary.dark}
-                editing={false}/>
+                editing={false}
+              />
             </Grid>
           </Grid>
         </CardContent>
