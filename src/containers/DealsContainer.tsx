@@ -71,7 +71,7 @@ const initalState: newDealState = {
   dealName: null,
   dealDesc: null,
   notes: null,
-  category: "Other",
+  category: null,
   imageUrl: null
 };
 export const DealsContainer = (props: any) => {
@@ -133,6 +133,9 @@ export const DealsContainer = (props: any) => {
   const persistDeal = async () => {
     const tempDeal = { ...newDeal };
     delete tempDeal.typeChecked;
+    tempDeal.category = isEmpty(tempDeal.category)
+      ? "Other"
+      : tempDeal.category;
     const rep = await postData(tempDeal);
     // clear entries, doesn't handle errors
     if (rep.statusCode === 200) {
