@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
-import { DealsList } from 'components/DealsList';
-import { AppContext } from '../AppContainer';
-import { MapContainerActions } from 'components/Search';
-import { useGeoPosition } from 'hooks/useGeoPosition';
-import { handleObs, showBack } from '../../services/backService';
+import React, { useContext, useEffect } from "react";
+import { Grid } from "@material-ui/core";
+import { DealsList } from "components/DealsList";
+import { AppContext } from "../AppContainer";
+import { useGeoPosition } from "hooks/useGeoPosition";
+import { showBack } from "../../services/backService";
 
 type ExploreContainerProps = {
   deals: any;
@@ -12,13 +11,15 @@ type ExploreContainerProps = {
 
 export const ExploreContainer = (props: ExploreContainerProps) => {
   const { getLocation } = useGeoPosition();
-  const { position, filterResults } = useContext(AppContext);
-  const foodDeals = filterResults.filter(deal => deal.category === 'Food').sort((a, b) => (a.name> b.name) ? 1 : -1);
-  const coffeeDeals = filterResults.filter(deal => deal.category === 'Coffee');
+  const { filterResults } = useContext(AppContext);
+  const foodDeals = filterResults
+    .filter(deal => deal.category === "Food")
+    .sort((a, b) => (a.name > b.name ? 1 : -1));
+  const coffeeDeals = filterResults.filter(deal => deal.category === "Coffee");
   const servicesDeals = filterResults.filter(
-    deal => deal.category === 'Services'
+    deal => deal.category === "Services"
   );
-  const otherDeals = filterResults.filter(deal => deal.category === 'Other');
+  const otherDeals = filterResults.filter(deal => deal.category === "Other");
 
   useEffect(() => {
     getLocation();
@@ -26,8 +27,8 @@ export const ExploreContainer = (props: ExploreContainerProps) => {
 
   //do not show back
   useEffect(() => {
-    showBack(false)
-  })
+    showBack(false);
+  });
 
   return (
     <Grid container justify="flex-start" alignItems="center">

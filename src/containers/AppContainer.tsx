@@ -49,7 +49,7 @@ export type AppContextTypes = {
   setSearchView: (value: SearchView) => void;
   currentPage: string | null;
   device: DeviceInfo | null;
-  position: Position | null;
+  devicePosition: Position | null;
   filterResults: Array<Deal>;
   setFilterResults: (value: Array<Deal>) => void;
   deviceLocationName: string;
@@ -62,17 +62,12 @@ export const AppContext = React.createContext<AppContextTypes>({
   searchView: null,
   currentPage: null,
   device: null,
-  position: null,
+  devicePosition: null,
   filterResults: [],
   setFilterResults: () => {},
   deviceLocationName: null,
   refetchDeals: () => {}
 });
-
-const manhattanCenter = {
-  lat: 40.7831,
-  lng: -73.9712
-};
 
 const checkNavigation = ({
   navValue,
@@ -125,6 +120,9 @@ const AppContainer = (props: AppProps) => {
       });
   };
   React.useEffect(() => {
+    const unlisten = history.listen(() => {
+      window.scrollTo(0, 0);
+    });
     const getDeviceInfo = async () => {
       const deviceInfo = await Plugins.Device.getInfo();
       setDevice(deviceInfo);
@@ -134,6 +132,9 @@ const AppContainer = (props: AppProps) => {
     checkNavigation({ navValue, setNavValue, history });
     getLocation();
     getAllDeals();
+    return () => {
+      unlisten();
+    };
   }, []);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
@@ -152,7 +153,7 @@ const AppContainer = (props: AppProps) => {
             searchView,
             currentPage: navValue,
             device: device,
-            position: position,
+            devicePosition: position,
             filterResults: filterResults,
             setFilterResults: setFilterResults,
             deviceLocationName: locationName,
