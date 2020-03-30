@@ -6,25 +6,29 @@ import "./map.css";
 import MapView from "components/Search/Map";
 import { ListView } from "components/Search";
 import { AppContext } from "./AppContainer";
-import { SearchView } from "utils/general";
+import { SearchView, isEmpty } from "utils/general";
 import { SearchFilter } from "components/Search/searchFilter";
 import { handleObs, showBack } from "services/backService";
 import { useHistory } from "react-router-dom";
-
 type SearchContainerProps = {
   listView: boolean;
 };
 
 export const SearchContainerContext = React.createContext({
-  locationName: "",
   searchByCustom: (location: string) => new Promise<void>(resolve => {}),
   setResults: (value: any) => {}
 });
 
 export const SearchContainer = (props: SearchContainerProps) => {
   const history = useHistory();
-  const { searchView, setSearchView, filterResults } = useContext(AppContext);
-  const { locationName, getLocation, searchByCustom } = useGeoPosition();
+  const {
+    searchView,
+    setSearchView,
+    filterResults,
+    deviceLocationName
+  } = useContext(AppContext);
+  //override the device location if searching for something else
+  const { locationName, searchByCustom } = useGeoPosition();
   const [filtered, setFiltered] = useState(filterResults);
   // populate the text field & default center
   // go  back the filter page
@@ -57,7 +61,6 @@ export const SearchContainer = (props: SearchContainerProps) => {
   return (
     <SearchContainerContext.Provider
       value={{
-        locationName,
         searchByCustom,
         setResults
       }}
@@ -67,7 +70,9 @@ export const SearchContainer = (props: SearchContainerProps) => {
           <div className="actionGroup">
             <MapContainerActions
               search={searchByCustom}
-              location={locationName}
+              location={
+                isEmpty(locationName) ? deviceLocationName : locationName
+              }
             />
           </div>
         </Grid>

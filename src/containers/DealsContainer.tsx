@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PlacesAutocomplete from "react-places-autocomplete";
 import {
   Grid,
@@ -26,6 +26,7 @@ import { useDiscountsApi } from "hooks/apiServiceHook";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Alert } from "@material-ui/lab";
 import { isEmpty } from "utils/general";
+import { AppContext } from "./AppContainer";
 
 const filterTileData = [
   {
@@ -79,6 +80,7 @@ export const DealsContainer = (props: any) => {
   const [newDeal, setNewDeal] = useState(initalState);
   const [openSnackbar, setOpenSnackBar] = useState(false);
   const { isLoading, postData } = useDiscountsApi();
+  const { refetchDeals } = useContext(AppContext);
   // the change for the typeahead
   const handleAutoChange = (value: any) => {
     const newState = produce(draft => {
@@ -138,8 +140,9 @@ export const DealsContainer = (props: any) => {
       ? "Other"
       : tempDeal.category;
     const rep = await postData(tempDeal);
-    // clear entries, doesn't handle errors
+    // update the deals, doesn't handle errors
     if (rep.statusCode === 200) {
+      refetchDeals();
       setNewDeal(initalState);
       setOpenSnackBar(true);
     }
@@ -292,7 +295,7 @@ export const DealsContainer = (props: any) => {
       <Snackbar
         open={openSnackbar}
         onClose={closeSnackBar}
-        autoHideDuration={3000}
+        autoHideDuration={2000}
       >
         <Alert severity="success">The deal has been added!</Alert>
       </Snackbar>
