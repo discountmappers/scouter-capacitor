@@ -14,14 +14,7 @@ import {
   AddCircleOutline,
   SupervisorAccountOutlined
 } from "@material-ui/icons";
-import {
-  SearchView,
-  Position,
-  mockResults,
-  Deal,
-  isEmpty,
-  Pages
-} from "utils/general";
+import { SearchView, Position, Deal, isEmpty, Pages } from "utils/general";
 import { Plugins, DeviceInfo } from "@capacitor/core";
 import { useHistory } from "react-router-dom";
 import { theme } from "../themes/theme";
@@ -70,7 +63,7 @@ export const AppContext = React.createContext<AppContextTypes>({
   device: null,
   position: null,
   setPosition: () => {},
-  filterResults: [...mockResults],
+  filterResults: [],
   setFilterResults: () => {}
 });
 
@@ -117,17 +110,34 @@ const AppContainer = (props: AppProps) => {
   const [navValue, setNavValue] = useState<string | null>(null);
   const [searchView, setSearchView] = useState<SearchView | null>(null);
   const [position, setPosition] = useState<Position | null>(manhattanCenter);
-  const [filterResults, setFilterResults] = useState(mockResults);
+  const [filterResults, setFilterResults] = useState([]);
   const [device, setDevice] = React.useState<DeviceInfo>(null);
   React.useEffect(() => {
-    async function getDeviceInfo() {
+    // show filter page if navigating away from it
+    history.listen(val => {
+      setSearchView(null);
+    });
+    const getDeviceInfo = async () => {
       const deviceInfo = await Plugins.Device.getInfo();
       setDevice(deviceInfo);
-    }
+    };
+
+    const getAllDeals = async () => {
+      const url = process.env.REACT_APP_API_URL || "";
+
+      //call the fetch function
+      await fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setFilterResults(data);
+        });
+    };
 
     getDeviceInfo();
     checkNavigation({ navValue, setNavValue, history });
     getLocation();
+    getAllDeals();
   }, []);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
