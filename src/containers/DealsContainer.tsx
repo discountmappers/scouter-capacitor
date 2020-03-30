@@ -25,6 +25,7 @@ import "./map.css";
 import { useDiscountsApi } from "hooks/apiServiceHook";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Alert } from "@material-ui/lab";
+import { isEmpty } from "utils/general";
 
 const filterTileData = [
   {
