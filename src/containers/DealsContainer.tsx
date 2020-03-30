@@ -140,8 +140,8 @@ export const DealsContainer = (props: any) => {
     const rep = await postData(tempDeal);
     // clear entries, doesn't handle errors
     if (rep.statusCode === 200) {
-      setOpenSnackBar(true);
       setNewDeal(initalState);
+      setOpenSnackBar(true);
     }
   };
   const setFilter = (data: any) => {
