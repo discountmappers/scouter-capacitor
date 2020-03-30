@@ -29,7 +29,6 @@ const MapView = (props: MapViewProps) => {
   );
   const { position } = useContext(AppContext);
   const [resultCard, setResultCard] = useState(null);
-
   // show the selected choice under the map
   const showClick = (result: any) => {
     setResultCard(result);

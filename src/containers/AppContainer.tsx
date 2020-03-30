@@ -4,8 +4,7 @@ import { Navigation } from "components/Navigation/navigation";
 import {
   BottomNavigation,
   BottomNavigationAction,
-  Container,
-  createMuiTheme
+  Container
 } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import {
@@ -50,9 +49,10 @@ export type AppContextTypes = {
   currentPage: string | null;
   device: DeviceInfo | null;
   position: Position | null;
-  setPosition: (value: Position) => void;
   filterResults: Array<Deal>;
   setFilterResults: (value: Array<Deal>) => void;
+  deviceLocationName: string;
+  refetchDeals: () => void;
 };
 
 // create context
@@ -62,9 +62,10 @@ export const AppContext = React.createContext<AppContextTypes>({
   currentPage: null,
   device: null,
   position: null,
-  setPosition: () => {},
   filterResults: [],
-  setFilterResults: () => {}
+  setFilterResults: () => {},
+  deviceLocationName: null,
+  refetchDeals: () => {}
 });
 
 const manhattanCenter = {
@@ -106,40 +107,38 @@ const checkNavigation = ({
 const AppContainer = (props: AppProps) => {
   const history = useHistory();
   const classes = useStyles();
-  const { getLocation } = useGeoPosition();
+  const { position, getLocation, locationName } = useGeoPosition();
   const [navValue, setNavValue] = useState<string | null>(null);
   const [searchView, setSearchView] = useState<SearchView | null>(null);
-  const [position, setPosition] = useState<Position | null>(manhattanCenter);
   const [filterResults, setFilterResults] = useState([]);
   const [device, setDevice] = React.useState<DeviceInfo>(null);
+  // fetch everything on app load for now
+  const getAllDeals = async () => {
+    const url = process.env.REACT_APP_API_URL || "";
+
+    //call the fetch function
+    await fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setFilterResults(data);
+      });
+  };
   React.useEffect(() => {
-    // show filter page if navigating away from it
-    history.listen(val => {
-      setSearchView(null);
-    });
     const getDeviceInfo = async () => {
       const deviceInfo = await Plugins.Device.getInfo();
       setDevice(deviceInfo);
     };
 
-    const getAllDeals = async () => {
-      const url = process.env.REACT_APP_API_URL || "";
-
-      //call the fetch function
-      await fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          setFilterResults(data);
-        });
-    };
-
     getDeviceInfo();
     checkNavigation({ navValue, setNavValue, history });
     getLocation();
+    console.log("just called get location");
     getAllDeals();
   }, []);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+    // when navigating on bottom clear the search stuff
+    setSearchView(null);
     setNavValue(newValue);
   };
 
@@ -153,9 +152,10 @@ const AppContainer = (props: AppProps) => {
             currentPage: navValue,
             device: device,
             position: position,
-            setPosition: setPosition,
             filterResults: filterResults,
-            setFilterResults: setFilterResults
+            setFilterResults: setFilterResults,
+            deviceLocationName: locationName,
+            refetchDeals: getAllDeals
           }}
         >
           <Container
