@@ -129,7 +129,6 @@ const AppContainer = (props: AppProps) => {
       await fetch(url)
         .then(res => res.json())
         .then(data => {
-          console.log(data);
           setFilterResults(data);
         });
     };
