@@ -30,7 +30,7 @@ const MapDetailView = (props: MapDetailViewProps) => {
     let currentLocation = new google.maps.LatLng(position.lat, position.lng);
     let request: any = {
       location: currentLocation,
-      radius: "2000",
+      radius: "3000",
       keyword: deal.name
     };
     // pass in a dummy div not worried about that
