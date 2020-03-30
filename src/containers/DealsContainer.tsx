@@ -71,7 +71,7 @@ const initalState: newDealState = {
   dealName: null,
   dealDesc: null,
   notes: null,
-  category: null,
+  category: "Other",
   imageUrl: null
 };
 export const DealsContainer = (props: any) => {
