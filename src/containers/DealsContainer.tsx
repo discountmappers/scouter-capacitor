@@ -212,7 +212,6 @@ export const DealsContainer = (props: any) => {
                       padding: "12px 12px 12px 12px",
                       cursor: "pointer"
                     };
-                    console.log(suggestion);
                     return (
                       <div
                         {...getSuggestionItemProps(suggestion, {

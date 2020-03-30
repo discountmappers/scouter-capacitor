@@ -119,9 +119,9 @@ export const Navigation = (props: NavigationProps) => {
 
   //due to weirdness with back and map icon, center the title correctly
   let headerTextClass = "";
-  if (show && searchView !== null) {
+  if (show && searchView !== null && location.pathname.includes('/search')) {
     headerTextClass = classes.searchViewTitle;
-  } else if (show) {
+  } else if (show && location.pathname.includes('/deals')) {
     headerTextClass = classes.backTitle;
   } else {
     headerTextClass = classes.normalTitle;
