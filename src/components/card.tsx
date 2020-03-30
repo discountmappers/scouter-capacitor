@@ -9,15 +9,17 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import food from "../components/images/food.jpg";
 import coffee from "../components/images/coffee.jpg";
-import services1 from "../components/images/services1.jpg";
+import services2 from "../components/images/services2.jpg";
 import laundry from "../components/images/services1.jpg";
+import StarRatingComponent from 'react-star-rating-component';
+import { theme } from '../themes/theme';
 
 const useStyles = makeStyles({
   root: {
     display: "flex",
     alignItems: "center",
     boxShadow: "1px 1px 1px 1px #888888",
-    cursor: "pointer"
+    cursor: "pointer",
   },
   details: {
     width: "100%",
@@ -25,15 +27,27 @@ const useStyles = makeStyles({
     flexDirection: "column"
   },
   content: {
-    flex: "1 0 auto"
+    flex: "1 0 auto",
+    padding: '0px',
+    '&:last-child': {
+      paddingBottom: '0px'
+    },
   },
   img: {
-    width: 60,
-    height: 60,
-    padding: "10px 10px 10px 10px"
+    width: 90,
+    height: 80,
+    paddingRight: '20px',
+    borderRadius: '10px',
   },
   padding: {
-    paddingTop: "12px"
+    padding: "10px"
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: '12px',
+  },
+  subtitle: {
+    fontSize: '10px'
   }
 });
 
@@ -43,7 +57,7 @@ type iconMap = {
 const cardIcons: iconMap = {
   Food: food,
   Coffee: coffee,
-  Services: services1,
+  Services: services2,
   Other: laundry
 };
 
@@ -62,21 +76,29 @@ const CustomCard = (props: CardProps) => {
     });
   };
   const imageSrc = cardIcons[result.category];
+
   return (
     <Card className={classes.root} onClick={() => handleClick()}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Grid container>
-            <img className={classes.img} src={imageSrc} />
-            <Grid item xs={7} md={9}>
-              <Typography variant="body2">{result.dealDesc}</Typography>
+            <img className={classes.img} src={result.imageUrl} />
+            <Grid item xs={7} md={9} className={classes.padding}>
+              <Typography variant="body2" color={'primary'} className={classes.title}>{result.dealName}</Typography>
               <Typography
-                className={classes.padding}
                 variant="subtitle2"
                 color="textSecondary"
+                className={classes.subtitle}
               >
                 {result.name}
               </Typography>
+              <StarRatingComponent
+                name={"businessRating"}
+                value={Math.floor(Math.random() * 5) + 3}
+                starCount={5}
+                starColor={theme.palette.primary.main}
+                emptyStarColor={theme.palette.secondary.dark}
+                editing={false}/>
             </Grid>
           </Grid>
         </CardContent>
