@@ -46,23 +46,16 @@ const filterTileData = [
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      paddingTop: "20px",
-      width: "100%"
-    },
-    buttonContainer: {
-      width: "100%",
-      height: "100%",
-      padding: "15px",
-      justifyContent: "center",
-      display: "flex",
+      paddingTop: "20px"
     },
     button: {
       padding: "10px",
-      width: "80%",
+      width: "100%",
       fontSize: "12px",
       fontWeight: "bold"
     },
     dealsContainer: {
+      paddingTop: "20px",
       outline: "1px solid #9e9e9e",
       width: "100%",
       height: "100%",
@@ -93,10 +86,16 @@ export const SearchFilter = (props: SearchFilterProps) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container justify="center" className={classes.root}>
+      <Grid
+        item
+        container
+        justify="center"
+        alignItems="center"
+        className={classes.root}
+      >
         {filterTileData.map((tile, idx) => (
           <>
-            <Grid item xs={5} md={3}>
+            <Grid item xs={5} md={2}>
               <div style={{ height: "90px", width: "100%" }}>
                 <FilterType
                   disabled={false}
@@ -114,23 +113,34 @@ export const SearchFilter = (props: SearchFilterProps) => {
             )}
           </>
         ))}
-      </Grid>
-      <div className={classes.buttonContainer}>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color={"primary"}
-          onClick={event => {
-            submitFilters(selectedFilters);
-          }}
+
+        <Grid item xs={12}></Grid>
+        <Grid
+          item
+          className={classes.root}
+          justify="center"
+          xs={10}
+          sm={7}
+          md={4}
         >
-          Submit
-        </Button>
-      </div>
-      <div className={classes.dealsContainer}>
-        <DealsList title="Popular Search Results" deals={popularDeals} />
-        <DealsList title="New Offers" deals={newDeals} />
-      </div>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color={"primary"}
+            onClick={event => {
+              submitFilters(selectedFilters);
+            }}
+          >
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid container className={classes.root}>
+        <div className={classes.dealsContainer}>
+          <DealsList title="Popular Search Results" deals={popularDeals} />
+          <DealsList title="New Offers" deals={newDeals} />
+        </div>
+      </Grid>
     </ThemeProvider>
   );
 };
