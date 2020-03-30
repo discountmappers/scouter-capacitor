@@ -44,6 +44,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     mainNavigation: {
       height: 75
+    },
+    iosNavigation: {
+      height: 75,
+      paddingTop: '25px'
     }
   })
 );
@@ -51,7 +55,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Navigation = (props: NavigationProps) => {
   const classes = useStyles();
   const [show, setShow] = useState(false)
-  const { currentPage, searchView, setSearchView } = useContext(AppContext);
+  const { currentPage, searchView, setSearchView, device } = useContext(AppContext);
+  const isIphone = device && (device.model === "iPhone")
 
   useEffect(() => {
     const back = backObs.subscribe((val: any) => {
@@ -101,7 +106,7 @@ export const Navigation = (props: NavigationProps) => {
   return (
     <>
       <AppBar position="static">
-        <Toolbar className={classes.mainNavigation}>
+        <Toolbar className={isIphone ? classes.iosNavigation : classes.mainNavigation}>
           {show && <Button classes={{
             root: classes.buttonRoot
           }} onClick={goBack}><ArrowBackIcon className="navBtn" />Back</Button>}
