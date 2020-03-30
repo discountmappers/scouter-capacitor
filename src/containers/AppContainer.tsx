@@ -26,7 +26,7 @@ type AppProps = {
 const useStyles = makeStyles({
   appContainer: {
     paddingBottom: 90,
-    background: '#f5f5f5',
+    background: "#f5f5f5"
   },
   bottomNav: {
     width: "100%",
@@ -138,6 +138,7 @@ const AppContainer = (props: AppProps) => {
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     // when navigating on bottom clear the search stuff
+    localStorage.setItem("filters", null);
     setSearchView(null);
     setNavValue(newValue);
   };

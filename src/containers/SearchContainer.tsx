@@ -42,7 +42,10 @@ export const SearchContainer = (props: SearchContainerProps) => {
 
       setSearchView(null);
     });
-
+    // reset filters if they exist, they are cleared when using bottom nav bar
+    const persistedFilters = JSON.parse(localStorage.getItem("filters"));
+    if (persistedFilters !== null && persistedFilters.length > 0)
+      performFilter(persistedFilters);
     return () => {
       showBack(false);
       handle.unsubscribe();
@@ -50,9 +53,14 @@ export const SearchContainer = (props: SearchContainerProps) => {
   }, [searchView]);
 
   const submitFilters = (filters: Array<string>) => {
+    localStorage.setItem("filters", JSON.stringify(filters));
+    performFilter(filters);
+    setSearchView(SearchView.LIST);
+  };
+
+  const performFilter = (filters: Array<any>) => {
     const filt = filterResults.filter(fil => filters.includes(fil.category));
     setFiltered(filt);
-    setSearchView(SearchView.LIST);
   };
   const setResults = (value: any) => {
     setSearchView(SearchView.LIST);
