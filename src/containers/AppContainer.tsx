@@ -4,8 +4,7 @@ import { Navigation } from "components/Navigation/navigation";
 import {
   BottomNavigation,
   BottomNavigationAction,
-  Container,
-  createMuiTheme
+  Container
 } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import {
@@ -53,6 +52,7 @@ export type AppContextTypes = {
   setPosition: (value: Position) => void;
   filterResults: Array<Deal>;
   setFilterResults: (value: Array<Deal>) => void;
+  deviceLocationName: string;
 };
 
 // create context
@@ -64,7 +64,8 @@ export const AppContext = React.createContext<AppContextTypes>({
   position: null,
   setPosition: () => {},
   filterResults: [],
-  setFilterResults: () => {}
+  setFilterResults: () => {},
+  deviceLocationName: null
 });
 
 const manhattanCenter = {
@@ -106,7 +107,7 @@ const checkNavigation = ({
 const AppContainer = (props: AppProps) => {
   const history = useHistory();
   const classes = useStyles();
-  const { getLocation } = useGeoPosition();
+  const { getLocation, locationName } = useGeoPosition();
   const [navValue, setNavValue] = useState<string | null>(null);
   const [searchView, setSearchView] = useState<SearchView | null>(null);
   const [position, setPosition] = useState<Position | null>(manhattanCenter);
@@ -155,7 +156,8 @@ const AppContainer = (props: AppProps) => {
             position: position,
             setPosition: setPosition,
             filterResults: filterResults,
-            setFilterResults: setFilterResults
+            setFilterResults: setFilterResults,
+            deviceLocationName: locationName
           }}
         >
           <Container
