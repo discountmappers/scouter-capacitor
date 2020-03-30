@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Navigation } from 'components/Navigation/navigation';
+import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { Navigation } from "components/Navigation/navigation";
 import {
   BottomNavigation,
   BottomNavigationAction,
   Container,
   createMuiTheme
-} from '@material-ui/core';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+} from "@material-ui/core";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import {
   Explore,
   Search,
   AddCircleOutline,
   SupervisorAccountOutlined
-} from '@material-ui/icons';
+} from "@material-ui/icons";
 import {
   SearchView,
   Position,
@@ -21,11 +21,11 @@ import {
   Deal,
   isEmpty,
   Pages
-} from 'utils/general';
-import { Plugins, DeviceInfo } from '@capacitor/core';
-import { useHistory } from 'react-router-dom';
-import { theme } from '../themes/theme';
-import { useGeoPosition } from '../hooks/useGeoPosition';
+} from "utils/general";
+import { Plugins, DeviceInfo } from "@capacitor/core";
+import { useHistory } from "react-router-dom";
+import { theme } from "../themes/theme";
+import { useGeoPosition } from "../hooks/useGeoPosition";
 
 type AppProps = {
   children: React.ReactNode;
@@ -36,17 +36,17 @@ const useStyles = makeStyles({
     paddingBottom: 90
   },
   bottomNav: {
-    width: '100%',
-    position: 'fixed',
+    width: "100%",
+    position: "fixed",
     bottom: 0,
     margin: 0,
-    background: '#fafafa',
-    color: 'white',
+    background: "#fafafa",
+    color: "white",
     height: 65,
-    alignContent: 'center',
-    display: 'flex',
-    boxShadow: '0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)',
-    paddingBottom: '15px'
+    alignContent: "center",
+    display: "flex",
+    boxShadow: "0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)",
+    paddingBottom: "15px"
   }
 });
 
@@ -89,20 +89,20 @@ const checkNavigation = ({
   history: any;
 }) => {
   if (isEmpty(navValue)) {
-    const rootRoute = history.location.pathname.split('/')[1];
-    const childRoute = history.location.pathname.split('/')[2];
+    const rootRoute = history.location.pathname.split("/")[1];
+    const childRoute = history.location.pathname.split("/")[2];
 
     switch (rootRoute) {
-      case '':
+      case "":
         setNavValue(Pages.EXPLORE);
         break;
-      case 'search':
+      case "search":
         setNavValue(Pages.SEARCH);
         break;
-      case 'deals':
+      case "deals":
         childRoute ? setNavValue(Pages.SEARCH) : setNavValue(Pages.ADD_DEAL);
         break;
-      case 'profile':
+      case "profile":
         setNavValue(Pages.PROFILE);
         break;
       default:
@@ -120,10 +120,6 @@ const AppContainer = (props: AppProps) => {
   const [filterResults, setFilterResults] = useState(mockResults);
   const [device, setDevice] = React.useState<DeviceInfo>(null);
   React.useEffect(() => {
-    // show filter page if navigating away from it
-    history.listen(val => {
-      setSearchView(null);
-    });
     async function getDeviceInfo() {
       const deviceInfo = await Plugins.Device.getInfo();
       setDevice(deviceInfo);
