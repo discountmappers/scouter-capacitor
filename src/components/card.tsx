@@ -81,9 +81,11 @@ const CustomCard = (props: CardProps) => {
     <Card className={classes.root} onClick={handleClick}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Grid container>
-            <img className={classes.img} src={result.imageUrl} />
-            <Grid item xs={7} md={9} className={classes.padding}>
+          <Grid container alignItems="center">
+            <Grid item>
+              <img className={classes.img} src={result.imageUrl} />
+            </Grid>
+            <Grid item xs={7} md={9}>
               <Typography
                 variant="body2"
                 color={"primary"}

@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { BASE_GEOCODE_API, GOOGLE_API_KEY } from "utils/google";
-import { AppContext } from "containers/AppContainer";
 import { Plugins } from "@capacitor/core";
 const { Geolocation } = Plugins;
 
