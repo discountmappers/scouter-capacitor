@@ -13,7 +13,7 @@ type ExploreContainerProps = {
 export const ExploreContainer = (props: ExploreContainerProps) => {
   const { getLocation } = useGeoPosition();
   const { position, filterResults } = useContext(AppContext);
-  const foodDeals = filterResults.filter(deal => deal.category === 'Food');
+  const foodDeals = filterResults.filter(deal => deal.category === 'Food').sort((a, b) => (a.name> b.name) ? 1 : -1);
   const coffeeDeals = filterResults.filter(deal => deal.category === 'Coffee');
   const servicesDeals = filterResults.filter(
     deal => deal.category === 'Services'
