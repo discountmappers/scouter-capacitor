@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { BASE_GEOCODE_API, GOOGLE_API_KEY } from "utils/google";
 import { AppContext } from "containers/AppContainer";
+import { Plugins } from "@capacitor/core";
+const { Geolocation } = Plugins;
 
 type GoogleGeocodeResponse = {
   plus_code: { compound_code: string; global_code: string };
@@ -26,7 +28,8 @@ export const useGeoPosition = () => {
       lat,
       lng
     });
-    console.log("after calling set", lat);
+    console.log("lat", lat);
+    console.log("lng", lng);
     getCityName(lat, lng);
   };
 
@@ -40,12 +43,16 @@ export const useGeoPosition = () => {
     setLocationName(city.join(" "));
   };
 
-  // html api
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(extract_pos, console.error);
-    } else {
-      console.info("Location api not avaialble, defaulting to manhattan");
+  const getLocation = async () => {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      extract_pos(coordinates);
+    } catch (e) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(extract_pos, console.error);
+      } else {
+        console.info("Location api not avaialble, defaulting to manhattan");
+      }
     }
   };
 
