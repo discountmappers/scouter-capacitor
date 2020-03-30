@@ -49,10 +49,12 @@
     "init-ios": "yarn build && yarn add-ios",
     "sync-ios": "yarn build && npx cap sync",
     "open-ios": "npx cap open ios",
-    "init-deploy-ios": "yarn init-ios && yarn open-ios",
-    "deploy-ios": "yarn sync-ios && yarn open-ios",
-    "package-ios": "yarn sync-ios && mkdir Scouter && cp -R node_modules Scouter && cp -R ios Scouter && zip -r Scouter.zip Scouter",
-    "init-package-ios": "yarn init-ios && mkdir Scouter && cp -R node_modules Scouter && cp -R ios Scouter && zip -r Scouter.zip Scouter"
+    "copy-ios-icons": "tar -xvf mobile-assets.tar.gz && cd ./mobile-assets && cp -R ./ios/appiconset/production/*.{png,json} ../ios/App/App/Assets.xcassets/AppIcon.appiconset/",
+    "copy-ios-splash": "cd ./mobile-assets && cp -R ./ios/imageset/*.png ../ios/App/App/Assets.xcassets/Splash.imageset/ && rm -rf ./ios && cd .. && rm -rf ./mobile-assets",
+    "init-deploy-ios": "yarn init-ios && yarn copy-ios-icons && yarn copy-ios-splash && yarn open-ios",
+    "deploy-ios": "yarn sync-ios && yarn copy-ios-icons && yarn copy-ios-splash && yarn open-ios",
+    "init-package-ios": "rm -rf Scouter* && rm -rf ios && yarn init-ios && yarn copy-ios-icons && yarn copy-ios-splash && mkdir Scouter && cp -R node_modules Scouter && cp -R ios Scouter && zip -r Scouter.zip Scouter",
+    "package-ios": "rm -rf Souter && yarn sync-ios && yarn copy-ios-icons && yarn copy-ios-splash && mkdir Scouter && cp -R node_modules Scouter && cp -R ios Scouter && zip -r Scouter.zip Scouter"
   },
   "eslintConfig": {
     "extends": "react-app"
