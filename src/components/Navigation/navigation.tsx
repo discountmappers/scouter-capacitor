@@ -3,7 +3,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Fab,
   Button,
   ButtonBase
 } from "@material-ui/core";
