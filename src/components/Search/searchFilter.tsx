@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { createStyles, Theme, Grid, Button } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import foodImage from "../images/food.jpg";
@@ -14,7 +14,7 @@ import {
 import { FilterType } from "../FilterType";
 import { DealsList } from "components/DealsList";
 import { theme } from "../../themes/theme";
-import { mockResults } from "utils/general";
+import { AppContext } from "containers/AppContainer";
 
 type SearchFilterProps = {
   submitFilters: (filters: Array<string>) => void;
@@ -83,6 +83,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const SearchFilter = (props: SearchFilterProps) => {
   const classes = useStyles();
+  const { filterResults } = useContext(AppContext);
+  // set random order for deals
+  const popularDeals = filterResults
+    .map(a => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value);
+  const newDeals = filterResults.sort();
   const [selectedFilters, setFilter] = useState<any>([]);
   const { submitFilters } = props;
 
@@ -123,8 +130,8 @@ export const SearchFilter = (props: SearchFilterProps) => {
         </Button>
       </div>
       <div className={classes.dealsContainer}>
-        <DealsList title="Popular Search Results" deals={mockResults} />
-        <DealsList title="New Offers" deals={mockResults} />
+        <DealsList title="Popular Search Results" deals={popularDeals} />
+        <DealsList title="New Offers" deals={newDeals} />
       </div>
     </ThemeProvider>
   );

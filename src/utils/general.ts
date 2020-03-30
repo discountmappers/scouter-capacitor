@@ -1,6 +1,6 @@
 // explicit check for different types considered to be empty
 export const isEmpty = (value: any) => {
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     value = value.trim();
   }
 
@@ -9,26 +9,26 @@ export const isEmpty = (value: any) => {
     value === undefined ||
     value === false ||
     (value.constructor === Array && value.length === 0) ||
-    value === '' ||
+    value === "" ||
     (value.constructor === Object && Object.keys(value).length === 0)
   );
 };
 export enum SearchView {
-  LIST = 'List',
-  MAP = 'Map'
+  LIST = "List",
+  MAP = "Map"
 }
 export enum Pages {
-  EXPLORE = 'Explore Deals',
-  SEARCH = 'Search',
-  ADD_DEAL = 'Add Deal',
-  PROFILE = 'Profile'
+  EXPLORE = "Explore Deals",
+  SEARCH = "Search",
+  ADD_DEAL = "Add Deal",
+  PROFILE = "Profile"
 }
 export type Position = {
   lat: number;
   lng: number;
 };
 export type Deal = {
-  id: number;
+  id: any;
   name: string;
   dealName: string;
   type: string;
@@ -44,227 +44,227 @@ export type Deal = {
 export const mockResults = [
   {
     id: 1,
-    name: 'Starbucks',
-    dealName: 'Free Starbucks Coffee',
-    type: 'Chain',
-    offer: 'Free',
+    name: "Starbucks",
+    dealName: "Free Starbucks Coffee",
+    type: "Chain",
+    offer: "Free",
     dealDesc:
-      'Free tall hot or iced coffee to all health care workers through May 3',
+      "Free tall hot or iced coffee to all health care workers through May 3",
     notes:
-      'Offer goes for more than just doctors and nurses‚ police officers, firefighters, paramedics and other hospital or medical staffers are also eligible',
+      "Offer goes for more than just doctors and nurses‚ police officers, firefighters, paramedics and other hospital or medical staffers are also eligible",
     lat: null,
     lng: null,
-    address: '',
-    category: 'Coffee',
-    imageUrl: ''
+    address: "",
+    category: "Coffee",
+    imageUrl: "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
   },
   {
     id: 2,
-    name: 'Sweetgreen',
-    dealName: 'Free Salad Delivery',
-    type: 'Chain',
-    offer: 'Free',
-    dealDesc: 'Free delivery of salads and bowls to NYC hospitals',
-    notes: 'Free lunch for hospitals and health facilities',
+    name: "Sweetgreen",
+    dealName: "Free Salad Delivery",
+    type: "Chain",
+    offer: "Free",
+    dealDesc: "Free delivery of salads and bowls to NYC hospitals",
+    notes: "Free lunch for hospitals and health facilities",
     lat: null,
     lng: null,
-    address: '',
-    category: 'Food',
-    imageUrl: 'https://homepages.cae.wisc.edu/~ece533/images/boat.png'
+    address: "",
+    category: "Food",
+    imageUrl: "https://homepages.cae.wisc.edu/~ece533/images/boat.png"
   },
   {
     id: 3,
-    name: 'Krispy Kreme',
-    dealName: 'Free Donut Mondays',
-    type: 'Chain',
-    offer: 'Free',
-    dealDesc: 'Free dozen donuts on Mondays',
+    name: "Krispy Kreme",
+    dealName: "Free Donut Mondays",
+    type: "Chain",
+    offer: "Free",
+    dealDesc: "Free dozen donuts on Mondays",
     notes:
-      'Free donuts on Mondays through May 11 to anyone who works in the medical sector who shows up with their employee badge. Workets can go back for more each week, or even in the same day.',
+      "Free donuts on Mondays through May 11 to anyone who works in the medical sector who shows up with their employee badge. Workets can go back for more each week, or even in the same day.",
     lat: null,
     lng: null,
-    address: '',
-    category: 'Food',
-    imageUrl: 'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'
+    address: "",
+    category: "Food",
+    imageUrl: "https://homepages.cae.wisc.edu/~ece533/images/tulips.png"
   },
   {
     id: 4,
-    name: 'Four Seasons Hotel',
-    dealName: 'Free Hotel Stay',
-    type: 'Local',
-    offer: 'Free',
+    name: "Four Seasons Hotel",
+    dealName: "Free Hotel Stay",
+    type: "Local",
+    offer: "Free",
     dealDesc:
-      'The Four Seasons Hotel in Manhattan will provide free rooms to doctors, nurses and other medical personnel.',
-    notes: 'Free rooms to frontline workers through April 15',
+      "The Four Seasons Hotel in Manhattan will provide free rooms to doctors, nurses and other medical personnel.",
+    notes: "Free rooms to frontline workers through April 15",
     lat: 40.7376159,
     lng: -74.025165,
-    address: '57 E 57th St, New York, NY 10022',
-    category: 'Services',
-    imageUrl: ''
+    address: "57 E 57th St, New York, NY 10022",
+    category: "Services",
+    imageUrl: ""
   },
   {
     id: 5,
-    name: '&pizza',
-    dealName: 'Free Pizza',
-    type: 'Local',
-    offer: 'Free',
+    name: "&pizza",
+    dealName: "Free Pizza",
+    type: "Local",
+    offer: "Free",
     dealDesc:
-      'Hospital workers are invited to stop by &pizza for a free pizza ',
+      "Hospital workers are invited to stop by &pizza for a free pizza ",
     notes:
       "Show your hospital ID. If you're too busy to leave work, &Pizza will deliver it. Just text 200-03 #HERO",
     lat: 40.74526,
     lng: -73.98811,
-    address: '15 W 28th St, New York, NY 10001',
-    category: 'Food',
-    imageUrl: ''
+    address: "15 W 28th St, New York, NY 10001",
+    category: "Food",
+    imageUrl: ""
   },
   {
     id: 6,
-    name: 'Crocs',
-    dealName: 'Free Crocs',
-    type: 'Local',
-    offer: 'Free',
-    dealDesc: 'Free pair of crocs for all healthcare workers',
+    name: "Crocs",
+    dealName: "Free Crocs",
+    type: "Local",
+    offer: "Free",
+    dealDesc: "Free pair of crocs for all healthcare workers",
     notes:
-      'Healthcare workers can choose from Crocs Classic Clogs and Crocs At Work styles while supplies last',
+      "Healthcare workers can choose from Crocs Classic Clogs and Crocs At Work styles while supplies last",
     lat: 40.7569897,
     lng: -73.8576051,
-    address: '152 W 34th St, New York, NY 10120',
-    category: 'Other',
-    imageUrl: ''
+    address: "152 W 34th St, New York, NY 10120",
+    category: "Other",
+    imageUrl: ""
   },
   {
     id: 7,
-    name: 'Hertz',
-    dealName: 'Free Car Rental',
-    type: 'Local',
-    offer: '',
-    dealDesc: 'Hertz is offering free month-long car rentals through April 30',
+    name: "Hertz",
+    dealName: "Free Car Rental",
+    type: "Local",
+    offer: "",
+    dealDesc: "Hertz is offering free month-long car rentals through April 30",
     notes:
-      'Cars can be booked for as short as a week and up to a month. To redeem, customers will need a valid medical ID, email address with healthcare domain and driver‚Äôs license.',
+      "Cars can be booked for as short as a week and up to a month. To redeem, customers will need a valid medical ID, email address with healthcare domain and driver‚Äôs license.",
     lat: 40.740769,
     lng: -73.986489,
-    address: '403 Lafayette St, New York, NY 10003',
-    category: 'Services',
-    imageUrl: ''
+    address: "403 Lafayette St, New York, NY 10003",
+    category: "Services",
+    imageUrl: ""
   },
   {
     id: 8,
-    name: 'Casa Organic Dry Cleaners',
-    dealName: '50% Off Laundry',
-    type: 'Local',
-    offer: 'Discount',
+    name: "Casa Organic Dry Cleaners",
+    dealName: "50% Off Laundry",
+    type: "Local",
+    offer: "Discount",
     dealDesc:
-      'Casa Organic is offering all healthcare and frontline workers 50% off of laundry services for their uniforms',
-    notes: 'Offer ends May 30, 2020',
+      "Casa Organic is offering all healthcare and frontline workers 50% off of laundry services for their uniforms",
+    notes: "Offer ends May 30, 2020",
     lat: 40.7431327,
     lng: -74.0105148,
-    address: '155 W 21st St, New York, NY 10011',
-    category: 'Services',
-    imageUrl: ''
+    address: "155 W 21st St, New York, NY 10011",
+    category: "Services",
+    imageUrl: ""
   },
   {
     id: 9,
-    name: 'Bubbleology',
-    dealName: '50% Off Drinks',
-    type: 'Local',
-    offer: 'Discount',
-    dealDesc: '50% off of all drinks for emergency service workers',
-    notes: 'All drinks are discounted through April, 2020',
-    lat: 40.727240,
+    name: "Bubbleology",
+    dealName: "50% Off Drinks",
+    type: "Local",
+    offer: "Discount",
+    dealDesc: "50% off of all drinks for emergency service workers",
+    notes: "All drinks are discounted through April, 2020",
+    lat: 40.72724,
     lng: -73.985383,
-    address: '120 1/2 1st Avenue, New York, NY 10009',
-    category: 'Food',
-    imageUrl: ''
+    address: "120 1/2 1st Avenue, New York, NY 10009",
+    category: "Food",
+    imageUrl: ""
   },
   {
     id: 10,
-    name: 'Paris Baguette',
-    dealName: 'Free Coffee',
-    type: 'Chain',
-    offer: 'Free',
+    name: "Paris Baguette",
+    dealName: "Free Coffee",
+    type: "Chain",
+    offer: "Free",
     dealDesc:
-      'All Manhattan locations will give free coffee to all hospital workers, first responders, the NYPD, and FDNY. ',
-    notes: 'This deal will be offered throughout the COVID-19 pandemic',
+      "All Manhattan locations will give free coffee to all hospital workers, first responders, the NYPD, and FDNY. ",
+    notes: "This deal will be offered throughout the COVID-19 pandemic",
     lat: null,
     lng: null,
-    address: '',
-    category: 'Coffee',
-    imageUrl: ''
+    address: "",
+    category: "Coffee",
+    imageUrl: ""
   },
   {
     id: 11,
-    name: 'Melt Shop',
-    dealName: 'Free Sandwich',
-    type: 'Local',
-    offer: 'Free',
+    name: "Melt Shop",
+    dealName: "Free Sandwich",
+    type: "Local",
+    offer: "Free",
     dealDesc:
-      'Melt Shop is offering a free sandwich for takeout to any hospital worker.',
-    notes: '',
+      "Melt Shop is offering a free sandwich for takeout to any hospital worker.",
+    notes: "",
     lat: 40.7608163,
     lng: -73.9823423,
-    address: '135 W 50th St, New York, NY 10019',
-    category: 'Food',
-    imageUrl: ''
+    address: "135 W 50th St, New York, NY 10019",
+    category: "Food",
+    imageUrl: ""
   },
   {
     id: 12,
-    name: 'All Birds',
-    dealName: 'Free Shoes',
-    type: 'Local',
-    offer: 'Free',
-    dealDesc: 'Free pair of wool or tree runners for all frontline workers',
-    notes: 'This offer ends on June 15, 2020',
+    name: "All Birds",
+    dealName: "Free Shoes",
+    type: "Local",
+    offer: "Free",
+    dealDesc: "Free pair of wool or tree runners for all frontline workers",
+    notes: "This offer ends on June 15, 2020",
     lat: 40.7226354,
     lng: -73.9998318,
-    address: '73 Spring St, New York, NY 10012',
-    category: 'Other',
-    imageUrl: ''
+    address: "73 Spring St, New York, NY 10012",
+    category: "Other",
+    imageUrl: ""
   },
   {
     id: 13,
-    name: 'Tropical Smoothie Cafe',
-    dealName: 'Free Smoothie',
-    type: 'Chain',
-    offer: 'Free',
+    name: "Tropical Smoothie Cafe",
+    dealName: "Free Smoothie",
+    type: "Chain",
+    offer: "Free",
     dealDesc:
-      'Tropical Smoothie Cafe is donating 100,000 smoothies in NYC to local healthcare workers and first responders.',
-    notes: '',
+      "Tropical Smoothie Cafe is donating 100,000 smoothies in NYC to local healthcare workers and first responders.",
+    notes: "",
     lat: null,
     lng: null,
-    address: '',
-    category: 'Food',
+    address: "",
+    category: "Food",
     imageUrl:
-      'https://bluhawk.com/2018/wp-content/uploads/2019/03/000539-BLU-Tenant-Coordination-Tropical-Smoothie-Blog-Image.jpg'
+      "https://bluhawk.com/2018/wp-content/uploads/2019/03/000539-BLU-Tenant-Coordination-Tropical-Smoothie-Blog-Image.jpg"
   },
   {
     id: 14,
-    name: 'Room Mate Grace Hotel',
-    dealName: 'Free Hotel Stay',
-    type: 'Local',
-    offer: 'Free',
+    name: "Room Mate Grace Hotel",
+    dealName: "Free Hotel Stay",
+    type: "Local",
+    offer: "Free",
     dealDesc:
-      'The hotel is providing its facility to serve as free housing for nurses, doctors, and medical personnel.',
-    notes: '',
+      "The hotel is providing its facility to serve as free housing for nurses, doctors, and medical personnel.",
+    notes: "",
     lat: 40.7574482,
     lng: -73.9860246,
-    address: '125 W 45th St, New York, NY 10036',
-    category: 'Services',
-    imageUrl: ''
+    address: "125 W 45th St, New York, NY 10036",
+    category: "Services",
+    imageUrl: ""
   },
   {
     id: 15,
-    name: 'CitiBike',
-    dealName: 'Free CitiBike',
-    type: 'Chain',
-    offer: 'Free',
-    dealDesc: 'Free month of CitiBike service',
+    name: "CitiBike",
+    dealName: "Free CitiBike",
+    type: "Chain",
+    offer: "Free",
+    dealDesc: "Free month of CitiBike service",
     notes:
-      'Citi Bike launched its Critical Workforce Membership Program, which provides the first-responder, healthcare, and transit workforce with a free month of Citi Bike membership. ',
+      "Citi Bike launched its Critical Workforce Membership Program, which provides the first-responder, healthcare, and transit workforce with a free month of Citi Bike membership. ",
     lat: null,
     lng: null,
-    address: '',
-    category: 'Services',
-    imageUrl: ''
+    address: "",
+    category: "Services",
+    imageUrl: ""
   }
 ];

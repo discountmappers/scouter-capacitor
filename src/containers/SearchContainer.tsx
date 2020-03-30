@@ -6,7 +6,7 @@ import "./map.css";
 import MapView from "components/Search/Map";
 import { ListView } from "components/Search";
 import { AppContext } from "./AppContainer";
-import { SearchView, mockResults } from "utils/general";
+import { SearchView } from "utils/general";
 import { SearchFilter } from "components/Search/searchFilter";
 import { handleObs, showBack } from "services/backService";
 import { useHistory } from "react-router-dom";

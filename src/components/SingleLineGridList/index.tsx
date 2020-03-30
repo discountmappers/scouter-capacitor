@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
-import { AppContext } from 'containers/AppContainer';
-import { Link as RouterLink } from 'react-router-dom';
-import 'typeface-roboto';
-import { theme } from '../../themes/theme';
+import React, { useContext } from "react";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+import { AppContext } from "containers/AppContainer";
+import { Link as RouterLink } from "react-router-dom";
+import "typeface-roboto";
+import { theme } from "../../themes/theme";
 
 type TileType = {
   id: string;
@@ -29,52 +29,55 @@ type SingleLineGridListProps = {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    padding: '10px'
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "start",
+    overflow: "hidden",
+    padding: "10px",
+    "& ul": {
+      width: "100%"
+    }
   },
   gridList: {
-    flexWrap: 'nowrap',
-    padding: '0 0 8px',
+    flexWrap: "nowrap",
+    padding: "0 0 8px",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)'
+    transform: "translateZ(0)"
   },
   tile: {
-    '& > div': {
-      borderRadius: '10px',
-      boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+    "& > div": {
+      borderRadius: "10px",
+      boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"
     }
   },
   title: {
     color: theme.palette.primary.main,
-    fontSize: '12px',
-    fontWeight: 'bold'
+    fontSize: "12px",
+    fontWeight: "bold"
   },
   primarySubtitle: {
     color: theme.palette.secondary.contrastText,
-    '& div': {
-      '& div': {
-        margin: '5px 0 0'
+    "& div": {
+      "& div": {
+        margin: "5px 0 0"
       },
-      '& div:first-child': {
-        margin: '2px 0 0'
+      "& div:first-child": {
+        margin: "2px 0 0"
       }
     }
   },
   secondarySubtitle: {
-    '& svg': {
-      height: '15px',
-      width: '15px'
+    "& svg": {
+      height: "15px",
+      width: "15px"
     }
   },
   titleBar: {
-    background: '#ffffff',
-    '& > div': {
-      position: 'absolute',
-      top: '5px',
-      left: '5px',
+    background: "#ffffff",
+    "& > div": {
+      position: "absolute",
+      top: "5px",
+      left: "5px",
       margin: 0
     }
   }
@@ -86,9 +89,9 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
   const { device } = useContext(AppContext);
   const getCols = cols
     ? cols
-    : device?.platform === 'web' &&
-      device?.operatingSystem !== 'ios' &&
-      device?.operatingSystem !== 'android'
+    : device?.platform === "web" &&
+      device?.operatingSystem !== "ios" &&
+      device?.operatingSystem !== "android"
     ? 4.5
     : 2.5;
 
@@ -99,7 +102,7 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
           {tiles.map((tile, index) => (
             <GridListTile
               className={classes.tile}
-              key={tile.id}
+              key={Math.random()}
               component={RouterLink}
               to={{
                 pathname: `/deals/${tile.id}`,
@@ -110,7 +113,7 @@ const SingleLineGridList: React.FC<SingleLineGridListProps> = props => {
                 src={
                   tile.imageUrl
                     ? tile.imageUrl
-                    : 'https://homepages.cae.wisc.edu/~ece533/images/monarch.png'
+                    : "https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
                 }
                 alt={tile.name}
               />
