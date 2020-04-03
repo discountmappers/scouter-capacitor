@@ -18,6 +18,7 @@ import { Plugins, DeviceInfo } from "@capacitor/core";
 import { useHistory } from "react-router-dom";
 import { theme } from "../themes/theme";
 import { useGeoPosition } from "../hooks/useGeoPosition";
+import { processImageUrls } from "utils/google";
 
 type AppProps = {
   children: React.ReactNode;
@@ -113,11 +114,11 @@ const AppContainer = (props: AppProps) => {
     const url = process.env.REACT_APP_API_URL || "";
 
     //call the fetch function
-    await fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        setFilterResults(data);
-      });
+    const data = await fetch(url);
+    const results = await data.json();
+    // process response by reference
+    await processImageUrls(results);
+    setFilterResults(results);
   };
   React.useEffect(() => {
     const unlisten = history.listen(() => {

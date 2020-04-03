@@ -126,6 +126,7 @@ export const DealsContainer = (props: any) => {
         draft.address = response.formatted_address;
         draft.lat = response.geometry.location.lat();
         draft.lng = response.geometry.location.lng();
+        draft.placeId = response.place_id;
         // just get the first photo for now
         draft.imageUrl = response.photos[0].getUrl();
       });

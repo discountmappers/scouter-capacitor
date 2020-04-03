@@ -40,6 +40,7 @@ export type Deal = {
   address: string;
   category: string;
   imageUrl: string;
+  placeId?: string;
 };
 export const mockResults = [
   {
