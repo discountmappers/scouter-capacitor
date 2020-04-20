@@ -147,9 +147,11 @@ export const DealsContainer = (props: any) => {
       setOpenSnackBar(true);
     }
   };
-  const setFilter = (data: any) => {
-    const value = data?.[0] ? data?.[0] : "";
-    handleChange("category", value);
+  const toggleFilter = (value: any) => {
+    const newCategory: string | null =
+      newDeal.category !== value ? value : null;
+
+    handleChange("category", newCategory);
   };
 
   // display the filter images
@@ -166,8 +168,8 @@ export const DealsContainer = (props: any) => {
               }
               title={tile.title}
               icon={tile.icon}
-              selectedFilters={[]}
-              setFilter={setFilter}
+              selected={false}
+              toggleFilter={toggleFilter}
             />
           </div>
         </Grid>

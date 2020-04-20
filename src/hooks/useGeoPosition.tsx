@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { BASE_GEOCODE_API, GOOGLE_API_KEY } from "utils/google";
 import { Plugins } from "@capacitor/core";
 const { Geolocation } = Plugins;
@@ -17,18 +17,14 @@ export const useGeoPosition = () => {
   // the default
   const [position, setPosition] = useState(manhattanCenter);
 
-  //const { position, setPosition } = useContext(AppContext);
   const [locationName, setLocationName] = useState("");
   const extract_pos = (position: any) => {
     const lat = position.coords.latitude;
     const lng = position.coords.longitude;
-    console.log("setting lat", lat);
     setPosition({
       lat,
       lng
     });
-    console.log("lat", lat);
-    console.log("lng", lng);
     getCityName(lat, lng);
   };
 

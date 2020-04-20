@@ -7,7 +7,7 @@ import MapView from "components/Search/Map";
 import { ListView } from "components/Search";
 import { AppContext } from "./AppContainer";
 import { SearchView, isEmpty } from "utils/general";
-import { SearchFilter } from "components/Search/searchFilter";
+import { SearchFilter, FilterStateType } from "components/Search/searchFilter";
 import { handleObs, showBack } from "services/backService";
 import { useHistory } from "react-router-dom";
 type SearchContainerProps = {
@@ -39,29 +39,28 @@ export const SearchContainer = (props: SearchContainerProps) => {
     const show = history.location.pathname !== "/search" || searchView !== null;
     showBack(show);
     const handle = handleObs.subscribe(val => {
-      // we are already at the filter so go back to previous
-      if (searchView === null) history.goBack();
-
-      setSearchView(null);
+      // hacky way for now, maybe put the views in their own routes /map & /list
+      // no more back button on filter page
+      if (searchView === SearchView.MAP) {
+        setSearchView(SearchView.LIST);
+      } else {
+        setSearchView(null);
+      }
     });
-    // reset filters if they exist, they are cleared when using bottom nav bar
-    const persistedFilters = JSON.parse(localStorage.getItem("filters"));
-    if (persistedFilters !== null && persistedFilters.length > 0)
-      performFilter(persistedFilters);
     return () => {
       showBack(false);
       handle.unsubscribe();
     };
   }, [searchView]);
 
-  const submitFilters = (filters: Array<string>) => {
+  const submitFilters = (filters: FilterStateType) => {
     localStorage.setItem("filters", JSON.stringify(filters));
     performFilter(filters);
     setSearchView(SearchView.LIST);
   };
 
-  const performFilter = (filters: Array<any>) => {
-    const filt = filterResults.filter(fil => filters.includes(fil.category));
+  const performFilter = (filters: FilterStateType) => {
+    const filt = filterResults.filter(fil => filters[fil.category]);
     setFiltered(filt);
   };
 

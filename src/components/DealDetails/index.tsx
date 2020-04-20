@@ -89,70 +89,68 @@ export const DealDetails = (props: DealDetailsProps) => {
     <>
       <ThemeProvider theme={theme}>
         <Card className={classes.root}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={
-                deal.imageUrl
-                  ? deal.imageUrl
-                  : `https://maps.googleapis.com/maps/api/place/js/PhotoService.GetPhoto?1sCmRaAAAAXsRIKPwIMfKEpHr9R2GVyM6qzri2mOTSTEh3nJV4AkiJD7hvsP5fAJE7dXIdv6xKsv63N2of3o0NjKfoXhvbJ7oGkjpAMX1Wt1Pkl56bj3AwysyrOs09zpVTTQ4C8yYEEhC3T2haySoOWKQBifAoFaQKGhRKz7X9hAuJUGfGCevjwImJpDbx6g&3u4032&5m1&2e1&callback=none&key=${GOOGLE_API_KEY}&token=90529`
-              }
-            />
-            <CardContent className={classes.card}>
-              <Typography
-                gutterBottom
-                variant="body2"
-                component="h2"
-                align={"left"}
-                className={classes.name}
-              >
-                {deal.name}
-                {rating}
-              </Typography>
+          <CardMedia
+            className={classes.media}
+            image={
+              deal.imageUrl
+                ? deal.imageUrl
+                : `https://maps.googleapis.com/maps/api/place/js/PhotoService.GetPhoto?1sCmRaAAAAXsRIKPwIMfKEpHr9R2GVyM6qzri2mOTSTEh3nJV4AkiJD7hvsP5fAJE7dXIdv6xKsv63N2of3o0NjKfoXhvbJ7oGkjpAMX1Wt1Pkl56bj3AwysyrOs09zpVTTQ4C8yYEEhC3T2haySoOWKQBifAoFaQKGhRKz7X9hAuJUGfGCevjwImJpDbx6g&3u4032&5m1&2e1&callback=none&key=${GOOGLE_API_KEY}&token=90529`
+            }
+          />
+          <CardContent className={classes.card}>
+            <Typography
+              gutterBottom
+              variant="body2"
+              component="h2"
+              align={"left"}
+              className={classes.name}
+            >
+              {deal.name}
+              {rating}
+            </Typography>
 
-              <Typography
-                gutterBottom
-                variant="body1"
-                align={"left"}
-                color={"primary"}
-              >
-                {deal.dealName}
-              </Typography>
+            <Typography
+              gutterBottom
+              variant="body1"
+              align={"left"}
+              color={"primary"}
+            >
+              {deal.dealName}
+            </Typography>
 
-              <Typography
-                variant="caption"
-                color="textPrimary"
-                component="p"
-                className={classes.dealDesc}
-              >
-                Description: {deal.dealDesc ? deal.dealDesc : "None"}
+            <Typography
+              variant="caption"
+              color="textPrimary"
+              component="p"
+              className={classes.dealDesc}
+            >
+              Description: {deal.dealDesc ? deal.dealDesc : "None"}
+            </Typography>
+            <br />
+            {deal.notes ? (
+              <Typography variant="caption" color="textPrimary" component="p">
+                {deal.notes}
               </Typography>
-              <br />
-              {deal.notes ? (
-                <Typography variant="caption" color="textPrimary" component="p">
-                  {deal.notes}
-                </Typography>
-              ) : (
-                ""
-              )}
-            </CardContent>
+            ) : (
+              ""
+            )}
+          </CardContent>
 
-            <CardActions className={classes.map}>
-              <MapDetailView deal={deal} />
-            </CardActions>
+          <CardActions className={classes.map}>
+            <MapDetailView deal={deal} />
+          </CardActions>
 
-            <CardContent>
-              <Typography
-                variant="caption"
-                color="textPrimary"
-                component="p"
-                className={classes.dealDesc}
-              >
-                Address:{" "}
-                {deal.address ? deal.address : "Visit website for more details"}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+          <CardContent>
+            <Typography
+              variant="caption"
+              color="textPrimary"
+              component="p"
+              className={classes.dealDesc}
+            >
+              Address:{" "}
+              {deal.address ? deal.address : "Visit website for more details"}
+            </Typography>
+          </CardContent>
         </Card>
         <div className={classes.dealsContainer}>
           <DealsList title="Similar Deals" deals={similarDeals} />

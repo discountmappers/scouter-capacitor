@@ -15,9 +15,11 @@ import { FilterType } from "../FilterType";
 import { DealsList } from "components/DealsList";
 import { theme } from "../../themes/theme";
 import { AppContext } from "containers/AppContainer";
+import produce from "immer";
+import { isEmpty } from "utils/general";
 
 type SearchFilterProps = {
-  submitFilters: (filters: Array<string>) => void;
+  submitFilters: (filters: FilterStateType) => void;
 };
 
 const filterTileData = [
@@ -43,6 +45,20 @@ const filterTileData = [
   }
 ];
 
+export type FilterStateType = {
+  [index: string]: any;
+  Food: boolean;
+  Coffee: boolean;
+  Services: boolean;
+  Other: boolean;
+};
+
+const filterState: FilterStateType = {
+  Food: false,
+  Coffee: false,
+  Services: false,
+  Other: false
+};
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -81,9 +97,22 @@ export const SearchFilter = (props: SearchFilterProps) => {
     .sort((a, b) => a.sort - b.sort)
     .map(a => a.value);
   const newDeals = filterResults.sort();
-  const [selectedFilters, setFilter] = useState<any>([]);
+  // when using the back button, populate the previous filters
+  const persistedFilters = JSON.parse(localStorage.getItem("filters"));
+  const initFilterState = isEmpty(persistedFilters)
+    ? filterState
+    : persistedFilters;
+  const [selectedFilters, setFilter] = useState<FilterStateType>(
+    initFilterState
+  );
   const { submitFilters } = props;
 
+  const toggleFilter = (value: string) => {
+    const newFilterState = produce(draft => {
+      draft[value] = !draft[value];
+    });
+    setFilter(newFilterState(selectedFilters));
+  };
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -98,11 +127,11 @@ export const SearchFilter = (props: SearchFilterProps) => {
             <Grid item xs={5} md={2}>
               <div style={{ height: "90px", width: "100%" }}>
                 <FilterType
+                  selected={selectedFilters[tile.title]}
                   disabled={false}
                   title={tile.title}
                   icon={tile.icon}
-                  selectedFilters={selectedFilters}
-                  setFilter={setFilter}
+                  toggleFilter={toggleFilter}
                 />
               </div>
             </Grid>
